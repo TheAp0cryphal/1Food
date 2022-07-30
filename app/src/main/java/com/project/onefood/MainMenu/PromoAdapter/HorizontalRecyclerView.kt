@@ -1,4 +1,4 @@
-package com.project.onefood.PromoAdapter
+package com.project.onefood.MainMenu.PromoAdapter
 
 import android.view.LayoutInflater
 import android.view.View
