@@ -1,10 +1,11 @@
-package com.project.onefood
+package com.project.onefood.MainMenu
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.project.onefood.PromoAdapter.HorizontalRecyclerView
+import com.project.onefood.MainMenu.PromoAdapter.HorizontalRecyclerView
+import com.project.onefood.R
 
 class MainMenuActivity : AppCompatActivity() {
 

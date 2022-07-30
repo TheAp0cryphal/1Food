@@ -14,7 +14,7 @@
         android:theme="@style/Theme.1Food"
         tools:targetApi="31">
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".MainMenu.MainMenuActivity"
             android:label="Main Menu"
             android:exported="false" />
         <activity

@@ -4,8 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import com.project.onefood.MainMenu.MainMenuActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
