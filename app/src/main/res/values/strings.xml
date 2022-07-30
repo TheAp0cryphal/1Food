@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">1Food</string>
+    <string name="hellouser">Hello, Khaleesi</string>
+    <string name="qr">QR Scan</string>
+    <string name="locations">Locations</string>
+    <string name="reservation">Reservation</string>
+    <string name="favorites">Favorites</string>
+    <string name="todaypromo">Today\'s Promos</string>
 </resources>

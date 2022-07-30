@@ -1,5 +1,6 @@
 package com.project.onefood
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
@@ -21,10 +22,11 @@ class MainActivity : AppCompatActivity() {
 
         runOnUiThread {
             var progressBar: ProgressBar = findViewById(R.id.progressBar)
-
             for (i in 0..100){
                 progressBar.setProgress(i, true)
             }
         }
+        val intent = Intent(this, MainMenuActivity::class.java)
+        startActivity(intent)
     }
 }
