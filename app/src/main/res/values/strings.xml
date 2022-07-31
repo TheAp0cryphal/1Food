@@ -6,4 +6,14 @@
     <string name="reservation">Reservation</string>
     <string name="favorites">Favorites</string>
     <string name="todaypromo">Today\'s Promos</string>
+    <string name="orderconfirmed">Your order is confirmed!</string>
+    <string name="checkorderstatus">Check order status</string>
+    <string name="usersettings">User Settings</string>
+
+    <string-array name="languages">
+        <item>English</item>
+        <item>Chinese</item>
+        <item>French</item>
+    </string-array>
+
 </resources>
