@@ -1,5 +1,6 @@
 package com.project.onefood.MainMenu
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -21,9 +22,13 @@ class QRScanActivity : AppCompatActivity() {
         qrScanner.startPreview()
 
         qrScanner.decodeCallback = DecodeCallback {
-            runOnUiThread{
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
-            }
+
+            val intent = Intent(this, OrderPlacedActivity::class.java)
+            startActivity(intent)
+
+           // runOnUiThread{
+                //Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+           // }
         }
 
         qrScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS

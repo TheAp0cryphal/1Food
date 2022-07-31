@@ -13,13 +13,23 @@ import pub.devrel.easypermissions.EasyPermissions
 
 class MainMenuActivity : AppCompatActivity() {
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
+
     override fun onResume() {
         super.onResume()
 
         val qrScan : ImageView = findViewById(R.id.qr_scan)
-
         qrScan.setOnClickListener {
             val intent = Intent(this, QRScanActivity::class.java)
+            startActivity(intent)
+        }
+
+        val userProfile : ImageView = findViewById(R.id.userProfile)
+        userProfile.setOnClickListener {
+            val intent = Intent(this, UserProfileActivity::class.java)
             startActivity(intent)
         }
     }

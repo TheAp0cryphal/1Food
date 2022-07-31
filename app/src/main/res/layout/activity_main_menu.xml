@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F4F1"
-    android:padding="5dp"
+    android:padding="2dp"
     tools:context=".MainMenu.MainMenuActivity">
 
     <LinearLayout
@@ -108,14 +108,14 @@
 
     <TextView
         android:id="@+id/userAddress"
-        android:layout_width="214dp"
+        android:layout_width="247dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="176dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="150dp"
         android:background="@drawable/rounded_corner"
         android:fontFamily="@font/roboto"
         android:text="145 Murdock St."
@@ -136,6 +136,8 @@
 
         <ImageView
             android:id="@+id/userProfile"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/user" />
@@ -162,8 +164,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/userAddress"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="315dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="284dp"
         android:text="@string/todaypromo"
         android:textColor="#00B4E9"
         android:textFontWeight="400"
@@ -182,10 +184,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/promorecycler"
-        android:layout_width="406dp"
-        android:layout_height="wrap_content"
+        android:layout_width="409dp"
+        android:layout_height="343dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="66dp"
+        android:layout_marginBottom="0dp"
         android:orientation="horizontal" />
 
 </RelativeLayout>
