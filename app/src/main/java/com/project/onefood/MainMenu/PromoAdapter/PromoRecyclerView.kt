@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.onefood.R
 
-class HorizontalRecyclerView : RecyclerView.Adapter<HorizontalRecyclerView.MyViewHolder>() {
+class PromoRecyclerView : RecyclerView.Adapter<PromoRecyclerView.MyViewHolder>() {
 
     class MyViewHolder(itemView : View) : RecyclerView.ViewHolder (itemView) {
 
