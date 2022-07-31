@@ -7,7 +7,8 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.project.onefood.MainMenu.PromoAdapter.HorizontalRecyclerView
+import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
+import com.project.onefood.MainMenu.ReservationAdapter.ReservationRecyclerView
 import com.project.onefood.R
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -32,6 +33,12 @@ class MainMenuActivity : AppCompatActivity() {
             val intent = Intent(this, UserProfileActivity::class.java)
             startActivity(intent)
         }
+
+        val reservations : ImageView = findViewById(R.id.reservation)
+        reservations.setOnClickListener {
+            val intent = Intent(this, ReservationActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +46,7 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_menu)
 
         val recyclerView : RecyclerView = findViewById(R.id.promorecycler)
-        val adapter = HorizontalRecyclerView()
+        val adapter = PromoRecyclerView()
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
