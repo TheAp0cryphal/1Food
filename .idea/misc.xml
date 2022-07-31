@@ -8,8 +8,10 @@
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_order_placed.xml" value="0.33" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_qrscan.xml" value="0.1" />
+        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_reservation.xml" value="0.22" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_user_profile.xml" value="0.33" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/cardview.xml" value="0.26132246376811596" />
+        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/reservation_list_item.xml" value="0.5" />
       </map>
     </option>
   </component>
