@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.onefood.MainMenu.PromoAdapter.HorizontalRecyclerView
 import com.project.onefood.R
+import com.project.onefood.RestaurantsList.RestaurantsListActivity
 import pub.devrel.easypermissions.EasyPermissions
 
 class MainMenuActivity : AppCompatActivity() {
@@ -30,6 +31,12 @@ class MainMenuActivity : AppCompatActivity() {
         val userProfile : ImageView = findViewById(R.id.userProfile)
         userProfile.setOnClickListener {
             val intent = Intent(this, UserProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        val restaurantsLocations : ImageView = findViewById(R.id.locations)
+        restaurantsLocations.setOnClickListener {
+            val intent = Intent(this, RestaurantsListActivity::class.java)
             startActivity(intent)
         }
     }

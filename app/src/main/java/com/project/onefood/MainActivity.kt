@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatDelegate
 import com.project.onefood.MainMenu.MainMenuActivity
-import pub.devrel.easypermissions.EasyPermissions
 
 class MainActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -35,6 +35,10 @@
             android:exported="false"
             android:label="Main Menu" />
         <activity
+            android:name=".RestaurantsList.RestaurantsListActivity"
+            android:exported="false"
+            android:label="Restaurants List" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar">
