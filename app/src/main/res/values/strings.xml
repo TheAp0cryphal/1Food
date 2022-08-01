@@ -9,6 +9,7 @@
     <string name="orderconfirmed">Your order is confirmed!</string>
     <string name="checkorderstatus">Check order status</string>
     <string name="usersettings">User Settings</string>
+    <string name="empty">This section is empty :(</string>
 
     <string-array name="languages">
         <item>English</item>

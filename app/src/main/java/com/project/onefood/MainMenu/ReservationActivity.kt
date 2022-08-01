@@ -2,6 +2,8 @@ package com.project.onefood.MainMenu
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
@@ -13,8 +15,15 @@ class ReservationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation)
 
-        val recyclerView : RecyclerView = findViewById(R.id.reservationrecycler)
+        val recyclerView: RecyclerView = findViewById(R.id.reservationrecycler)
         val adapter = ReservationRecyclerView()
+
+        val emptyText: TextView = findViewById(R.id.empty)
+        //if(dataset.isEmpty(){
+        emptyText.isVisible = true
+        //else
+
+
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
