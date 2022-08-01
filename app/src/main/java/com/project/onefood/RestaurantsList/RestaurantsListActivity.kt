@@ -41,8 +41,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         thread.start();
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    var thread = Thread {
+    private var thread = Thread {
         try {
             val request = Request.Builder().url("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA").build()
 
@@ -64,14 +63,24 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val restaurantRating = jsonRestaurant.getString("rating")
 
                 list.add(RestaurantItem(restaurantName, restaurantAccurateAddress, 123.2, ""))
+
+                runOnUiThread {
+                    adapter.notifyDataSetChanged()
+                }
+                //adapter.notifyItemInserted(list.size - 1)
+               //adapter.notifyDataSetChanged()
             }
-            recyclerView.adapter!!.notifyDataSetChanged()
+            //recyclerView.adapter!!.notifyDataSetChanged()
+
             //recyclerView.adapter = RestaurantsRecyclerView(this, list)
             //recyclerView.invalidate();
 
             Log.d("listlist", list.toString())
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
+        catch (e: Exception) {
+          e.printStackTrace()
+        }
+
     }
+
 }
