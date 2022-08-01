@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -53,6 +54,12 @@ dependencies {
 
     //ConstraintLayout
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //Google places
+    implementation 'com.google.android.libraries.places:places:2.6.0'
+
+    //For making API calls
+    implementation("com.squareup.okhttp3:okhttp:4.8.1")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
