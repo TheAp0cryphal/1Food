@@ -20,8 +20,9 @@ class ReservationActivity : AppCompatActivity() {
 
         val emptyText: TextView = findViewById(R.id.empty)
         //if(dataset.isEmpty(){
-        emptyText.isVisible = true
+        //emptyText.isVisible = true
         //else
+        emptyText.isVisible = false
 
 
 
