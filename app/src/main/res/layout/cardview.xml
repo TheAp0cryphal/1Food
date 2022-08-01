@@ -15,7 +15,8 @@
         android:id="@+id/promoimage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:contentDescription="@string/todo" />
 
     <ImageView
         android:id="@+id/promo_text_bg"
@@ -23,7 +24,8 @@
         android:layout_height="77dp"
         android:layout_gravity="bottom"
         android:layout_margin="10dp"
-        app:srcCompat="@drawable/promo_bg_shape"></ImageView>
+        app:srcCompat="@drawable/promo_bg_shape"
+        android:contentDescription="TODO"></ImageView>
 
     <LinearLayout
         android:layout_width="214dp"
