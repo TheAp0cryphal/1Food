@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
 import com.project.onefood.MainMenu.ReservationAdapter.ReservationRecyclerView
 import com.project.onefood.R
+import com.project.onefood.RestaurantsList.RestaurantsListActivity
 import pub.devrel.easypermissions.EasyPermissions
 
 class MainMenuActivity : AppCompatActivity() {
@@ -22,25 +23,30 @@ class MainMenuActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val qrScan : ImageView = findViewById(R.id.qr_scan)
+        val qrScan: ImageView = findViewById(R.id.qr_scan)
         qrScan.setOnClickListener {
             val intent = Intent(this, QRScanActivity::class.java)
             startActivity(intent)
         }
 
-        val userProfile : ImageView = findViewById(R.id.userProfile)
+        val userProfile: ImageView = findViewById(R.id.userProfile)
         userProfile.setOnClickListener {
             val intent = Intent(this, UserProfileActivity::class.java)
             startActivity(intent)
         }
 
-        val reservations : ImageView = findViewById(R.id.reservation)
+        val restaurantsLocations: ImageView = findViewById(R.id.locations)
+        restaurantsLocations.setOnClickListener {
+            val intent = Intent(this, RestaurantsListActivity::class.java)
+            startActivity(intent)
+        }
+
+        val reservations: ImageView = findViewById(R.id.reservation)
         reservations.setOnClickListener {
             val intent = Intent(this, ReservationActivity::class.java)
             startActivity(intent)
         }
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
@@ -52,6 +58,7 @@ class MainMenuActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         rqPerms()
+        rqPermsLocation()
     }
 
     override fun onRequestPermissionsResult(
@@ -79,6 +86,20 @@ class MainMenuActivity : AppCompatActivity() {
                 "Camera required for QR Scanning...",
                 101,
                 Manifest.permission.CAMERA)
+        }
+    }
+
+    private fun rqPermsLocation() {
+        val perms = { Manifest.permission.ACCESS_FINE_LOCATION}
+
+        if (EasyPermissions.hasPermissions(this, perms.toString())){
+            //
+        }
+        else{
+            EasyPermissions.requestPermissions(this,
+                "Location required for displaying the restaurants...",
+                102,
+                Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
 
