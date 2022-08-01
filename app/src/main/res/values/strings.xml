@@ -13,6 +13,7 @@
     <string name="italian">Italian</string>
     <string name="american">American</string>
     <string name="mexican">Mexican</string>
+    <string name="empty">This section is empty :(</string>
 
     <string-array name="languages">
         <item>English</item>

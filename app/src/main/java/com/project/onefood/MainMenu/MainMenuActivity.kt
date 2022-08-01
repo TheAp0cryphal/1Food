@@ -58,6 +58,7 @@ class MainMenuActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         rqPerms()
+        rqPermsLocation()
     }
 
     override fun onRequestPermissionsResult(
@@ -85,6 +86,20 @@ class MainMenuActivity : AppCompatActivity() {
                 "Camera required for QR Scanning...",
                 101,
                 Manifest.permission.CAMERA)
+        }
+    }
+
+    private fun rqPermsLocation() {
+        val perms = { Manifest.permission.ACCESS_FINE_LOCATION}
+
+        if (EasyPermissions.hasPermissions(this, perms.toString())){
+            //
+        }
+        else{
+            EasyPermissions.requestPermissions(this,
+                "Location required for displaying the restaurants...",
+                102,
+                Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
 
