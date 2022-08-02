@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.project.onefood"
-        minSdk 26
+        minSdk 28
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -60,6 +60,7 @@ dependencies {
 
     //For making API calls
     implementation("com.squareup.okhttp3:okhttp:4.8.1")
+    implementation 'com.android.car.ui:car-ui-lib:+'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
