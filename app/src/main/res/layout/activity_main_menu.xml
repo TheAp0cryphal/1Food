@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,65 +10,68 @@
     tools:context=".MainMenu.MainMenuActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="82dp"
+        android:id="@+id/linearLayout3"
+        android:layout_width="398dp"
+        android:layout_height="98dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="459dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="190dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/qr_scan"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             app:srcCompat="@drawable/qr" />
 
         <ImageView
             android:id="@+id/locations"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             app:srcCompat="@drawable/locations" />
 
         <ImageView
             android:id="@+id/reservation"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             app:srcCompat="@drawable/reservation" />
 
         <ImageView
             android:id="@+id/favorites"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             app:srcCompat="@drawable/favorite" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="406dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:layout_width="397dp"
+        android:layout_height="18dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="435dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
             android:id="@+id/textView"
@@ -114,34 +117,36 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="150dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corner"
         android:fontFamily="@font/roboto"
         android:text="145 Murdock St."
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="16dp" />
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="35dp"
+        android:layout_height="37dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="7dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:elevation="10dp"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/userProfile"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/user" />
+            android:background="@drawable/user"
+            android:clickable="true"
+            android:focusable="true" />
 
     </androidx.cardview.widget.CardView>
 
@@ -172,13 +177,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/userAddress"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="40dp"
         android:text="@string/hellouser"
         android:textColor="#00B4E9"
         android:textFontWeight="400"
         android:textSize="44dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userAddress" />
 
     <TextView
         android:id="@+id/textView3"
@@ -186,30 +193,38 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/userAddress"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="284dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
         android:text="@string/todaypromo"
         android:textColor="#00B4E9"
         android:textFontWeight="400"
         android:textSize="24dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <ImageView
         android:id="@+id/salutation"
-        android:layout_width="212dp"
-        android:layout_height="25dp"
+        android:layout_width="218dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/userGreeting"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="9dp"
-        android:layout_marginBottom="569dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userGreeting"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/salutation" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/promorecycler"
-        android:layout_width="409dp"
-        android:layout_height="343dp"
+        android:layout_width="413dp"
+        android:layout_height="331dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
