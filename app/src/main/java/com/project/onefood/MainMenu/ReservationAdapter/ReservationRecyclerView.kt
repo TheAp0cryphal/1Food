@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.model.LatLng
 import com.project.onefood.Databases.ReservationDB.ReservationItem
 import com.project.onefood.R
 import com.project.onefood.RestaurantPage.ReservationMapsActivity
 import kotlinx.coroutines.withContext
 
 class ReservationRecyclerView(private val context : Context, private var list: List<ReservationItem>) : RecyclerView.Adapter<ReservationRecyclerView.MyViewHolder>() {
+
+     var lat : Double = 0.0
+     var lon : Double = 0.0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.reservation_list_item, parent, false)
@@ -24,6 +28,9 @@ class ReservationRecyclerView(private val context : Context, private var list: L
        holder.restaurantName.text = list[position].restaurantName
         holder.date.text = list[position].date
         holder.time.text = list[position].time
+        lat = list[position].latitude
+        lon = list[position].longitude
+
        // holder.restaurantPic
     }
 
@@ -47,6 +54,7 @@ class ReservationRecyclerView(private val context : Context, private var list: L
 
         override fun onClick(v: View?) {
             val intent = Intent(context, ReservationMapsActivity::class.java)
+            intent.putExtra("restaurant_coordinates", LatLng(lat, lon))
             context.startActivity(intent)
         }
     }

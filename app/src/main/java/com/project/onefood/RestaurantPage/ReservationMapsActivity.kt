@@ -16,6 +16,7 @@ class ReservationMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityReservationMapsBinding
+    private lateinit var latLng : LatLng
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,8 @@ class ReservationMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
     }
 
     /**
@@ -42,8 +45,14 @@ class ReservationMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        val sydney = latLng
+        mMap.addMarker(MarkerOptions().position(sydney).title("Reservation"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        mMap.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                latLng,
+                17f
+            ))
     }
 }

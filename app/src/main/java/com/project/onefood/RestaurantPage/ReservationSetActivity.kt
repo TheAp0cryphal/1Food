@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.project.onefood.Databases.ReservationDB.ReservationDatabase
 import com.project.onefood.Databases.ReservationDB.ReservationDatabaseDao
@@ -87,11 +88,19 @@ class ReservationSetActivity : AppCompatActivity() {
 
         var save : Button = findViewById(R.id.savebutton)
         save.setOnClickListener {
+
             var numOfPeopleEditText = findViewById<EditText>(R.id.numOfPeople)
             var numOfPeople = numOfPeopleEditText.text
 
+            var latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
+
             CoroutineScope(IO).launch{
-                reservationDatabaseDao.insert(ReservationItem(intent.getStringExtra("restaurant_name").toString(), myDate, myTime, numOfPeople.toString().toInt()))
+                reservationDatabaseDao.insert(ReservationItem(intent.getStringExtra("restaurant_name").toString(),
+                    myDate,
+                    myTime,
+                    numOfPeople.toString().toInt(),
+                    latLng.latitude,
+                    latLng.longitude))
             }
             showtoast(this, "Reservation has been made!")
         }

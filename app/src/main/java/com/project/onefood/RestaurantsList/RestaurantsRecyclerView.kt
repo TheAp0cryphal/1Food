@@ -32,10 +32,12 @@ class RestaurantsRecyclerView(private val context: Context, private val list: Ar
             tvRestaurantName.text = list[position].name
             tvRestaurantAddress.text = list[position].address
             tvRestaurantDistance.text = list[position].distance.toString()
+
             itemView.findViewById<LinearLayout>(R.id.restaurantCard).setOnClickListener {
                 val intent = Intent(context, RestaurantActivity::class.java)
                 intent.putExtra("restaurant_name", list[position].name)
                 intent.putExtra("restaurant_address", list[position].address)
+                intent.putExtra("restaurant_coordinates", list[position].latLng)
                 context.startActivity(intent)
             }
             itemView.findViewById<ImageView>(R.id.favoriteBtn).setOnClickListener {

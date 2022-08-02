@@ -1,5 +1,7 @@
 package com.project.onefood.RestaurantsList
 
-data class RestaurantItem(val name:String, val address: String, val distance: Double, val img: String) {
+import com.google.android.gms.maps.model.LatLng
+
+data class RestaurantItem(val name:String, val address: String, val distance: Double, val img: String, val latLng : LatLng) {
 
 }

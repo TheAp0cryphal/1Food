@@ -3,8 +3,10 @@ package com.project.onefood.RestaurantPage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.project.onefood.R
 
@@ -12,6 +14,7 @@ class RestaurantActivity : AppCompatActivity() {
 
     private var restaurantName : String = ""
     private var restaurantAddress : String = ""
+    private lateinit var latLng : LatLng
 
     override fun onResume() {
         super.onResume()
@@ -26,6 +29,7 @@ class RestaurantActivity : AppCompatActivity() {
             val intent = Intent(this, ReservationSetActivity::class.java)
             intent.putExtra("restaurant_name", restaurantName)
             intent.putExtra("restaurant_address", restaurantAddress)
+            intent.putExtra("restaurant_coordinates", latLng)
             startActivity(intent)
         }
 
@@ -43,6 +47,9 @@ class RestaurantActivity : AppCompatActivity() {
 
         var restaurantAddressTextView : TextView = findViewById(R.id.restaurant_address)
         restaurantAddressTextView.text = restaurantAddress
+
+        latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
+        Log.d("LatLng?", latLng.toString())
 
     }
 }

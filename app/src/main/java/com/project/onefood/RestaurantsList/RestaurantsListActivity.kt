@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.project.onefood.R
 import com.project.onefood.RestaurantPage.RestaurantActivity
@@ -41,6 +42,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         val placesClient = Places.createClient(this)
 
         list = ArrayList()
+        list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300)))
         searchView = findViewById(R.id.searchVieww)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastKnownLocation()
@@ -170,12 +172,13 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val parseCoordinates = JSONObject(restaurantCoordinates.toString())
                 val restaurantLocation = parseCoordinates.getString("location")
                 val parseLocation = JSONObject(restaurantLocation.toString())
+
                 val restaurantLatResult = parseLocation.getString("lat")
                 val restaurantLngResult = parseLocation.getString("lng")
 
                 val restaurantRating = jsonRestaurant.getString("rating")
 
-                list.add(RestaurantItem(restaurantName, restaurantAccurateAddress, 123.2, ""))
+                list.add(RestaurantItem(restaurantName, restaurantAccurateAddress, 123.2, "", LatLng(restaurantLatResult.toDouble(), restaurantLngResult.toDouble())))
 
             }
         }
