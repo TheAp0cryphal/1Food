@@ -30,14 +30,28 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA" />
+        <activity
+            android:name=".RestaurantPage.ReservationMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_reservation_maps" />
+        <activity
+            android:name=".RestaurantPage.ReservationSetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RestaurantPage.RestaurantActivity"
+            android:exported="false" />
         <activity
             android:name=".MainMenu.ReservationActivity"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".MainMenu.UserProfileActivity"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".MainMenu.OrderPlacedActivity"
             android:exported="false"
@@ -49,8 +63,8 @@
         <activity
             android:name=".MainMenu.MainMenuActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:label="Main Menu" />
+            android:label="Main Menu"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RestaurantsList.RestaurantsListActivity"
             android:exported="false"

@@ -1,6 +1,7 @@
 package com.project.onefood.RestaurantsList
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.SearchView
@@ -11,6 +12,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.libraries.places.api.Places
 import com.project.onefood.R
+import com.project.onefood.RestaurantPage.RestaurantActivity
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -180,8 +182,17 @@ class RestaurantsListActivity : AppCompatActivity() {
         runOnUiThread {
             adapter.notifyDataSetChanged()
         }
+        /*
+        adapter.setOnItemClickListener(object : RestaurantsRecyclerView.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent(this@RestaurantsListActivity, RestaurantActivity::class.java)
+                intent.putExtra("restaurant_name", list[position].name)
+                intent.putExtra("restaurant_address", list[position].address)
+                startActivity(intent)
+                //intent.putExtra("restaurant_rating")
+            }
+        })
 
+         */
     }
-
-
 }
