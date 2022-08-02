@@ -26,6 +26,15 @@
         android:theme="@style/Theme.1Food"
         tools:targetApi="31">
         <activity
+            android:name=".PagerSystem.FoodOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PagerSystem.NewOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PagerSystem.FoodOrdersActivity"
+            android:exported="false" />
+        <activity
             android:name=".Login.RestaurantManagerRegisterActivity"
             android:exported="false" />
         <activity

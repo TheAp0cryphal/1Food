@@ -69,10 +69,28 @@
     <string name="restaurant_manager_register_activity_toast_empty_email_address">The email address cannot be empty</string>
     <string name="restaurant_manager_register_activity_toast_empty_password">The password cannot be empty</string>
 
-    <!-- Reset Password Activity ///////////////////////////////////////////////////////-->
+    <!-- Reset Password Activity ////////////////////////////////////////////////////////////////-->
     <string name="reset_password_activity_title">Please enter your email to search for your account</string>
     <string name="reset_password_activity_edittext_email_address">Email Address</string>
     <string name="reset_password_activity_button_reset_password">Reset Password</string>
     <string name="reset_password_activity_toast_empty_email_address">The email address cannot be empty</string>
+
+    <!-- Food Orders Activity ///////////////////////////////////////////////////////////////////-->
+    <string name="food_orders_activity_action_bar_new_oder">New Order</string>
+
+    <!-- New Order Activity /////////////////////////////////////////////////////////////////////-->
+    <string name="new_order_activity_text_remark">Remark</string>
+    <string name="new_order_activity_button_submit">Submit</string>
+    <string name="new_order_activity_toast_success">The request is sent</string>
+    <string name="new_order_activity_toast_failure">Unable to send the request</string>
+
+    <!-- Food Order Activity ////////////////////////////////////////////////////////////////////-->
+    <string name="food_order_activity_text_order">Order</string>
+    <string name="food_order_activity_text_order_time">Order Time:</string>
+    <string name="food_order_activity_button_done">Done</string>
+    <string name="food_order_activity_toast_success">Notification is sent</string>
+    <string name="food_order_activity_toast_failure">Unable to send the notification</string>
+    <string name="food_order_activity_toast_delete">The food order is deleted</string>
+    <string name="food_order_activity_action_bar_delete_oder">Delete Order</string>
 
 </resources>
