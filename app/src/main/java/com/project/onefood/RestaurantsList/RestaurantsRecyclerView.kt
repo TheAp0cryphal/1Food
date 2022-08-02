@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.onefood.R
@@ -19,23 +21,31 @@ class RestaurantsRecyclerView(private val context: Context, private val list: Ar
         internal var tvRestaurantDistance: TextView
 
         init {
-            itemView.setOnClickListener(this)
+            itemView.findViewById<LinearLayout>(R.id.restaurantCard).setOnClickListener(this)
+            itemView.findViewById<ImageView>(R.id.favoriteBtn).setOnClickListener(this)
             tvRestaurantName = itemView.findViewById(R.id.tvRestaurantName)
             tvRestaurantAddress = itemView.findViewById(R.id.tvRestaurantAddress)
             tvRestaurantDistance = itemView.findViewById(R.id.tvRestaurantDistance)
-        }
-
-        override fun onClick(v: View?) {
-            val intent = Intent(context, RestaurantActivity::class.java)
-            intent.putExtra("restaurant_name", list[position].name)
-            intent.putExtra("restaurant_address", list[position].address)
-            context.startActivity(intent)
         }
 
         internal fun bind(position: Int) {
             tvRestaurantName.text = list[position].name
             tvRestaurantAddress.text = list[position].address
             tvRestaurantDistance.text = list[position].distance.toString()
+            itemView.findViewById<LinearLayout>(R.id.restaurantCard).setOnClickListener {
+                val intent = Intent(context, RestaurantActivity::class.java)
+                intent.putExtra("restaurant_name", list[position].name)
+                intent.putExtra("restaurant_address", list[position].address)
+                context.startActivity(intent)
+            }
+            itemView.findViewById<ImageView>(R.id.favoriteBtn).setOnClickListener {
+                itemView.findViewById<ImageView>(R.id.favoriteBtn).setImageResource(R.drawable.heart)
+            }
+
+        }
+
+        override fun onClick(p0: View?) {
+            //TODO("Not yet implemented")
         }
     }
 

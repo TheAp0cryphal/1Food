@@ -91,15 +91,16 @@ class MainMenuActivity : AppCompatActivity() {
 
     private fun rqPermsLocation() {
         val perms = { Manifest.permission.ACCESS_FINE_LOCATION}
+        val perms2 = { Manifest.permission.ACCESS_COARSE_LOCATION}
 
-        if (EasyPermissions.hasPermissions(this, perms.toString())){
+        if (EasyPermissions.hasPermissions(this, perms.toString()) && EasyPermissions.hasPermissions(this, perms2.toString())){
             //
         }
         else{
             EasyPermissions.requestPermissions(this,
                 "Location required for displaying the restaurants...",
-                102,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+                103,
+                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         }
     }
 
