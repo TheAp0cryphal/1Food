@@ -22,7 +22,6 @@
         android:theme="@style/Theme.1Food"
         tools:targetApi="31">
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA" />
