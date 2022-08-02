@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatDelegate
+import com.project.onefood.Login.LoginActivity
 import com.project.onefood.MainMenu.MainMenuActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,13 +27,33 @@ class MainActivity : AppCompatActivity()  {
     // Loading progress bar for dataloader API
     private fun initAutoloader() {
 
-        runOnUiThread {
-            val progressBar: ProgressBar = findViewById(R.id.progressBar)
-            for (i in 0..100){
+//        runOnUiThread {
+//            val progressBar: ProgressBar = findViewById(R.id.progressBar)
+//            for (i in 0..100){
+//                progressBar.setProgress(i, true)
+//            }
+//        }
+//
+//        val intent = Intent(this, LoginActivity::class.java)
+//        startActivity(intent)
+        val progressBar: ProgressBar = findViewById(R.id.progressBar)
+
+        GlobalScope.launch {
+            for (i in 0..100) {
                 progressBar.setProgress(i, true)
+
+                if (i % 20 == 0) {
+                    Thread.sleep(300)
+                }
             }
+
+            switchToLoginActivity()
         }
-        val intent = Intent(this, MainMenuActivity::class.java)
+    }
+
+    // Switch to login activity
+    private fun switchToLoginActivity() {
+        val intent: Intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 }
