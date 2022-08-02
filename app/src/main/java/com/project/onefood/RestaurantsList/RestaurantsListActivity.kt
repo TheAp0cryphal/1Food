@@ -42,7 +42,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         val placesClient = Places.createClient(this)
 
         list = ArrayList()
-        list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300)))
+        //list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300),))
         searchView = findViewById(R.id.searchVieww)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastKnownLocation()
@@ -171,6 +171,7 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val isRestaurantOpen = jsonRestaurant.optString("opening_hours")
                 var parseOpening: JSONObject? = null
                 var restaurantOpeningResult = ""
+
                 if (isRestaurantOpen == null){
                     parseOpening = JSONObject(isRestaurantOpen.toString())
                     restaurantOpeningResult = parseOpening.optString("open_now") //is restaurant open? true, false
@@ -186,7 +187,15 @@ class RestaurantsListActivity : AppCompatActivity() {
 
                 val restaurantRating = jsonRestaurant.optString("rating")
 
-                list.add(RestaurantItem(restaurantName, restaurantAccurateAddress, 123.2, "", LatLng(restaurantLatResult.toDouble(), restaurantLngResult.toDouble())))
+                Log.d("restaurantStatus", restaurantOpeningResult)
+
+                list.add(RestaurantItem(restaurantName,
+                    restaurantAccurateAddress,
+                    123.2,
+                    "",
+                    LatLng(restaurantLatResult.toDouble(),
+                        restaurantLngResult.toDouble()),
+                    restaurantRating, restaurantOpeningResult))
 
             }
         }

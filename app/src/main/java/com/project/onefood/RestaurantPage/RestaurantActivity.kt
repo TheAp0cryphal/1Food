@@ -9,12 +9,14 @@ import android.widget.TextView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.project.onefood.R
+import org.w3c.dom.Text
 
 class RestaurantActivity : AppCompatActivity() {
 
     private var restaurantName : String = ""
     private var restaurantAddress : String = ""
     private lateinit var latLng : LatLng
+    private var restaurantRating : String = ""
 
     override fun onResume() {
         super.onResume()
@@ -49,7 +51,17 @@ class RestaurantActivity : AppCompatActivity() {
         restaurantAddressTextView.text = restaurantAddress
 
         latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
-        Log.d("LatLng?", latLng.toString())
+
+        restaurantRating = intent.getStringExtra("restaurant_rating").toString()
+
+        var restaurantRatingTextView : TextView = findViewById(R.id.restaurant_rating)
+        restaurantRatingTextView.text = restaurantRating
+
+        var restaurantStatus : String = "Status : Open"
+
+        var restaurantStatusTextView : TextView = findViewById(R.id.restaurant_status)
+        restaurantStatusTextView.text = restaurantStatus
+        //Log.d("LatLng?", latLng.toString())
 
     }
 }

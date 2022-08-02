@@ -38,6 +38,8 @@ class RestaurantsRecyclerView(private val context: Context, private val list: Ar
                 intent.putExtra("restaurant_name", list[position].name)
                 intent.putExtra("restaurant_address", list[position].address)
                 intent.putExtra("restaurant_coordinates", list[position].latLng)
+                intent.putExtra("restaurant_rating", list[position].rating)
+                intent.putExtra("restaurant_status", list[position].status)
                 context.startActivity(intent)
             }
             itemView.findViewById<ImageView>(R.id.favoriteBtn).setOnClickListener {
