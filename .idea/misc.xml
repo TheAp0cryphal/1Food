@@ -3,26 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/drawable/promo_bg_shap.xml" value="0.2165" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/drawable/round_outline.xml" value="0.2335" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/drawable/rounded_corner.xml" value="0.2335" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/font/roboto.xml" value="0.25462962962962965" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_main.xml" value="0.31974921630094044" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_order_placed.xml" value="0.33" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_qrscan.xml" value="0.1" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_reservation.xml" value="0.22" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_reservation_set_activity.xml" value="0.33" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_restaurant.xml" value="0.42800318217979316" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_restaurants_list.xml" value="0.3625" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_user_profile.xml" value="0.33" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/cardview.xml" value="0.6216216216216216" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/reservation_list_item.xml" value="0.67" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/restaurant_item_card.xml" value="0.5" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/drawable/heart.xml" value="0.1" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/drawable/heart_outline.xml" value="0.1" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.1" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/drawable/ic_baseline_restaurant_24.xml" value="0.1" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_main_menu.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_order_placed.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_restaurants_list.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_user_profile.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/cardview.xml" value="0.1" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/reservation_list_item.xml" value="0.1" />
+        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/restaurant_item_card.xml" value="0.22" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
