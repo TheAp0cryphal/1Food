@@ -1,20 +1,29 @@
 package com.project.onefood.MainMenu
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
 import com.project.onefood.MainMenu.ReservationAdapter.ReservationRecyclerView
 import com.project.onefood.PagerSystem.FoodOrdersActivity
 import com.project.onefood.R
 import com.project.onefood.RestaurantsList.RestaurantsListActivity
 import pub.devrel.easypermissions.EasyPermissions
+import java.util.*
 
 class MainMenuActivity : AppCompatActivity() {
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -23,6 +32,8 @@ class MainMenuActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        getUserLocation()
 
         val qrScan: ImageView = findViewById(R.id.qr_scan)
         qrScan.setOnClickListener {
@@ -54,6 +65,27 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
+    @SuppressLint("MissingPermission")
+    private fun getUserLocation() {
+        Log.d("here?", "yes")
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        var userLongitude = location.longitude
+                        var userLatitude = location.latitude
+
+                        val mGeocoder = Geocoder(applicationContext, Locale.getDefault())
+                        var addressString =
+                            mGeocoder.getFromLocation(userLatitude, userLongitude, 1)
+                            var address = addressString[0].getAddressLine(0).split(",")[0] + ", " + addressString[0].getAddressLine(0).split(",")[1]
+                            findViewById<TextView>(R.id.userAddress).text = address
+                    }
+                }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
@@ -87,7 +119,7 @@ class MainMenuActivity : AppCompatActivity() {
         val perms = arrayOf("Manifest.permission.CAMERA", "Manifest.permission.ACCESS_FINE_LOCATION", "Manifest.permission.ACCESS_COARSE_LOCATION")
 
         if (EasyPermissions.hasPermissions(this, perms.toString())){
-            //
+            getUserLocation()
         }
         else{
             EasyPermissions.requestPermissions(this,
