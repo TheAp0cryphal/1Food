@@ -172,8 +172,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/userAddress"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
         android:text="@string/todaypromo"
         android:textColor="#00B4E9"
         android:textFontWeight="400"
@@ -198,8 +198,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/promorecycler"
-        android:layout_width="415dp"
-        android:layout_height="366dp"
+        android:layout_width="413dp"
+        android:layout_height="331dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
