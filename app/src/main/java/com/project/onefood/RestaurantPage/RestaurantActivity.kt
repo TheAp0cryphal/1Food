@@ -57,7 +57,7 @@ class RestaurantActivity : AppCompatActivity() {
         var restaurantRatingTextView : TextView = findViewById(R.id.restaurant_rating)
         restaurantRatingTextView.text = restaurantRating
 
-        var restaurantStatus : String = "Status : Open"
+        var restaurantStatus = "Status : Open"
 
         var restaurantStatusTextView : TextView = findViewById(R.id.restaurant_status)
         restaurantStatusTextView.text = restaurantStatus
