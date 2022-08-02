@@ -129,6 +129,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="35dp"
         android:layout_height="37dp"
         android:layout_alignParentTop="true"
@@ -151,23 +152,24 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="35dp"
+        android:layout_height="37dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="50dp"
         android:elevation="10dp"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView"
+        android:layout_marginRight="10dp">
 
         <ImageView
             android:id="@+id/foodOrdersImageView"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ic_baseline_restaurant_24" />
+            android:background="@drawable/ic_baseline_restaurant_24"
+            android:clickable="true"
+            android:focusable="true" />
 
     </androidx.cardview.widget.CardView>
 
