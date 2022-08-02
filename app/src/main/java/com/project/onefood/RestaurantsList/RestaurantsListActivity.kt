@@ -46,6 +46,8 @@ class RestaurantsListActivity : AppCompatActivity() {
         searchView = findViewById(R.id.searchVieww)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastKnownLocation()
+        userLongitude = ""
+        userLatitude = ""
 
 
         recyclerView = findViewById(R.id.restaurantsRecycler)
@@ -139,9 +141,9 @@ class RestaurantsListActivity : AppCompatActivity() {
     private fun callApi(){
         var url = ""
         if (!isResultsForSearch){
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=50000&type=restaurant&keyword=cruise&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=cruise&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
         }else {
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=50000&type=restaurant&keyword=${queryString}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=${queryString}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
         }
 
         list.clear()
@@ -160,23 +162,29 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val jsonRestaurant = JSONObject(results[i].toString())
                 val restaurantName = jsonRestaurant.getString("name")
 
-                val restaurantAddress = jsonRestaurant.getString("plus_code")
-                val parseAddress = JSONObject(restaurantAddress.toString())
-                val restaurantAccurateAddress = parseAddress.getString("compound_code")
+//                val restaurantAddress = jsonRestaurant.optString("plus_code")
+//                val parseAddress = JSONObject(restaurantAddress.toString())
+//                val restaurantAccurateAddress = parseAddress.optString("compound_code")
+                val restaurantAccurateAddress = jsonRestaurant.optString("vicinity")
 
-                val isRestaurantOpen = jsonRestaurant.getString("opening_hours")
-                val parseOpening = JSONObject(isRestaurantOpen.toString())
-                val restaurantOpeningResult = parseOpening.getString("open_now") //is restaurant open? true, false
 
-                val restaurantCoordinates = jsonRestaurant.getString("geometry")
+                val isRestaurantOpen = jsonRestaurant.optString("opening_hours")
+                var parseOpening: JSONObject? = null
+                var restaurantOpeningResult = ""
+                if (isRestaurantOpen == null){
+                    parseOpening = JSONObject(isRestaurantOpen.toString())
+                    restaurantOpeningResult = parseOpening.optString("open_now") //is restaurant open? true, false
+                }
+
+
+                val restaurantCoordinates = jsonRestaurant.optString("geometry")
                 val parseCoordinates = JSONObject(restaurantCoordinates.toString())
-                val restaurantLocation = parseCoordinates.getString("location")
+                val restaurantLocation = parseCoordinates.optString("location")
                 val parseLocation = JSONObject(restaurantLocation.toString())
+                val restaurantLatResult = parseLocation.optString("lat")
+                val restaurantLngResult = parseLocation.optString("lng")
 
-                val restaurantLatResult = parseLocation.getString("lat")
-                val restaurantLngResult = parseLocation.getString("lng")
-
-                val restaurantRating = jsonRestaurant.getString("rating")
+                val restaurantRating = jsonRestaurant.optString("rating")
 
                 list.add(RestaurantItem(restaurantName, restaurantAccurateAddress, 123.2, "", LatLng(restaurantLatResult.toDouble(), restaurantLngResult.toDouble())))
 
