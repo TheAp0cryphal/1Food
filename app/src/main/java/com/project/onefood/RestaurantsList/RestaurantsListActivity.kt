@@ -182,17 +182,5 @@ class RestaurantsListActivity : AppCompatActivity() {
         runOnUiThread {
             adapter.notifyDataSetChanged()
         }
-        /*
-        adapter.setOnItemClickListener(object : RestaurantsRecyclerView.onItemClickListener{
-            override fun onItemClick(position: Int) {
-                val intent = Intent(this@RestaurantsListActivity, RestaurantActivity::class.java)
-                intent.putExtra("restaurant_name", list[position].name)
-                intent.putExtra("restaurant_address", list[position].address)
-                startActivity(intent)
-                //intent.putExtra("restaurant_rating")
-            }
-        })
-
-         */
     }
 }
