@@ -1,25 +1,35 @@
 package com.project.onefood.RestaurantsList
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.onefood.R
+import com.project.onefood.RestaurantPage.RestaurantActivity
 
 
 class RestaurantsRecyclerView(private val context: Context, private val list: ArrayList<RestaurantItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         internal var tvRestaurantName: TextView
         internal var tvRestaurantAddress: TextView
         internal var tvRestaurantDistance: TextView
 
         init {
+            itemView.setOnClickListener(this)
             tvRestaurantName = itemView.findViewById(R.id.tvRestaurantName)
             tvRestaurantAddress = itemView.findViewById(R.id.tvRestaurantAddress)
             tvRestaurantDistance = itemView.findViewById(R.id.tvRestaurantDistance)
+        }
+
+        override fun onClick(v: View?) {
+            val intent = Intent(context, RestaurantActivity::class.java)
+            intent.putExtra("restaurant_name", list[position].name)
+            intent.putExtra("restaurant_address", list[position].address)
+            context.startActivity(intent)
         }
 
         internal fun bind(position: Int) {

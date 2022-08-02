@@ -1,6 +1,7 @@
 package com.project.onefood.RestaurantsList
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.libraries.places.api.Places
 import com.project.onefood.R
+import com.project.onefood.RestaurantPage.RestaurantActivity
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.internal.notify
@@ -18,7 +20,7 @@ class RestaurantsListActivity : AppCompatActivity() {
 
     lateinit var list: ArrayList<RestaurantItem>
     lateinit var recyclerView : RecyclerView
-    lateinit var adapter: RestaurantsRecyclerView
+    private lateinit var adapter: RestaurantsRecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +82,17 @@ class RestaurantsListActivity : AppCompatActivity() {
         catch (e: Exception) {
           e.printStackTrace()
         }
+        /*
+        adapter.setOnItemClickListener(object : RestaurantsRecyclerView.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent(this@RestaurantsListActivity, RestaurantActivity::class.java)
+                intent.putExtra("restaurant_name", list[position].name)
+                intent.putExtra("restaurant_address", list[position].address)
+                startActivity(intent)
+                //intent.putExtra("restaurant_rating")
+            }
+        })
 
+         */
     }
-
 }

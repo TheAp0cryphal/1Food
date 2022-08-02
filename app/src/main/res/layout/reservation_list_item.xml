@@ -23,34 +23,40 @@
 
         <TextView
             android:id="@+id/reservation_restaurant"
-            android:layout_width="226dp"
-            android:layout_height="37dp"
+            android:layout_width="224dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
             android:text="Baker St Filer."
             android:textSize="20dp" />
 
         <TextView
             android:id="@+id/reservation_time"
-            android:layout_width="226dp"
-            android:layout_height="37dp"
+            android:layout_width="224dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
             android:text="3:00 PM"
             android:textSize="15dp" />
 
         <TextView
             android:id="@+id/reservation_date"
-            android:layout_width="226dp"
-            android:layout_height="37dp"
+            android:layout_width="224dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
             android:text="26 March 2022"
             android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/guests"
+            android:layout_width="224dp"
+            android:layout_height="wrap_content"
+            android:text="4 people" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/reservation_delete"
-        android:layout_width="52dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="49dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/ic_baseline_delete_forever_24" />
 
 </LinearLayout>
