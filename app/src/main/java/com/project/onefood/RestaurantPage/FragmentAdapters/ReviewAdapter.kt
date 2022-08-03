@@ -22,7 +22,7 @@ class ReviewAdapter(var context : Context) : BaseAdapter(){
     var reviewerRating= arrayOf(R.drawable.zero_star,R.drawable.one_star,R.drawable.two_star,R.drawable.three_star,R.drawable.four_star, R.drawable.five_star)
 
     override fun getCount(): Int {
-        return 3
+        return 4
     }
 
     override fun getItem(p0: Int): Any {
