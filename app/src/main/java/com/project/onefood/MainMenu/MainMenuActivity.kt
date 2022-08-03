@@ -83,13 +83,30 @@ class MainMenuActivity : AppCompatActivity() {
                         var userLongitude = location.longitude
                         var userLatitude = location.latitude
 
-                        val mGeocoder = Geocoder(applicationContext, Locale.getDefault())
-                        var addressString =
-                            mGeocoder.getFromLocation(userLatitude, userLongitude, 1)
-                            var address = addressString[0].getAddressLine(0).split(",")[0] + ", " + addressString[0].getAddressLine(0).split(",")[1]
-                            findViewById<TextView>(R.id.userAddress).text = address
+                        Log.d("LatLng", "$userLongitude $userLatitude")
+                        setLocationText(userLatitude, userLongitude)
                     }
                 }
+    }
+
+    private fun setLocationText(userLatitude : Double, userLongitude : Double) {
+        val mGeocoder = Geocoder(applicationContext, Locale.getDefault())
+
+        var address = "Location Error."
+
+        var addressString =
+            mGeocoder.getFromLocation(userLatitude, userLongitude, 1)
+        //Log.d("LatLngA", addressString.toString())
+
+        if(addressString.size > 0) {
+            address = addressString[0].getAddressLine(0)
+                .split(",")[0] + ", " + addressString[0].getAddressLine(0)
+                .split(",")[1]
+        }
+        else {
+
+        }
+        findViewById<TextView>(R.id.userAddress).text = address
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
