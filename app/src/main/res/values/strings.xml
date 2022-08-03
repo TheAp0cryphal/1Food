@@ -33,6 +33,10 @@
     <!-- Firebase ////////////////////////////////////////////////////////////////////////////////-->
     <string name="firebase_database_customers">Customers</string>
     <string name="firebase_database_restaurant_manager">Restaurant Manager</string>
+    <string name="firebase_database_instance_users">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
+
+    <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->
+    <string name="main_menu_activity_text_hello">Hello,</string>
 
     <!-- Login Activity /////////////////////////////////////////////////////////////////////////-->
     <string name="login_activity_title">Login to 1Food</string>
@@ -71,16 +75,16 @@
     <string name="restaurant_manager_register_activity_hint_email_address">Email Address</string>
     <string name="restaurant_manager_register_activity_hint_password">Password</string>
     <string name="restaurant_manager_register_activity_button_submit">Submit</string>
-    <string name="customer_register_activity_toast_succeed_create_restaurant_manager_account">Your account has been created</string>
-    <string name="customer_register_activity_toast_fail_create_restaurant_manager_customer_account">Failed to create an account</string>
+    <string name="restaurant_manager_register_activity_toast_succeed_create_restaurant_manager_account">Your account has been created</string>
+    <string name="restaurant_manager_register_activity_toast_fail_create_restaurant_manager_customer_account">Failed to create an account</string>
 
     <!-- Reset Password Activity ////////////////////////////////////////////////////////////////-->
     <string name="reset_password_activity_title">Please enter your email to search for your account</string>
     <string name="reset_password_activity_edittext_email_address">Email Address</string>
     <string name="reset_password_activity_button_reset_password">Reset Password</string>
     <string name="reset_password_activity_toast_empty_email_address">The email address cannot be empty</string>
-    <string name="customer_register_activity_toast_succeed_send_password_reset_email">The password reset email has been sent</string>
-    <string name="customer_register_activity_toast_fail_send_password_reset_email">Unable to send the password reset email</string>
+    <string name="reset_password_activity_toast_succeed_send_password_reset_email">The password reset email has been sent</string>
+    <string name="reset_password_activity_toast_fail_send_password_reset_email">Unable to send the password reset email</string>
 
     <!-- Food Orders Activity ///////////////////////////////////////////////////////////////////-->
     <string name="food_orders_activity_action_bar_new_oder">New Order</string>

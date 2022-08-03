@@ -10,4 +10,6 @@ data class Customer(
     var firstName: String,
     var lastName: String,
     var emailAddress: String,
-)
+) {
+    constructor(): this("", "", "")
+}

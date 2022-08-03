@@ -90,19 +90,19 @@ class RestaurantManagerRegisterActivity : AppCompatActivity() {
 
                 firebaseDatabase.getReference(getString(R.string.firebase_database_restaurant_manager)).child(uid).setValue(restaurantManager).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Toast.makeText(this, R.string.customer_register_activity_toast_succeed_create_restaurant_manager_account, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.restaurant_manager_register_activity_toast_succeed_create_restaurant_manager_account, Toast.LENGTH_SHORT).show()
 
                         val intent: Intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                     }
                     else {
-                        Toast.makeText(this, R.string.customer_register_activity_toast_fail_create_restaurant_manager_customer_account, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.restaurant_manager_register_activity_toast_fail_create_restaurant_manager_customer_account, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
             // Fail to create
             else {
-                Toast.makeText(this, R.string.customer_register_activity_toast_fail_create_restaurant_manager_customer_account, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.restaurant_manager_register_activity_toast_fail_create_restaurant_manager_customer_account, Toast.LENGTH_SHORT).show()
             }
         }
     }

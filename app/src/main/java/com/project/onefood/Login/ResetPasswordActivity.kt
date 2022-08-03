@@ -71,14 +71,14 @@ class ResetPasswordActivity : AppCompatActivity() {
         firebaseAuth.sendPasswordResetEmail(emailAddressString).addOnCompleteListener {
             // Succeed to send a password reset email
             if (it.isSuccessful) {
-                Toast.makeText(this, R.string.customer_register_activity_toast_succeed_send_password_reset_email, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.reset_password_activity_toast_succeed_send_password_reset_email, Toast.LENGTH_SHORT).show()
 
                 val intent: Intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }
             // Failed to send a password reset email
             else {
-                Toast.makeText(this, R.string.customer_register_activity_toast_fail_send_password_reset_email, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.reset_password_activity_toast_fail_send_password_reset_email, Toast.LENGTH_SHORT).show()
             }
         }
     }

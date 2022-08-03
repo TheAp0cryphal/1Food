@@ -42,7 +42,7 @@ class CustomerRegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        firebaseDatabase = FirebaseDatabase.getInstance("https://onefood-255ff-default-rtdb.firebaseio.com/")
+        firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
     }
 
     // Set the listeners

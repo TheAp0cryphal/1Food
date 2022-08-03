@@ -9,4 +9,6 @@ package com.project.onefood.Login.data
 data class RestaurantManager(
     var restaurantName: String,
     var emailAddress: String,
-)
+) {
+    constructor(): this("", "")
+}
