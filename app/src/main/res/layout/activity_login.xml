@@ -10,16 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="center"
         android:padding="10dp">
 
-        <TextView
+        <ImageView
+            android:id="@+id/logoImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login_activity_title"
-            android:textColor="@color/black"
-            android:textSize="30dp"
-            android:gravity="center" />
+            android:adjustViewBounds="true"
+            android:src="@drawable/logo"/>
 
         <EditText
             android:id="@+id/emailAddressEditText"
@@ -27,8 +25,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:hint="@string/login_activity_edittext_email_address"
-            android:layout_marginTop="60dp"
+            android:hint="@string/login_activity_hint_email_address"
+            android:layout_marginTop="20dp"
             android:textColor="@color/black"/>
 
         <EditText
@@ -37,8 +35,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
-            android:hint="@string/login_activity_edittext_password"
-            android:layout_marginTop="20dp"
+            android:hint="@string/login_activity_hint_password"
+            android:layout_marginTop="10dp"
             android:textColor="@color/black"/>
 
         <Button
@@ -46,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_activity_button_login"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginTop="30dp"/>
 
         <TextView
             android:id="@+id/registerTextView"

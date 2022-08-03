@@ -2,7 +2,7 @@
  * File Name: CustomerRegisterActivity.kt
  * File Description: For customers to register
  * Author: Ching Hang Lam
- * Last Modified: 2022/08/02
+ * Last Modified: 2022/08/03
  */
 package com.project.onefood.Login
 
@@ -10,7 +10,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.project.onefood.MainMenu.MainMenuActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.project.onefood.Login.data.Customer
 import com.project.onefood.R
 import com.project.onefood.databinding.ActivityCustomerRegisterBinding
 
@@ -20,6 +22,10 @@ class CustomerRegisterActivity : AppCompatActivity() {
 
     //UI
     private lateinit var binding: ActivityCustomerRegisterBinding
+
+    // Firebase
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseDatabase: FirebaseDatabase
 
     // Actions on create
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,54 +40,71 @@ class CustomerRegisterActivity : AppCompatActivity() {
     private fun initActivity() {
         binding = ActivityCustomerRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
     }
 
     // Set the listeners
     private fun setListeners() {
+        binding.logoImageView.setOnClickListener {
+            clickLogoImageView()
+        }
+
         binding.submitButton.setOnClickListener {
             clickSubmitButton()
         }
     }
 
-    // Click the submit button
-    private fun clickSubmitButton() {
-        if (!checkFirstName()) {
-            Toast.makeText(this, R.string.customer_register_activity_toast_empty_first_name, Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (!checkEmailAddress()) {
-            Toast.makeText(this, R.string.customer_register_activity_toast_empty_email_address, Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (!checkPassword()) {
-            Toast.makeText(this, R.string.customer_register_activity_toast_empty_password, Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val intent: Intent = Intent(this, MainMenuActivity::class.java)
+    // Click the logo image view
+    private fun clickLogoImageView() {
+        val intent: Intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
-    // Check the first name
-    // Returns
-    // true: valid first name, false: invalid first name
-    private fun checkFirstName(): Boolean {
-        return binding.firstNameEditText.text.toString().isNotEmpty()
+    // Click the submit button
+    private fun clickSubmitButton() {
+        if (!LoginActivity.checkFirstName(resources, binding.firstNameEditText))
+            return
+
+        if (!LoginActivity.checkEmailAddress(resources, binding.emailAddressEditText))
+            return
+
+        if (!LoginActivity.checkPassword(resources, binding.passwordEditText))
+            return
+
+        createCustomerAccount()
     }
 
-    // Check the email address
-    // Returns
-    // true: valid email address, false: invalid email address
-    private fun checkEmailAddress(): Boolean {
-        return binding.emailAddressEditText.text.toString().isNotEmpty()
-    }
+    // Create a customer account
+    private fun createCustomerAccount() {
+        val firstNameString: String = binding.firstNameEditText.text.toString().trim()
+        val lastNameString: String = binding.lastNameEditText.text.toString().trim()
+        val emailAddressString: String = binding.emailAddressEditText.text.toString().trim()
+        val passwordString: String = binding.passwordEditText.text.toString().trim()
 
-    // Check the password
-    // Returns
-    // true: valid password, false: invalid password
-    private fun checkPassword(): Boolean {
-        return binding.passwordEditText.text.toString().isNotEmpty()
+        firebaseAuth.createUserWithEmailAndPassword(emailAddressString, passwordString).addOnCompleteListener {
+            // Succeed to create
+            if (it.isSuccessful) {
+                val customer: Customer = Customer(firstNameString, lastNameString, emailAddressString)
+                val uid: String = FirebaseAuth.getInstance().currentUser!!.uid
+
+                firebaseDatabase.getReference(getString(R.string.firebase_database_customers)).child(uid).setValue(customer).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Toast.makeText(this, R.string.customer_register_activity_toast_succeed_create_customer_account, Toast.LENGTH_SHORT).show()
+
+                        val intent: Intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else {
+                        Toast.makeText(this, R.string.customer_register_activity_toast_fail_create_customer_account, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            // Fail to create
+            else {
+                Toast.makeText(this, R.string.customer_register_activity_toast_fail_create_customer_account, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

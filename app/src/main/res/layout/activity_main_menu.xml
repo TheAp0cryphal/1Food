@@ -16,11 +16,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="190dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/salutation">
 
         <ImageView
             android:id="@+id/qr_scan"
@@ -180,8 +179,8 @@
         android:layout_below="@+id/userAddress"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/hellouser"
+        android:layout_marginTop="8dp"
+        android:text="@string/main_menu_activity_text_hello"
         android:textColor="#00B4E9"
         android:textFontWeight="400"
         android:textSize="44dp"
@@ -190,22 +189,36 @@
         app:layout_constraintTop_toBottomOf="@+id/userAddress" />
 
     <TextView
+        android:id="@+id/userNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userAddress"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:textColor="#00B4E9"
+        android:textFontWeight="400"
+        android:textSize="44dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/userGreeting"
+        app:layout_constraintStart_toEndOf="@+id/userGreeting"
+        app:layout_constraintTop_toTopOf="@+id/userGreeting"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/userAddress"
         android:layout_alignParentStart="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:text="@string/todaypromo"
         android:textColor="#00B4E9"
         android:textFontWeight="400"
         android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/promorecycler"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <ImageView
         android:id="@+id/salutation"
@@ -215,10 +228,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userGreeting"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/salutation" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -227,8 +238,8 @@
         android:layout_height="331dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

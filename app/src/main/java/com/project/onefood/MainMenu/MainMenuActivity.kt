@@ -14,14 +14,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.onefood.FavouriteList.FavouriteActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.project.onefood.Login.data.Customer
+import com.project.onefood.Login.data.RestaurantManager
 import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
 import com.project.onefood.PagerSystem.FoodOrdersActivity
 import com.project.onefood.R
 import com.project.onefood.RestaurantsList.RestaurantsListActivity
+import com.project.onefood.databinding.ActivityMainMenuBinding
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.*
 
 class MainMenuActivity : AppCompatActivity() {
+
+    // UI
+    private lateinit var binding: ActivityMainMenuBinding
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -111,7 +122,10 @@ class MainMenuActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_menu)
+
+        initActivity()
+
+        setUserName()
 
         val recyclerView : RecyclerView = findViewById(R.id.promorecycler)
         val adapter = PromoRecyclerView()
@@ -121,6 +135,47 @@ class MainMenuActivity : AppCompatActivity() {
 
         rqPerms()
         //rqPermsLocation()
+    }
+
+    // Initialize the activity
+    private fun initActivity() {
+        binding = ActivityMainMenuBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    // Set the user name
+    private fun setUserName() {
+        val uid: String = FirebaseAuth.getInstance().currentUser!!.uid
+
+        FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users)).getReference(getString(R.string.firebase_database_customers)).child(uid).addListenerForSingleValueEvent(
+            object: ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    val customer: Customer? = p0.getValue(Customer::class.java)
+                    if (customer != null) {
+                        binding.userNameTextView.text = customer.firstName
+                    }
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    //binding.userNameTextView.text = ""
+                }
+            }
+        )
+
+        FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users)).getReference(getString(R.string.firebase_database_restaurant_manager)).child(uid).addListenerForSingleValueEvent(
+            object: ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    val restaurantManager: RestaurantManager? = p0.getValue(RestaurantManager::class.java)
+                    if (restaurantManager != null) {
+                        binding.userNameTextView.text = restaurantManager.restaurantName
+                    }
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    //binding.userNameTextView.text = ""
+                }
+            }
+        )
     }
 
     override fun onRequestPermissionsResult(
