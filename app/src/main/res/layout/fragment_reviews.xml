@@ -8,6 +8,7 @@
     <ListView
         android:id="@+id/review_list"
         android:layout_width="match_parent"
+        android:clickable="false"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
