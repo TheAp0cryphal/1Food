@@ -1,6 +1,8 @@
 package com.project.onefood.FavouriteList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,9 +46,9 @@ class FavouriteActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        val emptyText: TextView = findViewById(R.id.empty)
         favouriteItemViewModel.allFavouriteItemsLiveData.observe(this, Observer { it ->
-
-
+            emptyText.isVisible = it.isEmpty()
             adapter.replace(it as ArrayList<FavouriteItem>)
             adapter.notifyDataSetChanged()
         })
