@@ -17,31 +17,34 @@ class ReviewAdapter(var context : Context) : BaseAdapter(){
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    var reviewComments = arrayOf("Great food.. awesome vibe", "Awesome Food.. shit vibe", "It be bitchin")
-    var reviewerName = arrayOf("Shiela Shah")
-    //rating
+    var reviewerComments = arrayOf("Very expensive", "Poor service", "Nice food and good variety.","Yuummmyyyyy!!")
+    var reviewerName = arrayOf("Shiela Shah", "Tangy Shawarma", "John Cena", "Mikaela")
+    var reviewerRating= arrayOf(R.drawable.zero_star,R.drawable.one_star,R.drawable.two_star,R.drawable.three_star,R.drawable.four_star, R.drawable.five_star)
 
     override fun getCount(): Int {
         return 3
     }
 
     override fun getItem(p0: Int): Any {
-        return reviewComments[p0]
+        return reviewerComments[p0]
     }
 
     override fun getItemId(p0: Int): Long {
-        return reviewComments[p0].toLong()
+        return reviewerComments[p0].toLong()
     }
 
     override fun getView(position: Int, view : View?, parent : ViewGroup?): View {
         val rowView = inflater.inflate(R.layout.review_row, parent, false)
 
 
-        val foodName = rowView.findViewById<TextView>(R.id.customer_name)
-        foodName.text = "Shiela Shah"
+        val customerName = rowView.findViewById<TextView>(R.id.customer_name)
+        customerName.text = reviewerName[position]
 
-        val foodPrice =  rowView.findViewById<TextView>(R.id.customer_review)
-        foodPrice.text = reviewComments[position]
+        val customerReview =  rowView.findViewById<TextView>(R.id.customer_review)
+        customerReview.text = reviewerComments[position]
+
+        val customerRating= rowView.findViewById<ImageView>(R.id.star_rating)
+        customerRating.setImageResource(reviewerRating[position])
 
         return rowView
     }

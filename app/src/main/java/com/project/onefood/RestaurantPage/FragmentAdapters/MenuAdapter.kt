@@ -15,7 +15,7 @@ class MenuAdapter(var context : Context) : BaseAdapter() {
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    var foodItems = arrayOf("pizza", "pasta", "taco")
+    var foodItems = arrayOf("pizza", "pasta", "chicken noodles")
 
     override fun getCount(): Int {
         return 3

@@ -172,7 +172,6 @@
         layout="@layout/tabbed_layout_restaurant"
         android:layout_width="match_parent"
         android:layout_height="328dp"
-        android:layout_margintop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
