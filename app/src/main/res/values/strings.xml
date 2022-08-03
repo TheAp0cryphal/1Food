@@ -26,67 +26,75 @@
     <string name="tab_text_2">Tab 2</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="login_activity_title">Login to 1Food</string>
+
+    <!-- General ////////////////////////////////////////////////////////////////////////////////-->
+    <string name="one_food_web_address">http://onefood.lamchinghang.com/</string>
+
+    <!-- Firebase ////////////////////////////////////////////////////////////////////////////////-->
+    <string name="firebase_database_customers">Customers</string>
+    <string name="firebase_database_restaurant_manager">Restaurant Manager</string>
 
     <!-- Login Activity /////////////////////////////////////////////////////////////////////////-->
-    <string name="login_activity_edittext_email_address">Email Address</string>
-    <string name="login_activity_edittext_password">Password</string>
+    <string name="login_activity_title">Login to 1Food</string>
+    <string name="login_activity_hint_email_address">Email Address</string>
+    <string name="login_activity_hint_password">Password</string>
     <string name="login_activity_button_login">Login</string>
-    <string name="login_activity_textview_reset_password">Forget Password?</string>
     <string name="login_activity_textview_register">Register</string>
+    <string name="login_activity_textview_reset_password">Forgot Password?</string>
     <string name="login_activity_textview_anonymous_user">Anonymous User</string>
-    <string name="login_activity_toast_empty_email_address">The email address cannot be empty</string>
-    <string name="login_activity_toast_empty_password">The password cannot be empty</string>
-    <string name="who_activity_title">Who are you?</string>
+    <string name="login_activity_error_empty_email_address">The email address cannot be empty</string>
+    <string name="login_activity_error_invalid_email_address">This email address is valid</string>
+    <string name="login_activity_error_invalid_password">The password should be at least 6 characters</string>
+    <string name="login_activity_error_empty_first_name">The first name cannot be empty</string>
+    <string name="login_activity_error_empty_restaurant_name">The restaurant name cannot be empty</string>
 
     <!-- Who Activity ///////////////////////////////////////////////////////////////////////////-->
+    <string name="who_activity_title">Who are you?</string>
     <string name="who_activity_button_customer">Customer</string>
     <string name="who_activity_button_restaurant_manager">Restaurant Manager</string>
-    <string name="customer_register_activity_title">Enter your details</string>
 
     <!-- Customer Register Activity /////////////////////////////////////////////////////////////-->
-    <string name="customer_register_activity_edittext_first_name">First Name</string>
-    <string name="customer_register_activity_edittext_last_name">Last Name</string>
-    <string name="customer_register_activity_edittext_email_address">Email Address</string>
-    <string name="customer_register_activity_edittext_password">Password</string>
+    <string name="customer_register_activity_title">Enter your details</string>
+    <string name="customer_register_activity_hint_first_name">First Name</string>
+    <string name="customer_register_activity_hint_last_name">Last Name</string>
     <string name="customer_register_activity_button_submit">Submit</string>
-    <string name="customer_register_activity_toast_empty_first_name">The first name cannot be empty</string>
-    <string name="customer_register_activity_toast_empty_email_address">The email address cannot be empty</string>
-    <string name="customer_register_activity_toast_empty_password">The password cannot be empty</string>
-    <string name="restaurant_manager_register_activity_title">Enter your details</string>
+    <string name="customer_register_activity_toast_succeed_create_customer_account">Your account has been created</string>
+    <string name="customer_register_activity_toast_fail_create_customer_account">Fail to create an account</string>
 
     <!-- Restaurant Manager Register Activity ///////////////////////////////////////////////////-->
-    <string name="restaurant_manager_register_activity_edittext_restaurant_name">Restaurant Name</string>
-    <string name="restaurant_manager_register_activity_edittext_email_address">Email Address</string>
-    <string name="restaurant_manager_register_activity_edittext_password">Password</string>
+    <string name="restaurant_manager_register_activity_title">Enter your details</string>
+    <string name="restaurant_manager_register_activity_hint_restaurant_name">Restaurant Name</string>
+    <string name="restaurant_manager_register_activity_hint_email_address">Email Address</string>
+    <string name="restaurant_manager_register_activity_hint_password">Password</string>
     <string name="restaurant_manager_register_activity_button_submit">Submit</string>
-    <string name="restaurant_manager_register_activity_toast_empty_restaurant_name">The restaurant name cannot be empty</string>
-    <string name="restaurant_manager_register_activity_toast_empty_email_address">The email address cannot be empty</string>
-    <string name="restaurant_manager_register_activity_toast_empty_password">The password cannot be empty</string>
-    <string name="reset_password_activity_title">Please enter your email to search for your account</string>
+    <string name="customer_register_activity_toast_succeed_create_restaurant_manager_account">Your account has been created</string>
+    <string name="customer_register_activity_toast_fail_create_restaurant_manager_customer_account">Fail to create an account</string>
 
     <!-- Reset Password Activity ////////////////////////////////////////////////////////////////-->
+    <string name="reset_password_activity_title">Please enter your email to search for your account</string>
     <string name="reset_password_activity_edittext_email_address">Email Address</string>
     <string name="reset_password_activity_button_reset_password">Reset Password</string>
     <string name="reset_password_activity_toast_empty_email_address">The email address cannot be empty</string>
-    <string name="food_orders_activity_action_bar_new_oder">New Order</string>
 
     <!-- Food Orders Activity ///////////////////////////////////////////////////////////////////-->
-    <string name="new_order_activity_text_remark">Remark</string>
+    <string name="food_orders_activity_action_bar_new_oder">New Order</string>
 
     <!-- New Order Activity /////////////////////////////////////////////////////////////////////-->
+    <string name="new_order_activity_text_remark">Remark</string>
     <string name="new_order_activity_button_submit">Submit</string>
     <string name="new_order_activity_toast_success">The request is sent</string>
     <string name="new_order_activity_toast_failure">Unable to send the request</string>
-    <string name="food_order_activity_text_order">Order</string>
 
     <!-- Food Order Activity ////////////////////////////////////////////////////////////////////-->
+    <string name="food_order_activity_text_order">Order</string>
     <string name="food_order_activity_text_order_time">Order Time:</string>
     <string name="food_order_activity_button_done">Done</string>
     <string name="food_order_activity_toast_success">Notification is sent</string>
     <string name="food_order_activity_toast_failure">Unable to send the notification</string>
     <string name="food_order_activity_toast_delete">The food order is deleted</string>
     <string name="food_order_activity_action_bar_delete_oder">Delete Order</string>
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="favourites">favourites</string>
     <string name="no_favourites_added_yet">No favourites added yet!</string>
     <string name="Favourites">Favourites</string>
