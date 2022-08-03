@@ -11,10 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.project.onefood.FavouriteList.FavouriteActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
-import com.project.onefood.MainMenu.ReservationAdapter.ReservationRecyclerView
 import com.project.onefood.PagerSystem.FoodOrdersActivity
 import com.project.onefood.R
 import com.project.onefood.RestaurantsList.RestaurantsListActivity
@@ -56,6 +56,12 @@ class MainMenuActivity : AppCompatActivity() {
         val restaurantsLocations: ImageView = findViewById(R.id.locations)
         restaurantsLocations.setOnClickListener {
             val intent = Intent(this, RestaurantsListActivity::class.java)
+            startActivity(intent)
+        }
+
+        val favourites: ImageView = findViewById(R.id.favorites)
+        favourites.setOnClickListener {
+            val intent = Intent(this, FavouriteActivity::class.java)
             startActivity(intent)
         }
 

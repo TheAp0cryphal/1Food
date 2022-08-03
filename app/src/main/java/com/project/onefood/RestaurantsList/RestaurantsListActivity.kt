@@ -12,6 +12,10 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
+import com.project.onefood.Databases.FavouriteDB.FavouriteDatabase
+import com.project.onefood.Databases.FavouriteDB.FavouriteDatabaseDao
+import com.project.onefood.Databases.ReservationDB.ReservationDatabase
+import com.project.onefood.Databases.ReservationDB.ReservationDatabaseDao
 import com.project.onefood.R
 import com.project.onefood.RestaurantPage.RestaurantActivity
 import okhttp3.OkHttpClient
@@ -42,6 +46,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         val placesClient = Places.createClient(this)
 
         list = ArrayList()
+        list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300), "12345", "true", "2345"))
         //list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300),))
         searchView = findViewById(R.id.searchVieww)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -186,6 +191,8 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val restaurantLngResult = parseLocation.optString("lng")
 
                 val restaurantRating = jsonRestaurant.optString("rating")
+                val place_id = jsonRestaurant.optString("place_id")
+
 
                 Log.d("restaurantStatus", restaurantOpeningResult)
 
@@ -195,7 +202,7 @@ class RestaurantsListActivity : AppCompatActivity() {
                     "",
                     LatLng(restaurantLatResult.toDouble(),
                         restaurantLngResult.toDouble()),
-                    restaurantRating, restaurantOpeningResult))
+                    restaurantRating, restaurantOpeningResult, place_id))
 
             }
         }
