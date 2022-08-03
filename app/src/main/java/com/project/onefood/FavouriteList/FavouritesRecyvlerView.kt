@@ -2,6 +2,7 @@ package com.project.onefood.FavouriteList
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.model.LatLng
 import com.project.onefood.Databases.FavouriteDB.FavouriteDatabase
 import com.project.onefood.Databases.FavouriteDB.FavouriteItem
 import com.project.onefood.R
@@ -43,13 +45,13 @@ class FavouritesRecyvlerView(private val context: Context, private var list: Arr
 
             itemView.findViewById<ImageView>(R.id.favoriteBtn).setImageResource(R.drawable.heart)
 
-            itemView.findViewById<LinearLayout>(R.id.restaurantCard).setOnClickListener {
-                val intent = Intent(context, RestaurantActivity::class.java)
-                intent.putExtra("restaurant_name", list[position].name)
-                intent.putExtra("restaurant_address", list[position].address)
-                //intent.putExtra("restaurant_coordinates", list[position].latLng)
-                context.startActivity(intent)
-            }
+//            itemView.findViewById<LinearLayout>(R.id.restaurantCard).setOnClickListener {
+//                val intent = Intent(context, RestaurantActivity::class.java)
+//                intent.putExtra("restaurant_name", list[position].name)
+//                intent.putExtra("restaurant_address", list[position].address)
+//                //intent.putExtra("restaurant_coordinates", LatLng(list[position].latitude, list[position].longitude))
+//                context.startActivity(intent)
+//            }
 
             itemView.findViewById<ImageView>(R.id.favoriteBtn).setOnClickListener {
                 CoroutineScope(Dispatchers.IO).launch{

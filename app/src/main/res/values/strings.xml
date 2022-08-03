@@ -87,6 +87,9 @@
     <string name="food_order_activity_toast_failure">Unable to send the notification</string>
     <string name="food_order_activity_toast_delete">The food order is deleted</string>
     <string name="food_order_activity_action_bar_delete_oder">Delete Order</string>
+    <string name="favourites">favourites</string>
+    <string name="no_favourites_added_yet">No favourites added yet!</string>
+    <string name="Favourites">Favourites</string>
     <string-array name="languages">
         <item>English</item>
         <item>Chinese</item>
