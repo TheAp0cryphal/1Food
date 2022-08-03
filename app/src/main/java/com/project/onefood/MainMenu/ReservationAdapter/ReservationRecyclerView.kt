@@ -29,9 +29,8 @@ class ReservationRecyclerView(private val context : Context, private var list: L
         holder.date.text = list[position].date
         holder.time.text = list[position].time
         holder.guests.text = list[position].members.toString() + " people"
+        lat = list[position].latitude
         lon = list[position].longitude
-
-       // holder.restaurantPic
     }
 
     override fun getItemCount(): Int {

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import com.google.android.gms.maps.model.LatLng
@@ -93,6 +94,8 @@ class ReservationSetActivity : AppCompatActivity() {
             var numOfPeople = numOfPeopleEditText.text
 
             var latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
+
+            Log.d("Coords2", "" + latLng.latitude + " " + latLng.longitude)
 
             CoroutineScope(IO).launch{
                 reservationDatabaseDao.insert(ReservationItem(intent.getStringExtra("restaurant_name").toString(),

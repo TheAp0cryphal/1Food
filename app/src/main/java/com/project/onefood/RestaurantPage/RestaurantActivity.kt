@@ -3,6 +3,7 @@ package com.project.onefood.RestaurantPage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -68,7 +69,7 @@ class RestaurantActivity : AppCompatActivity() {
 
         var restaurantStatusTextView : TextView = findViewById(R.id.restaurant_status)
         restaurantStatusTextView.text = restaurantStatus
-        //Log.d("LatLng?", latLng.toString())
+        Log.d("Coords", latLng.toString())
 
     }
 
