@@ -73,20 +73,20 @@ class CustomerRegisterActivity : AppCompatActivity() {
         if (!LoginActivity.checkPassword(resources, binding.passwordEditText))
             return
 
-        connectToFirebase()
+        createCustomerAccount()
     }
 
-    // Connect to the firebase
-    private fun connectToFirebase() {
+    // Create a customer account
+    private fun createCustomerAccount() {
         val firstNameString: String = binding.firstNameEditText.text.toString().trim()
         val lastNameString: String = binding.lastNameEditText.text.toString().trim()
-        val emailString: String = binding.emailAddressEditText.text.toString().trim()
+        val emailAddressString: String = binding.emailAddressEditText.text.toString().trim()
         val passwordString: String = binding.passwordEditText.text.toString().trim()
 
-        firebaseAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener {
+        firebaseAuth.createUserWithEmailAndPassword(emailAddressString, passwordString).addOnCompleteListener {
             // Succeed to create
             if (it.isSuccessful) {
-                val customer: Customer = Customer(firstNameString, lastNameString, emailString)
+                val customer: Customer = Customer(firstNameString, lastNameString, emailAddressString)
                 val uid: String = FirebaseAuth.getInstance().currentUser!!.uid
 
                 firebaseDatabase.getReference(getString(R.string.firebase_database_customers)).child(uid).setValue(customer).addOnCompleteListener {

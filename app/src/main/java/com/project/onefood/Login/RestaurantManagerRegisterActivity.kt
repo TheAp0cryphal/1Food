@@ -73,19 +73,19 @@ class RestaurantManagerRegisterActivity : AppCompatActivity() {
         if (!LoginActivity.checkPassword(resources, binding.passwordEditText))
             return
 
-        connectToFirebase()
+        createRestaurantManagerAccount()
     }
 
-    // Connect to the firebase
-    private fun connectToFirebase() {
+    // Create a restaurant manager account
+    private fun createRestaurantManagerAccount() {
         val restaurantNameString: String = binding.restaurantNameEditText.text.toString().trim()
-        val emailString: String = binding.emailAddressEditText.text.toString().trim()
+        val emailAddressString: String = binding.emailAddressEditText.text.toString().trim()
         val passwordString: String = binding.passwordEditText.text.toString().trim()
 
-        firebaseAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener {
+        firebaseAuth.createUserWithEmailAndPassword(emailAddressString, passwordString).addOnCompleteListener {
             // Succeed to create
             if (it.isSuccessful) {
-                val restaurantManager: RestaurantManager = RestaurantManager(restaurantNameString, emailString)
+                val restaurantManager: RestaurantManager = RestaurantManager(restaurantNameString, emailAddressString)
                 val uid: String = FirebaseAuth.getInstance().currentUser!!.uid
 
                 firebaseDatabase.getReference(getString(R.string.firebase_database_restaurant_manager)).child(uid).setValue(restaurantManager).addOnCompleteListener {

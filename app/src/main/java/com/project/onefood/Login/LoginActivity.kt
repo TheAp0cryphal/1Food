@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseAuth
 import com.project.onefood.MainMenu.MainMenuActivity
@@ -89,8 +90,25 @@ class LoginActivity : AppCompatActivity() {
         if (!checkPassword(resources, binding.passwordEditText))
             return
 
-        val intent: Intent = Intent(this, MainMenuActivity::class.java)
-        startActivity(intent)
+        login()
+    }
+
+    // Login to an account
+    private fun login() {
+        val emailAddressString: String = binding.emailAddressEditText.text.toString().trim()
+        val passwordString: String = binding.passwordEditText.text.toString().trim()
+
+        firebaseAuth.signInWithEmailAndPassword(emailAddressString, passwordString).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(this, R.string.customer_register_activity_toast_succeed_login, Toast.LENGTH_SHORT).show()
+
+                val intent: Intent = Intent(this, MainMenuActivity::class.java)
+                startActivity(intent)
+            }
+            else {
+                Toast.makeText(this, R.string.customer_register_activity_toast_fail_login, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     // Click the register textview
@@ -117,16 +135,16 @@ class LoginActivity : AppCompatActivity() {
         // Returns
         // true: valid email address, false: invalid email address
         fun checkEmailAddress(resources: Resources, editText: EditText): Boolean {
-            val emailString: String = editText.text.toString().trim()
+            val emailAddressString: String = editText.text.toString().trim()
 
-            if (emailString.isEmpty()) {
+            if (emailAddressString.isEmpty()) {
                 editText.error = resources.getString(R.string.login_activity_error_empty_email_address)
                 editText.requestFocus()
 
                 return false
             }
 
-            if (!Patterns.EMAIL_ADDRESS.matcher(emailString).matches()) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(emailAddressString).matches()) {
                 editText.error = resources.getString(R.string.login_activity_error_invalid_email_address)
                 editText.requestFocus()
 

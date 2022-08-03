@@ -47,6 +47,8 @@
     <string name="login_activity_error_invalid_password">The password should be at least 6 characters</string>
     <string name="login_activity_error_empty_first_name">The first name cannot be empty</string>
     <string name="login_activity_error_empty_restaurant_name">The restaurant name cannot be empty</string>
+    <string name="customer_register_activity_toast_succeed_login">Welcome</string>
+    <string name="customer_register_activity_toast_fail_login">Failed to login</string>
 
     <!-- Who Activity ///////////////////////////////////////////////////////////////////////////-->
     <string name="who_activity_title">Who are you?</string>
@@ -59,7 +61,7 @@
     <string name="customer_register_activity_hint_last_name">Last Name</string>
     <string name="customer_register_activity_button_submit">Submit</string>
     <string name="customer_register_activity_toast_succeed_create_customer_account">Your account has been created</string>
-    <string name="customer_register_activity_toast_fail_create_customer_account">Fail to create an account</string>
+    <string name="customer_register_activity_toast_fail_create_customer_account">Failed to create an account</string>
 
     <!-- Restaurant Manager Register Activity ///////////////////////////////////////////////////-->
     <string name="restaurant_manager_register_activity_title">Enter your details</string>
@@ -68,7 +70,7 @@
     <string name="restaurant_manager_register_activity_hint_password">Password</string>
     <string name="restaurant_manager_register_activity_button_submit">Submit</string>
     <string name="customer_register_activity_toast_succeed_create_restaurant_manager_account">Your account has been created</string>
-    <string name="customer_register_activity_toast_fail_create_restaurant_manager_customer_account">Fail to create an account</string>
+    <string name="customer_register_activity_toast_fail_create_restaurant_manager_customer_account">Failed to create an account</string>
 
     <!-- Reset Password Activity ////////////////////////////////////////////////////////////////-->
     <string name="reset_password_activity_title">Please enter your email to search for your account</string>
