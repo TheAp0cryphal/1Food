@@ -88,6 +88,7 @@
 
     <!-- Food Orders Activity ///////////////////////////////////////////////////////////////////-->
     <string name="food_orders_activity_action_bar_new_oder">New Order</string>
+    <string name="food_orders_activity_text_empty_food_order_list">The food order list is empty</string>
 
     <!-- New Order Activity /////////////////////////////////////////////////////////////////////-->
     <string name="new_order_activity_text_remark">Remark</string>

@@ -10,10 +10,12 @@ import android.content.Context
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.project.onefood.MainMenu.MainMenuActivity
@@ -64,6 +66,13 @@ class FoodOrdersActivity : AppCompatActivity() {
     // Set the observers
     private fun setObservers() {
         foodOrderDatabaseViewModel.allFoodOrdersLiveData.observe(this, Observer {
+            if (it.isEmpty()) {
+                binding.foodOrdersListView.visibility = View.GONE
+                binding.emptyFoodOrderListTextView.visibility = View.VISIBLE
+            } else {
+                binding.foodOrdersListView.visibility = View.VISIBLE
+                binding.emptyFoodOrderListTextView.visibility = View.GONE
+            }
             foodOrdersAdapter.updateFoodOrdersList(it)
         })
     }
