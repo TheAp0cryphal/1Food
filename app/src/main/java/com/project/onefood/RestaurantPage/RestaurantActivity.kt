@@ -3,13 +3,18 @@ package com.project.onefood.RestaurantPage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.project.onefood.R
-import org.w3c.dom.Text
+import com.project.onefood.RestaurantPage.FragmentAdapters.TabAdapter
+import com.project.onefood.RestaurantPage.Fragments.MenuFragment
+import com.project.onefood.RestaurantPage.Fragments.ReviewsFragment
 
 class RestaurantActivity : AppCompatActivity() {
 
@@ -40,6 +45,8 @@ class RestaurantActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
 
+        initFragment()
+
         restaurantName = intent.getStringExtra("restaurant_name").toString()
 
         var restaurantNameTextView :TextView = findViewById(R.id.restaurant_name)
@@ -63,5 +70,36 @@ class RestaurantActivity : AppCompatActivity() {
         restaurantStatusTextView.text = restaurantStatus
         //Log.d("LatLng?", latLng.toString())
 
+    }
+
+    private lateinit var menuFragment: MenuFragment
+    private lateinit var reviewsFragment: ReviewsFragment
+    private lateinit var fragments: ArrayList<Fragment>
+    private lateinit var tab: TabLayout
+    private lateinit var viewPager: ViewPager2
+    private lateinit var tabAdapter: FragmentStateAdapter
+    private lateinit var tabLayoutMediator: TabLayoutMediator
+    private lateinit var tabConfigurationStrategy: TabLayoutMediator.TabConfigurationStrategy
+    private val TAB_TEXT = arrayOf("Menu","Reviews")
+
+    private fun initFragment() {
+        menuFragment = MenuFragment()
+        reviewsFragment= ReviewsFragment()
+
+        fragments = ArrayList()
+
+        fragments.add(menuFragment)
+        fragments.add(reviewsFragment)
+
+        tab= findViewById(R.id.tabLayout)
+        viewPager= findViewById(R.id.viewPager)
+        tabAdapter = TabAdapter(this,fragments)
+        viewPager.adapter = tabAdapter
+        tabConfigurationStrategy = TabLayoutMediator.TabConfigurationStrategy(){
+                tab:TabLayout.Tab, position:Int->
+            tab.text= TAB_TEXT[position]
+        }
+        tabLayoutMediator = TabLayoutMediator(tab,viewPager,tabConfigurationStrategy)
+        tabLayoutMediator.attach()
     }
 }
