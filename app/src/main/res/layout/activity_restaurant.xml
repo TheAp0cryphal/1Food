@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".RestaurantActivity">
+    tools:context="com.project.onefood.RestaurantPage.RestaurantActivity">
 
 
     <ImageView
@@ -170,12 +170,15 @@
     <include
         android:id="@+id/include"
         layout="@layout/tabbed_layout_restaurant"
-        android:layout_width="407dp"
-        android:layout_height="320dp"
+        android:layout_width="match_parent"
+        android:layout_height="328dp"
+        android:layout_margintop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_info_box" />
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_info_box"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
