@@ -2,7 +2,7 @@
  * File Name: WhoActivity.kt
  * File Description: For users to select different mode to register
  * Author: Ching Hang Lam
- * Last Modified: 2022/08/02
+ * Last Modified: 2022/08/03
  */
 package com.project.onefood.Login
 
@@ -35,6 +35,10 @@ class WhoActivity : AppCompatActivity() {
 
     // Set the listeners
     private fun setListeners() {
+        binding.logoImageView.setOnClickListener {
+            clickLogoImageView()
+        }
+
         binding.customerButton.setOnClickListener {
             clickCustomerButton()
         }
@@ -42,6 +46,12 @@ class WhoActivity : AppCompatActivity() {
         binding.restaurantManagerButton.setOnClickListener {
             clickRestaurantManagerButton()
         }
+    }
+
+    // Click the logo image view
+    private fun clickLogoImageView() {
+        val intent: Intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 
     // Click the customer button

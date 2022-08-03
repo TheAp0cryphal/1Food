@@ -10,8 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_gravity="center">
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/logo"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -26,8 +32,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="@string/customer_register_activity_edittext_first_name"
-            android:layout_marginTop="30dp"/>
+            android:hint="@string/customer_register_activity_hint_first_name"
+            android:layout_marginTop="10dp"/>
 
         <EditText
             android:id="@+id/lastNameEditText"
@@ -35,8 +41,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="@string/customer_register_activity_edittext_last_name"
-            android:layout_marginTop="20dp"/>
+            android:hint="@string/customer_register_activity_hint_last_name"
+            android:layout_marginTop="10dp"/>
 
         <EditText
             android:id="@+id/emailAddressEditText"
@@ -44,8 +50,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:hint="@string/customer_register_activity_edittext_email_address"
-            android:layout_marginTop="20dp" />
+            android:hint="@string/login_activity_hint_email_address"
+            android:layout_marginTop="10dp" />
 
         <EditText
             android:id="@+id/passwordEditText"
@@ -53,15 +59,15 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword"
-            android:hint="@string/customer_register_activity_edittext_password"
-            android:layout_marginTop="20dp" />
+            android:hint="@string/login_activity_hint_password"
+            android:layout_marginTop="10dp" />
 
         <Button
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/customer_register_activity_button_submit"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginTop="30dp"/>
 
     </LinearLayout>
 
