@@ -12,7 +12,7 @@ import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.project.onefood.R
 
-class QRScanActivity : AppCompatActivity() {
+class  QRScanActivity : AppCompatActivity() {
 
     private lateinit var qrScanner: CodeScanner
 
@@ -24,11 +24,15 @@ class QRScanActivity : AppCompatActivity() {
         qrScanner.decodeCallback = DecodeCallback {
 
             val intent = Intent(this, OrderPlacedActivity::class.java)
+            intent.putExtra("ID", it.text)
             startActivity(intent)
 
-           // runOnUiThread{
-                //Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
-           // }
+            /*
+            runOnUiThread{
+                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+            }
+
+             */
         }
 
         qrScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
