@@ -41,6 +41,9 @@
             android:name=".Login.LoginActivity"
             android:exported="false" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA" />
         <activity
             android:name=".RestaurantPage.ReservationMapsActivity"
             android:exported="false"

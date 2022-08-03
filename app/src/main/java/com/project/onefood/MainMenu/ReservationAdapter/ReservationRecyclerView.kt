@@ -28,7 +28,7 @@ class ReservationRecyclerView(private val context : Context, private var list: L
        holder.restaurantName.text = list[position].restaurantName
         holder.date.text = list[position].date
         holder.time.text = list[position].time
-        lat = list[position].latitude
+        holder.guests.text = list[position].members.toString() + " people"
         lon = list[position].longitude
 
        // holder.restaurantPic
@@ -42,6 +42,7 @@ class ReservationRecyclerView(private val context : Context, private var list: L
        var restaurantPic : ImageView
        var date : TextView
        var time : TextView
+       var guests : TextView
        var restaurantName : TextView
 
        init {
@@ -50,6 +51,7 @@ class ReservationRecyclerView(private val context : Context, private var list: L
            date = itemView.findViewById(R.id.reservation_date)
            time = itemView.findViewById(R.id.reservation_time)
            restaurantName = itemView.findViewById(R.id.reservation_restaurant)
+           guests = itemView.findViewById(R.id.guests)
        }
 
         override fun onClick(v: View?) {

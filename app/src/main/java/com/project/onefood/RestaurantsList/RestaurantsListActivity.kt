@@ -46,7 +46,8 @@ class RestaurantsListActivity : AppCompatActivity() {
         val placesClient = Places.createClient(this)
 
         list = ArrayList()
-        list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300), "12345"))
+        list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300), "12345", "true", "2345"))
+        //list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300),))
         searchView = findViewById(R.id.searchVieww)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastKnownLocation()
@@ -175,6 +176,7 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val isRestaurantOpen = jsonRestaurant.optString("opening_hours")
                 var parseOpening: JSONObject? = null
                 var restaurantOpeningResult = ""
+
                 if (isRestaurantOpen == null){
                     parseOpening = JSONObject(isRestaurantOpen.toString())
                     restaurantOpeningResult = parseOpening.optString("open_now") //is restaurant open? true, false
@@ -189,10 +191,18 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val restaurantLngResult = parseLocation.optString("lng")
 
                 val restaurantRating = jsonRestaurant.optString("rating")
-
                 val place_id = jsonRestaurant.optString("place_id")
 
-                list.add(RestaurantItem(restaurantName, restaurantAccurateAddress, 123.2, "", LatLng(restaurantLatResult.toDouble(), restaurantLngResult.toDouble()), place_id))
+
+                Log.d("restaurantStatus", restaurantOpeningResult)
+
+                list.add(RestaurantItem(restaurantName,
+                    restaurantAccurateAddress,
+                    123.2,
+                    "",
+                    LatLng(restaurantLatResult.toDouble(),
+                        restaurantLngResult.toDouble()),
+                    restaurantRating, restaurantOpeningResult, place_id))
 
             }
         }
