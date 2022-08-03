@@ -100,6 +100,9 @@
     <string name="food_order_activity_toast_delete">The food order is deleted</string>
     <string name="food_order_activity_action_bar_delete_oder">Delete Order</string>
 
+    <!-- User Profile Activity ///////////////////////////////////////////////////////////////////-->
+    <string name="user_profile_activity_button_logout">Logout</string>
+
     <!-- ////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="favourites">favourites</string>
     <string name="no_favourites_added_yet">No favourites added yet!</string>
