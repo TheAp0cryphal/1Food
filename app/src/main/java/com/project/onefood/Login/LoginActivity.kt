@@ -90,23 +90,23 @@ class LoginActivity : AppCompatActivity() {
         if (!checkPassword(resources, binding.passwordEditText))
             return
 
-        login()
+        loginUserAccount()
     }
 
-    // Login to an account
-    private fun login() {
+    // Login to a user account
+    private fun loginUserAccount() {
         val emailAddressString: String = binding.emailAddressEditText.text.toString().trim()
         val passwordString: String = binding.passwordEditText.text.toString().trim()
 
         firebaseAuth.signInWithEmailAndPassword(emailAddressString, passwordString).addOnCompleteListener {
             if (it.isSuccessful) {
-                Toast.makeText(this, R.string.customer_register_activity_toast_succeed_login, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, R.string.login_activity_toast_succeed_login_user_account, Toast.LENGTH_SHORT).show()
 
                 val intent: Intent = Intent(this, MainMenuActivity::class.java)
                 startActivity(intent)
             }
             else {
-                Toast.makeText(this, R.string.customer_register_activity_toast_fail_login, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.login_activity_toast_fail_login_user_account, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -125,8 +125,22 @@ class LoginActivity : AppCompatActivity() {
 
     // Click the register textview
     private fun clickAnonymousUserTextView() {
-        val intent: Intent = Intent(this, MainMenuActivity::class.java)
-        startActivity(intent)
+        loginAnonymousAccount()
+    }
+
+    // Login anonymous account
+    private fun loginAnonymousAccount() {
+        firebaseAuth.signInAnonymously().addOnCompleteListener {
+            if (it.isSuccessful) {
+                //Toast.makeText(this, R.string.login_activity_toast_succeed_login_anonymous_account, Toast.LENGTH_SHORT).show()
+
+                val intent: Intent = Intent(this, MainMenuActivity::class.java)
+                startActivity(intent)
+            }
+            else {
+                Toast.makeText(this, R.string.login_activity_toast_fail_login_anonymous_account, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     companion object {

@@ -47,8 +47,10 @@
     <string name="login_activity_error_invalid_password">The password should be at least 6 characters</string>
     <string name="login_activity_error_empty_first_name">The first name cannot be empty</string>
     <string name="login_activity_error_empty_restaurant_name">The restaurant name cannot be empty</string>
-    <string name="customer_register_activity_toast_succeed_login">Welcome</string>
-    <string name="customer_register_activity_toast_fail_login">Failed to login</string>
+    <string name="login_activity_toast_succeed_login_user_account">Welcome</string>
+    <string name="login_activity_toast_fail_login_user_account">Failed to login</string>
+    <string name="login_activity_toast_succeed_login_anonymous_account">Welcome</string>
+    <string name="login_activity_toast_fail_login_anonymous_account">Failed to login</string>
 
     <!-- Who Activity ///////////////////////////////////////////////////////////////////////////-->
     <string name="who_activity_title">Who are you?</string>
