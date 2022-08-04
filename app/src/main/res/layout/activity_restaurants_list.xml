@@ -90,13 +90,27 @@
             </LinearLayout>
         </LinearLayout>
 
-        <android.widget.SearchView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            app:queryBackground="@color/black"
-            android:id="@+id/searchVieww"
-            android:queryHint="Restaurants or Cuisines"/>
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <android.widget.SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                app:queryBackground="@color/black"
+                android:layout_weight="2"
+                android:id="@+id/searchVieww"
+                android:queryHint="Restaurants or Cuisines"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:id="@+id/nearestBtn"
+                android:layout_marginEnd="7dp"
+                android:text="@string/nearest"/>
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/restaurantsRecycler"

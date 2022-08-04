@@ -17,6 +17,7 @@ import com.project.onefood.Databases.FavouriteDB.FavouriteDatabase
 import com.project.onefood.Databases.FavouriteDB.FavouriteItem
 import com.project.onefood.R
 import com.project.onefood.RestaurantPage.RestaurantActivity
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +30,7 @@ class RestaurantsRecyclerView(private val context: Context, private val list: Ar
         internal var tvRestaurantName: TextView
         internal var tvRestaurantAddress: TextView
         internal var tvRestaurantDistance: TextView
+        internal var restaurantImg: ImageView
         var favouriteDatabaseDao = FavouriteDatabase.getInstance(context).FavouriteDatabaseDao
 
         init {
@@ -37,12 +39,15 @@ class RestaurantsRecyclerView(private val context: Context, private val list: Ar
             tvRestaurantName = itemView.findViewById(R.id.tvRestaurantName)
             tvRestaurantAddress = itemView.findViewById(R.id.tvRestaurantAddress)
             tvRestaurantDistance = itemView.findViewById(R.id.tvRestaurantDistance)
+            restaurantImg = itemView.findViewById(R.id.restaurantImg)
         }
 
         internal fun bind(position: Int) {
             tvRestaurantName.text = list[position].name
             tvRestaurantAddress.text = list[position].address
             tvRestaurantDistance.text = list[position].distance.toString()
+
+            Picasso.get().load(list[position].img).into(restaurantImg)
 
             var allFavourites: List<FavouriteItem>
             CoroutineScope(Dispatchers.IO).launch{
@@ -59,6 +64,7 @@ class RestaurantsRecyclerView(private val context: Context, private val list: Ar
                 intent.putExtra("restaurant_coordinates", list[position].latLng)
                 intent.putExtra("restaurant_rating", list[position].rating)
                 intent.putExtra("restaurant_status", list[position].status)
+                intent.putExtra("restaurant_img", list[position].img)
                 context.startActivity(intent)
             }
             itemView.findViewById<ImageView>(R.id.favoriteBtn).setOnClickListener {
