@@ -193,13 +193,17 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val restaurantRating = jsonRestaurant.optString("rating")
                 val place_id = jsonRestaurant.optString("place_id")
 
+                val restaurantPhoto = jsonRestaurant.getJSONArray("photos")[0]
+                val parsePhoto = JSONObject(restaurantPhoto.toString())
+                val restaurantPhotoReference = parsePhoto.optString("photo_reference")
 
-                Log.d("restaurantStatus", restaurantOpeningResult)
+
+                Log.d("restaurantPhotoReferenceRes", restaurantPhotoReference.toString())
 
                 list.add(RestaurantItem(restaurantName,
                     restaurantAccurateAddress,
                     123.2,
-                    "",
+                    "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${restaurantPhotoReference}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA",
                     LatLng(restaurantLatResult.toDouble(),
                         restaurantLngResult.toDouble()),
                     restaurantRating, restaurantOpeningResult, place_id))

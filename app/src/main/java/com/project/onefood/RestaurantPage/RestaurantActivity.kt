@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -16,6 +17,7 @@ import com.project.onefood.R
 import com.project.onefood.RestaurantPage.FragmentAdapters.TabAdapter
 import com.project.onefood.RestaurantPage.Fragments.MenuFragment
 import com.project.onefood.RestaurantPage.Fragments.ReviewsFragment
+import com.squareup.picasso.Picasso
 
 class RestaurantActivity : AppCompatActivity() {
 
@@ -57,6 +59,13 @@ class RestaurantActivity : AppCompatActivity() {
 
         var restaurantAddressTextView : TextView = findViewById(R.id.restaurant_address)
         restaurantAddressTextView.text = restaurantAddress
+
+        val restaurant_img = intent.getStringExtra("restaurant_img").toString()
+
+        var restaurantImgImageView : ImageView = findViewById(R.id.imageView3)
+        Picasso.get().load(restaurant_img).into(restaurantImgImageView);
+
+
 
         latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
 
