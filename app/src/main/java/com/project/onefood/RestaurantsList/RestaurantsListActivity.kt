@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,11 +30,13 @@ class RestaurantsListActivity : AppCompatActivity() {
     lateinit var recyclerView : RecyclerView
     lateinit var adapter: RestaurantsRecyclerView
     lateinit var searchView: SearchView
+    lateinit var nearestBtn: Button
     var isResultsForSearch = false
     var queryString: String? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var userLongitude: String
     lateinit var userLatitude: String
+    var isNearestBtnPressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300), "12345", "true", "2345"))
         //list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300),))
         searchView = findViewById(R.id.searchVieww)
+        nearestBtn = findViewById(R.id.nearestBtn)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastKnownLocation()
         userLongitude = ""
@@ -60,10 +64,40 @@ class RestaurantsListActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
 
+        nearestBtn.setOnClickListener {
+            if (!isNearestBtnPressed){
+                isNearestBtnPressed = true
+                val nearestTh = Thread {
+                    try {
+                        callApi()
+                    }
+                    catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+                nearestBtn.text = getString(R.string.Clear)
+                nearestTh.start()
+            }else{
+                isNearestBtnPressed = false
+                val clearNearestTh = Thread {
+                    try {
+                        callApi()
+                    }
+                    catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+                nearestBtn.text = getString(R.string.Nearest)
+                clearNearestTh.start()
+            }
+
+        }
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 isResultsForSearch = true
                 queryString = query
+                isNearestBtnPressed = false
                 if (query.isEmpty()){
                     queryString = null
                     isResultsForSearch = false
@@ -84,6 +118,7 @@ class RestaurantsListActivity : AppCompatActivity() {
                 if (newText.isEmpty()){
                     queryString = null
                     isResultsForSearch = false
+                    isNearestBtnPressed = false
                     val searchTh = Thread {
                         try {
                             callApi()
@@ -145,7 +180,9 @@ class RestaurantsListActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun callApi(){
         var url = ""
-        if (!isResultsForSearch){
+        if (isNearestBtnPressed){
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?types=restaurant&rankby=distance&location=${userLatitude},${userLongitude}&sensor=true&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
+        } else if (!isResultsForSearch){
             url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=cruise&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
         }else {
             url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=${queryString}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
@@ -193,12 +230,13 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val restaurantRating = jsonRestaurant.optString("rating")
                 val place_id = jsonRestaurant.optString("place_id")
 
-                val restaurantPhoto = jsonRestaurant.getJSONArray("photos")[0]
-                val parsePhoto = JSONObject(restaurantPhoto.toString())
-                val restaurantPhotoReference = parsePhoto.optString("photo_reference")
-
-
-                Log.d("restaurantPhotoReferenceRes", restaurantPhotoReference.toString())
+                var restaurantPhotoReference = ""
+                var restaurantPhoto = jsonRestaurant.optJSONArray("photos")
+                if (restaurantPhoto != null){
+                    restaurantPhoto = jsonRestaurant.optJSONArray("photos")
+                    val parsePhoto = JSONObject(restaurantPhoto!![0].toString())
+                    restaurantPhotoReference = parsePhoto.optString("photo_reference")
+                }
 
                 list.add(RestaurantItem(restaurantName,
                     restaurantAccurateAddress,

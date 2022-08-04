@@ -112,6 +112,9 @@
     <string name="favourites">favourites</string>
     <string name="no_favourites_added_yet">No favourites added yet!</string>
     <string name="Favourites">Favourites</string>
+    <string name="nearest">Nearest</string>
+    <string name="Nearest">Nearest</string>
+    <string name="Clear">clear</string>
     <string-array name="languages">
         <item>English</item>
         <item>Chinese</item>
