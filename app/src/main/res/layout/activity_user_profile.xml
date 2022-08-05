@@ -12,14 +12,14 @@
         android:id="@+id/user_profile"
         android:layout_width="143dp"
         android:layout_height="143dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/user_big"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/user_name"
         android:layout_width="153dp"
         android:layout_height="31dp"
         android:layout_marginTop="60dp"

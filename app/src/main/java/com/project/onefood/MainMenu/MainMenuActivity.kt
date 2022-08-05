@@ -35,6 +35,7 @@ class MainMenuActivity : AppCompatActivity(){
 
     // UI
     private lateinit var binding: ActivityMainMenuBinding
+    private var name : String = ""
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -57,6 +58,7 @@ class MainMenuActivity : AppCompatActivity(){
         val userProfile: ImageView = findViewById(R.id.userProfile)
         userProfile.setOnClickListener {
             val intent = Intent(this, UserProfileActivity::class.java)
+            intent.putExtra("customer_name", name)
             startActivity(intent)
         }
 
@@ -155,6 +157,11 @@ class MainMenuActivity : AppCompatActivity(){
                     val customer: Customer? = p0.getValue(Customer::class.java)
                     if (customer != null) {
                         binding.userNameTextView.text = customer.firstName
+
+                        var firstname = (customer.firstName).substring(0, 1).toUpperCase() + (customer.firstName).substring(1, customer.firstName.length)
+                        var lastname =  (customer.lastName).substring(0, 1).toUpperCase() + (customer.lastName).substring(1, customer.lastName.length)
+
+                        name = "$firstname $lastname"
                     }
                 }
 

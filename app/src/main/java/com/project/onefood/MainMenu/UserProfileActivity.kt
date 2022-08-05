@@ -15,7 +15,6 @@ class UserProfileActivity : AppCompatActivity(){
 
     // UI
     private lateinit var binding: ActivityUserProfileBinding
-    private lateinit var locale : Locale
 
     // Actions on create
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +48,11 @@ class UserProfileActivity : AppCompatActivity(){
 
     override fun onResume() {
         super.onResume()
+
+        var username = findViewById<TextView>(R.id.user_name)
+        var name = intent.getStringExtra("customer_name")
+
+        username.text = name
 
         var myLanguage = findViewById<TextView>(R.id.myLanguage)
         myLanguage.text = Locale.getDefault().displayName
