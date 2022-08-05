@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.android.gms.maps.LocationSource
 import com.google.firebase.auth.FirebaseAuth
 import com.project.onefood.Login.LoginActivity
 import com.project.onefood.MainMenu.MainMenuActivity

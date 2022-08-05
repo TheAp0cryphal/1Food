@@ -56,17 +56,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:background="#FEF1F1"
-        android:outlineSpotShadowColor="@color/black"
-        android:id="@+id/spinner"
-        android:layout_width="219dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
@@ -76,5 +65,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/settings"
+        android:layout_width="196dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.039">
+
+        <TextView
+            android:id="@+id/myLanguage"
+            android:layout_width="145dp"
+            android:layout_height="29dp"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_baseline_settings_24" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

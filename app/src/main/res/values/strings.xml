@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">1Food</string>
+    <string name="app_name" translatable="false">1Food</string>
     <string name="hellouser">Hello, Anon</string>
     <string name="qr">QR Scan</string>
     <string name="locations">Locations</string>
@@ -24,8 +24,6 @@
     <string name="title_activity_tabbed_menu_reviews">TabbedMenuReviews</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- TODO: Remove or change this placeholder text -->
 
     <!-- General ////////////////////////////////////////////////////////////////////////////////-->
     <string name="one_food_web_address">http://onefood.lamchinghang.com/</string>
