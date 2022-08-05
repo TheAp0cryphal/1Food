@@ -15,10 +15,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.project.onefood.R
+import com.project.onefood.RestaurantPage.FragmentAdapters.ReviewItem
 import com.project.onefood.RestaurantPage.FragmentAdapters.TabAdapter
 import com.project.onefood.RestaurantPage.Fragments.MenuFragment
 import com.project.onefood.RestaurantPage.Fragments.ReviewsFragment
 import com.squareup.picasso.Picasso
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONObject
 
 class RestaurantActivity : AppCompatActivity() {
 
@@ -26,6 +30,7 @@ class RestaurantActivity : AppCompatActivity() {
     private var restaurantAddress : String = ""
     private lateinit var latLng : LatLng
     private var restaurantRating : String = ""
+    private lateinit var reviewsArr: ArrayList<ReviewItem>
 
     override fun onResume() {
         super.onResume()
@@ -45,26 +50,45 @@ class RestaurantActivity : AppCompatActivity() {
         }
 
     }
+    val thread = Thread {
+        try {
+            callRestaurantDetailsApi(intent.getStringExtra("place_id").toString())
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        thread.interrupt()
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
 
+        reviewsArr = ArrayList<ReviewItem>()
+
+        thread.start()
+
         initFragment()
 
         restaurantName = intent.getStringExtra("restaurant_name").toString()
 
-        var restaurantNameTextView :TextView = findViewById(R.id.restaurant_name)
+        val restaurantNameTextView :TextView = findViewById(R.id.restaurant_name)
         restaurantNameTextView.text = restaurantName
 
         restaurantAddress = intent.getStringExtra("restaurant_address").toString()
 
-        var restaurantAddressTextView : TextView = findViewById(R.id.restaurant_address)
+        val restaurantAddressTextView : TextView = findViewById(R.id.restaurant_address)
         restaurantAddressTextView.text = restaurantAddress
 
         val restaurant_img = intent.getStringExtra("restaurant_img").toString()
 
-        var restaurantImgImageView : ImageView = findViewById(R.id.imageView3)
+        val restaurantImgImageView : ImageView = findViewById(R.id.imageView3)
         Picasso.get().load(restaurant_img).into(restaurantImgImageView);
 
 
@@ -73,15 +97,15 @@ class RestaurantActivity : AppCompatActivity() {
 
         restaurantRating = intent.getStringExtra("restaurant_rating").toString()
 
-        var restaurantRatingTextView : TextView = findViewById(R.id.restaurant_rating)
+        val restaurantRatingTextView : TextView = findViewById(R.id.restaurant_rating)
         restaurantRatingTextView.text = restaurantRating
 
-        var restaurantStatus = "Status : Open"
+//        val restaurantStatus = "Status : Open"
+//
+//        val restaurantStatusTextView : TextView = findViewById(R.id.restaurant_status)
+//        restaurantStatusTextView.text = restaurantStatus
 
-        var restaurantStatusTextView : TextView = findViewById(R.id.restaurant_status)
-        restaurantStatusTextView.text = restaurantStatus
-
-        var restaurantDistanceTextView : TextView = findViewById(R.id.restaurant_distance)
+        val restaurantDistanceTextView : TextView = findViewById(R.id.restaurant_distance)
         restaurantDistanceTextView.text = (intent.getStringExtra("restaurant_distance"))
 
     }
@@ -100,6 +124,10 @@ class RestaurantActivity : AppCompatActivity() {
         menuFragment = MenuFragment()
         reviewsFragment= ReviewsFragment()
 
+        val bundleReviews = Bundle()
+        bundleReviews.putSerializable("reviewsArr", reviewsArr)
+        reviewsFragment.arguments = bundleReviews
+
         fragments = ArrayList()
 
         fragments.add(menuFragment)
@@ -115,5 +143,43 @@ class RestaurantActivity : AppCompatActivity() {
         }
         tabLayoutMediator = TabLayoutMediator(tab,viewPager,tabConfigurationStrategy)
         tabLayoutMediator.attach()
+    }
+
+    private fun callRestaurantDetailsApi(placeid: String){
+        val request = Request.Builder().url("https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeid}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA").build()
+
+        val response = OkHttpClient().newCall(request).execute().body?.string()
+        val jsonObject = JSONObject(response!!) // This will make the json below as an object for you
+
+        val results = jsonObject.getString("result")
+        val jsonResults = JSONObject(results)
+
+        val restaurantReviews = jsonResults.optJSONArray("reviews")
+
+        val restaurantOpeningHours = jsonResults.optString("opening_hours")
+        val openingHoursResults = JSONObject(restaurantOpeningHours)
+        val open_now = openingHoursResults.optString("open_now")
+        val weekday_text = openingHoursResults.optJSONArray("weekday_text")
+        Log.d("asdasdasdasdacasc", open_now)
+        Log.d("asdasdasdasdacasc123", weekday_text.toString())
+
+        val isOpen = if (open_now.toBoolean()) "Open" else "Not open"
+        val restaurantStatusTextView : TextView = findViewById(R.id.restaurant_status)
+        restaurantStatusTextView.text = "Status: $isOpen"
+
+
+
+        if (restaurantReviews != null){
+            for (i in 0 until restaurantReviews.length()){
+                val reviewJson = JSONObject(restaurantReviews[i].toString())
+                val author_name = reviewJson.getString("author_name")
+                val profile_photo_url = reviewJson.getString("profile_photo_url")
+                val rating = reviewJson.getString("rating")
+                val relative_time_description = reviewJson.getString("relative_time_description")
+                val text = reviewJson.getString("text")
+
+                reviewsArr.add(ReviewItem(author_name, profile_photo_url, rating, text, relative_time_description))
+            }
+        }
     }
 }

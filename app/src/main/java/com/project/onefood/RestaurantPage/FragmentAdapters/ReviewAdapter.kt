@@ -1,5 +1,6 @@
 package com.project.onefood.RestaurantPage.FragmentAdapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -11,40 +12,47 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.project.onefood.R
+import com.squareup.picasso.Picasso
 
-class ReviewAdapter(var context : Context) : BaseAdapter(){
+class ReviewAdapter(var context : Context, var list: ArrayList<ReviewItem>) : BaseAdapter(){
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    var reviewerComments = arrayOf("Very expensive", "Poor service", "Nice food and good variety.","Yuummmyyyyy!!")
-    var reviewerName = arrayOf("Shiela Shah", "Tangy Shawarma", "John Cena", "Mikaela")
-    var reviewerRating= arrayOf(R.drawable.zero_star,R.drawable.one_star,R.drawable.two_star,R.drawable.three_star,R.drawable.four_star, R.drawable.five_star)
-
     override fun getCount(): Int {
-        return 4
+        return list.size
     }
 
     override fun getItem(p0: Int): Any {
-        return reviewerComments[p0]
+        return list[p0]
     }
 
     override fun getItemId(p0: Int): Long {
-        return reviewerComments[p0].toLong()
+        return list[p0].text.toLong()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun getView(position: Int, view : View?, parent : ViewGroup?): View {
         val rowView = inflater.inflate(R.layout.review_row, parent, false)
 
 
         val customerName = rowView.findViewById<TextView>(R.id.customer_name)
-        customerName.text = reviewerName[position]
+        customerName.text = list[position].author_name
 
         val customerReview =  rowView.findViewById<TextView>(R.id.customer_review)
-        customerReview.text = reviewerComments[position]
+        customerReview.text = list[position].text
 
-        val customerRating= rowView.findViewById<ImageView>(R.id.star_rating)
-        customerRating.setImageResource(reviewerRating[position])
+        val reviewRating =  rowView.findViewById<TextView>(R.id.reviewRating)
+        reviewRating.text = "Rating: " + list[position].rating
+
+        val timeOfReview =  rowView.findViewById<TextView>(R.id.timeOfReview)
+        timeOfReview.text = list[position].relative_time_description
+
+        val userImg =  rowView.findViewById<ImageView>(R.id.userImg)
+        Picasso.get().load(list[position].profile_photo_url).into(userImg)
+
+//        val customerRating= rowView.findViewById<ImageView>(R.id.star_rating)
+//        customerRating.setImageResource(list[position].rating.toInt())
 
         return rowView
     }
