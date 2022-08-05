@@ -1,5 +1,6 @@
 package com.project.onefood.RestaurantPage
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -44,6 +45,7 @@ class RestaurantActivity : AppCompatActivity() {
         }
 
     }
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
@@ -78,7 +80,9 @@ class RestaurantActivity : AppCompatActivity() {
 
         var restaurantStatusTextView : TextView = findViewById(R.id.restaurant_status)
         restaurantStatusTextView.text = restaurantStatus
-        Log.d("Coords", latLng.toString())
+
+        var restaurantDistanceTextView : TextView = findViewById(R.id.restaurant_distance)
+        restaurantDistanceTextView.text = (intent.getStringExtra("restaurant_distance"))
 
     }
 
@@ -90,7 +94,7 @@ class RestaurantActivity : AppCompatActivity() {
     private lateinit var tabAdapter: FragmentStateAdapter
     private lateinit var tabLayoutMediator: TabLayoutMediator
     private lateinit var tabConfigurationStrategy: TabLayoutMediator.TabConfigurationStrategy
-    private val TAB_TEXT = arrayOf("Menu","Reviews")
+    private val tabText = arrayOf("Menu","Reviews")
 
     private fun initFragment() {
         menuFragment = MenuFragment()
@@ -107,7 +111,7 @@ class RestaurantActivity : AppCompatActivity() {
         viewPager.adapter = tabAdapter
         tabConfigurationStrategy = TabLayoutMediator.TabConfigurationStrategy(){
                 tab:TabLayout.Tab, position:Int->
-            tab.text= TAB_TEXT[position]
+            tab.text= tabText[position]
         }
         tabLayoutMediator = TabLayoutMediator(tab,viewPager,tabConfigurationStrategy)
         tabLayoutMediator.attach()
