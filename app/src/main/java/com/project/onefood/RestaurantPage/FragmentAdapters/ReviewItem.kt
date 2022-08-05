@@ -8,5 +8,5 @@ data class ReviewItem(
         val profile_photo_url : String,
         val rating : String,
         val text : String,
-        val relative_time_description: String,
+        val relative_time_description: String
 ): Serializable

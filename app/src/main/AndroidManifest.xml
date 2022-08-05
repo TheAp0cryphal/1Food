@@ -52,10 +52,12 @@
 
         <activity
             android:name=".RestaurantPage.ReservationSetActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity
             android:name=".RestaurantPage.RestaurantActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity
             android:name=".MainMenu.ReservationActivity"
             android:exported="false"

@@ -22,7 +22,9 @@ import com.project.onefood.RestaurantPage.Fragments.ReviewsFragment
 import com.squareup.picasso.Picasso
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.json.JSONArray
 import org.json.JSONObject
+import java.time.LocalDate
 
 class RestaurantActivity : AppCompatActivity() {
 
@@ -149,7 +151,7 @@ class RestaurantActivity : AppCompatActivity() {
         val request = Request.Builder().url("https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeid}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA").build()
 
         val response = OkHttpClient().newCall(request).execute().body?.string()
-        val jsonObject = JSONObject(response!!) // This will make the json below as an object for you
+        val jsonObject = JSONObject(response!!) // This will make the json below as an object
 
         val results = jsonObject.getString("result")
         val jsonResults = JSONObject(results)
@@ -158,12 +160,14 @@ class RestaurantActivity : AppCompatActivity() {
 
         val restaurantOpeningHours = jsonResults.optString("opening_hours")
         val openingHoursResults = JSONObject(restaurantOpeningHours)
-        val open_now = openingHoursResults.optString("open_now")
-        val weekday_text = openingHoursResults.optJSONArray("weekday_text")
-        Log.d("asdasdasdasdacasc", open_now)
-        Log.d("asdasdasdasdacasc123", weekday_text.toString())
+        val openNow = openingHoursResults.optString("open_now")
+        val weekdayText = openingHoursResults.optJSONArray("weekday_text")
 
-        val isOpen = if (open_now.toBoolean()) "Open" else "Not open"
+        updateTimings(weekdayText)
+       // Log.d("asdasdasdasdacasc", openNow)
+        //Log.d("asdasdasdasdacasc123", weekdayText.toString())
+
+        val isOpen = if (openNow.toBoolean()) "Open" else "Not open"
         val restaurantStatusTextView : TextView = findViewById(R.id.restaurant_status)
         restaurantStatusTextView.text = "Status: $isOpen"
 
@@ -180,6 +184,16 @@ class RestaurantActivity : AppCompatActivity() {
 
                 reviewsArr.add(ReviewItem(author_name, profile_photo_url, rating, text, relative_time_description))
             }
+        }
+    }
+
+    private fun updateTimings(weekdayText: JSONArray?) {
+
+        var openTimes = findViewById<TextView>(R.id.openTimes)
+
+        if (weekdayText != null) {
+            Log.d("weekdayText",weekdayText.toString())
+            openTimes.text = weekdayText.getString(LocalDate.now().dayOfWeek.value - 1)
         }
     }
 }
