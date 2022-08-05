@@ -2,6 +2,7 @@ package com.project.onefood.RestaurantsList
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -49,7 +50,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         val placesClient = Places.createClient(this)
 
         list = ArrayList()
-        list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300), "12345", "true", "2345"))
+        // list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300), "12345", "true", "2345"))
         //list.add(RestaurantItem("Pad", "236 Murodck", 30.0, "", LatLng(49.299170, -122.817300),))
         searchView = findViewById(R.id.searchVieww)
         nearestBtn = findViewById(R.id.nearestBtn)
@@ -224,8 +225,8 @@ class RestaurantsListActivity : AppCompatActivity() {
                 val parseCoordinates = JSONObject(restaurantCoordinates.toString())
                 val restaurantLocation = parseCoordinates.optString("location")
                 val parseLocation = JSONObject(restaurantLocation.toString())
-                val restaurantLatResult = parseLocation.optString("lat")
-                val restaurantLngResult = parseLocation.optString("lng")
+                val restaurantLatResult = parseLocation.optString("lat").toDouble()
+                val restaurantLngResult = parseLocation.optString("lng").toDouble()
 
                 val restaurantRating = jsonRestaurant.optString("rating")
                 val place_id = jsonRestaurant.optString("place_id")
@@ -240,10 +241,10 @@ class RestaurantsListActivity : AppCompatActivity() {
 
                 list.add(RestaurantItem(restaurantName,
                     restaurantAccurateAddress,
-                    123.2,
+                    calculateDistanceUserToRestaurant(restaurantLatResult, restaurantLngResult).toDouble(),
                     "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${restaurantPhotoReference}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA",
-                    LatLng(restaurantLatResult.toDouble(),
-                        restaurantLngResult.toDouble()),
+                    LatLng(restaurantLatResult,
+                        restaurantLngResult),
                     restaurantRating, restaurantOpeningResult, place_id))
 
             }
@@ -251,5 +252,11 @@ class RestaurantsListActivity : AppCompatActivity() {
         runOnUiThread {
             adapter.notifyDataSetChanged()
         }
+    }
+
+    private fun calculateDistanceUserToRestaurant(restaurantLatResult: Double, restaurantLngResult: Double): String {
+        var distance = FloatArray(1)
+        Location.distanceBetween(restaurantLatResult, restaurantLngResult, userLatitude.toDouble(), userLongitude.toDouble(), distance)
+        return "%.2f".format(distance[0] / 1000)
     }
 }

@@ -14,11 +14,11 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="97dp"
-            android:layout_height="85dp"
             android:id="@+id/restaurantImg"
-            android:scaleType="centerCrop"
-            android:background="@drawable/food_recommendation1" />
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/food_recommendation1"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,8 +40,8 @@
 
                 <TextView
                     android:id="@+id/tvRestaurantAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="212dp"
+                    android:layout_height="48dp"
                     android:text="Restaurant Address" />
 
                 <TextView
@@ -51,12 +51,13 @@
                     android:layout_marginTop="10dp"
                     android:text="0km" />
             </LinearLayout>
+
             <ImageView
-                android:layout_width="43dp"
-                android:layout_height="43dp"
                 android:id="@+id/favoriteBtn"
+                android:layout_width="46dp"
+                android:layout_height="43dp"
                 android:layout_weight="1"
-                android:src="@drawable/heart_outline"/>
+                android:src="@drawable/heart_outline" />
         </LinearLayout>
     </LinearLayout>
 

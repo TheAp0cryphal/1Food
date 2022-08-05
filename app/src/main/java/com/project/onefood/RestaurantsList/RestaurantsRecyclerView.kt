@@ -45,7 +45,7 @@ class RestaurantsRecyclerView(private val context: Context, private val list: Ar
         internal fun bind(position: Int) {
             tvRestaurantName.text = list[position].name
             tvRestaurantAddress.text = list[position].address
-            tvRestaurantDistance.text = list[position].distance.toString()
+            tvRestaurantDistance.text = "" + list[position].distance + " km"
 
             Picasso.get().load(list[position].img).into(restaurantImg)
 
