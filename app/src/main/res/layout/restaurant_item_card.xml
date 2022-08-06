@@ -17,7 +17,7 @@
             android:id="@+id/restaurantImg"
             android:layout_width="128dp"
             android:layout_height="match_parent"
-            android:background="@drawable/food_recommendation1"
+            android:background="@drawable/locations"
             android:scaleType="centerCrop" />
 
         <LinearLayout

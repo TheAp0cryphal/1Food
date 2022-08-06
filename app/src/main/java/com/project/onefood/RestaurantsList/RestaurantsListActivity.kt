@@ -1,12 +1,12 @@
 package com.project.onefood.RestaurantsList
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,20 +14,21 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
-import com.project.onefood.Databases.FavouriteDB.FavouriteDatabase
-import com.project.onefood.Databases.FavouriteDB.FavouriteDatabaseDao
-import com.project.onefood.Databases.ReservationDB.ReservationDatabase
-import com.project.onefood.Databases.ReservationDB.ReservationDatabaseDao
 import com.project.onefood.R
-import com.project.onefood.RestaurantPage.RestaurantActivity
+import com.project.onefood.TinyDB
+import com.project.onefood.findSimilarity
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
+import org.w3c.dom.Text
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class RestaurantsListActivity : AppCompatActivity() {
 
     lateinit var list: ArrayList<RestaurantItem>
+    lateinit var tinyDB : TinyDB
     lateinit var recyclerView : RecyclerView
     lateinit var adapter: RestaurantsRecyclerView
     lateinit var searchView: SearchView
@@ -38,6 +39,11 @@ class RestaurantsListActivity : AppCompatActivity() {
     lateinit var userLongitude: String
     lateinit var userLatitude: String
     var isNearestBtnPressed = false
+
+    override fun onResume() {
+        super.onResume()
+        setRecommendations()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +65,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         userLongitude = ""
         userLatitude = ""
 
+        tinyDB = TinyDB(applicationContext)
 
         recyclerView = findViewById(R.id.restaurantsRecycler)
         adapter = RestaurantsRecyclerView(this, list)
@@ -98,6 +105,9 @@ class RestaurantsListActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 isResultsForSearch = true
                 queryString = query
+
+                addQueryToRecommendationList(queryString.toString())
+
                 isNearestBtnPressed = false
                 if (query.isEmpty()){
                     queryString = null
@@ -184,7 +194,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         if (isNearestBtnPressed){
             url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?types=restaurant&rankby=distance&location=${userLatitude},${userLongitude}&sensor=true&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
         } else if (!isResultsForSearch){
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=cruise&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=restaurant&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
         }else {
             url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=${queryString}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
         }
@@ -258,5 +268,63 @@ class RestaurantsListActivity : AppCompatActivity() {
         var distance = FloatArray(1)
         Location.distanceBetween(restaurantLatResult, restaurantLngResult, userLatitude.toDouble(), userLongitude.toDouble(), distance)
         return "%.2f".format(distance[0] / 1000)
+    }
+
+    private fun addQueryToRecommendationList(queryString: String) {
+        var cuisineList = resources.getStringArray(R.array.cuisines)
+        var recommendationList : ArrayList<Int> = arrayListOf()
+
+        for(i in cuisineList.indices){
+            recommendationList.add(0)
+        }
+
+        if(tinyDB.objectExists("recommendation_list")) {
+            recommendationList = tinyDB.getListInt("recommendation_list")
+        }
+
+
+        for(i in cuisineList.indices) {
+            Log.d("simi", cuisineList[i] + " " + queryString + " " + findSimilarity(queryString, cuisineList[i]).toString())
+            if (findSimilarity(queryString, cuisineList[i]) > 0.60){
+                recommendationList[i]++
+                break
+            }
+        }
+        tinyDB.putListInt("recommendation_list", recommendationList)
+        Log.d("RecommendationList", recommendationList.toString())
+
+        setRecommendations()
+    }
+
+    private fun setRecommendations(){
+
+        var recommendationList : ArrayList<Int> = arrayListOf()
+
+        if(tinyDB.objectExists("recommendation_list")) {
+            recommendationList = tinyDB.getListInt("recommendation_list")
+        }
+
+        var topThreeIndices = arrayListOf<Int>()
+
+        for (i in 0..2){
+            val maxIndex = recommendationList.indices.maxByOrNull {
+                recommendationList[it]
+            } ?: -1
+
+            topThreeIndices.add(maxIndex)
+
+            var maxValue = recommendationList[maxIndex]
+            recommendationList[maxIndex] = -1
+            Log.d("recommendationMaxOriginalIndex", topThreeIndices.toString())
+        }
+        var top1 = findViewById<TextView>(R.id.top1)
+        var top2 = findViewById<TextView>(R.id.top2)
+        var top3 = findViewById<TextView>(R.id.top3)
+
+        var cuisineList = resources.getStringArray(R.array.cuisines)
+
+        top1.text = cuisineList[topThreeIndices[0]]
+        top2.text = cuisineList[topThreeIndices[1]]
+        top3.text = cuisineList[topThreeIndices[2]]
     }
 }

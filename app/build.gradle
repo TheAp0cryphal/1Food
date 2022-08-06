@@ -44,6 +44,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
 
+    implementation 'org.apache.commons:commons-text:1.9'
 
     //Easy Permissions
     implementation 'pub.devrel:easypermissions:3.0.0'

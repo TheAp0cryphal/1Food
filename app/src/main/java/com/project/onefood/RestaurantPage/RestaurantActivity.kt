@@ -150,6 +150,7 @@ class RestaurantActivity : AppCompatActivity() {
     private fun callRestaurantDetailsApi(placeid: String){
         val request = Request.Builder().url("https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeid}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA").build()
 
+
         val response = OkHttpClient().newCall(request).execute().body?.string()
         val jsonObject = JSONObject(response!!) // This will make the json below as an object
 
