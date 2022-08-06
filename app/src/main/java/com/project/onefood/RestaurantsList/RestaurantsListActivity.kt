@@ -309,12 +309,14 @@ class RestaurantsListActivity : AppCompatActivity() {
         for (i in 0..2){
             val maxIndex = recommendationList.indices.maxByOrNull {
                 recommendationList[it]
-            } ?: -1
+            } ?: 20
 
             topThreeIndices.add(maxIndex)
 
-            var maxValue = recommendationList[maxIndex]
-            recommendationList[maxIndex] = -1
+            if (recommendationList.isNotEmpty()) {
+                recommendationList[maxIndex] = -1
+            }
+
             Log.d("recommendationMaxOriginalIndex", topThreeIndices.toString())
         }
         var top1 = findViewById<TextView>(R.id.top1)
