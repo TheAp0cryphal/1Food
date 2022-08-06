@@ -35,7 +35,7 @@ class RestaurantsListActivity : AppCompatActivity() {
     var queryString: String? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var userLongitude: String
-    lateinit var userLatitude: String
+    private lateinit var userLatitude: String
     var isNearestBtnPressed = false
 
     override fun onResume() {
@@ -63,6 +63,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         userLongitude = ""
         userLatitude = ""
 
+        //TinyDB init
         tinyDB = TinyDB(applicationContext)
 
         recyclerView = findViewById(R.id.restaurantsRecycler)
@@ -269,6 +270,9 @@ class RestaurantsListActivity : AppCompatActivity() {
     }
 
     private fun addQueryToRecommendationList(queryString: String) {
+
+        var similarityGradient : Double = 0.60
+
         var cuisineList = resources.getStringArray(R.array.cuisines)
         var recommendationList : ArrayList<Int> = arrayListOf()
 
@@ -280,16 +284,15 @@ class RestaurantsListActivity : AppCompatActivity() {
             recommendationList = tinyDB.getListInt("recommendation_list")
         }
 
-
         for(i in cuisineList.indices) {
-            Log.d("simi", cuisineList[i] + " " + queryString + " " + findSimilarity(queryString, cuisineList[i]).toString())
-            if (findSimilarity(queryString, cuisineList[i]) > 0.60){
+            //Log.d("simi", cuisineList[i] + " " + queryString + " " + findSimilarity(queryString, cuisineList[i]).toString())
+            if (findSimilarity(queryString, cuisineList[i]) > similarityGradient){
                 recommendationList[i]++
                 break
             }
         }
         tinyDB.putListInt("recommendation_list", recommendationList)
-        Log.d("RecommendationList", recommendationList.toString())
+        //Log.d("RecommendationList", recommendationList.toString())
 
         setRecommendations()
     }
@@ -315,7 +318,7 @@ class RestaurantsListActivity : AppCompatActivity() {
                 recommendationList[maxIndex] = -1
             }
 
-            Log.d("recommendationMaxOriginalIndex", topThreeIndices.toString())
+            //Log.d("recommendationMaxOriginalIndex", topThreeIndices.toString())
         }
         var top1 = findViewById<TextView>(R.id.top1)
         var top2 = findViewById<TextView>(R.id.top2)
