@@ -19,59 +19,10 @@
             android:adjustViewBounds="true"
             android:src="@drawable/logo"/>
 
-        <EditText
-            android:id="@+id/emailAddressEditText"
+        <FrameLayout
+            android:id="@+id/loginFrameLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="@string/login_activity_hint_email_address"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black"/>
-
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="@string/login_activity_hint_password"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"/>
-
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_activity_button_login"
-            android:layout_marginTop="30dp"/>
-
-        <TextView
-            android:id="@+id/registerTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_activity_textview_register"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/resetPasswordTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_activity_textview_reset_password"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/anonymousUserTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_activity_textview_anonymous_user"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black"/>
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 

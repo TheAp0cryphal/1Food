@@ -31,6 +31,7 @@
     <!-- Firebase ////////////////////////////////////////////////////////////////////////////////-->
     <string name="firebase_database_customers">Customers</string>
     <string name="firebase_database_restaurant_manager">Restaurant Manager</string>
+    <string name="firebase_database_users" translatable="false">Users</string>
     <string name="firebase_database_instance_users">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
 
     <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->

@@ -1,20 +1,22 @@
 /*
  * File Name: LoginActivity.kt
- * File Description: For users to login
+ * File Description: Control the login and registration system
  * Author: Ching Hang Lam
- * Last Modified: 2022/08/03
+ * Last Modified: 2022/08/06
  */
 package com.project.onefood.Login
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.net.toUri
-import com.google.firebase.auth.FirebaseAuth
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.project.onefood.Login.fragments.*
 import com.project.onefood.MainMenu.MainMenuActivity
 import com.project.onefood.R
 import com.project.onefood.databinding.ActivityLoginBinding
@@ -26,119 +28,44 @@ class LoginActivity : AppCompatActivity() {
     // UI
     private lateinit var binding: ActivityLoginBinding
 
-    // Firebase
-    private lateinit var firebaseAuth: FirebaseAuth
-
     // Actions on create
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initActivity()
+        initActivity(savedInstanceState)
 
         setListeners()
     }
 
-    // Actions on back press
+    // Actions on back pressed
     override fun onBackPressed() {
-        super.onBackPressed()
-
-        finishAffinity()
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.loginFrameLayout)
+        when (fragment) {
+            is WhoFragment -> LoginActivity.switchToLoginFragment(supportFragmentManager)
+            is CustomerRegisterFragment -> LoginActivity.switchToWhoFragment(supportFragmentManager)
+            is RestaurantManagerRegisterFragment -> LoginActivity.switchToWhoFragment(supportFragmentManager)
+            is ResetPasswordFragment -> LoginActivity.switchToLoginFragment(supportFragmentManager)
+            else -> finishAffinity()
+        }
     }
 
     // Initialize the activity
-    private fun initActivity() {
+    private fun initActivity(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        firebaseAuth = FirebaseAuth.getInstance()
+        if (savedInstanceState == null) {
+            switchToLoginFragment(supportFragmentManager)
+        }
     }
 
     // Set the listeners
     private fun setListeners() {
         binding.logoImageView.setOnClickListener {
-            clickLogoImageView()
-        }
-
-        binding.loginButton.setOnClickListener {
-            clickLoginButton()
-        }
-
-        binding.registerTextView.setOnClickListener {
-            clickRegisterTextView()
-        }
-
-        binding.resetPasswordTextView.setOnClickListener {
-            clickResetPasswordTextView()
-        }
-
-        binding.anonymousUserTextView.setOnClickListener {
-            clickAnonymousUserTextView()
-        }
-    }
-
-    // Click the logo image view
-    private fun clickLogoImageView() {
-        val intent: Intent = Intent(Intent.ACTION_VIEW, getString(R.string.one_food_web_address).toUri())
-        startActivity(intent)
-    }
-
-    // Click the login button
-    private fun clickLoginButton() {
-        if (!checkEmailAddress(resources, binding.emailAddressEditText))
-            return
-
-        if (!checkPassword(resources, binding.passwordEditText))
-            return
-
-        loginUserAccount()
-    }
-
-    // Login to a user account
-    private fun loginUserAccount() {
-        val emailAddressString: String = binding.emailAddressEditText.text.toString().trim()
-        val passwordString: String = binding.passwordEditText.text.toString().trim()
-
-        firebaseAuth.signInWithEmailAndPassword(emailAddressString, passwordString).addOnCompleteListener {
-            if (it.isSuccessful) {
-                //Toast.makeText(this, R.string.login_activity_toast_succeed_login_user_account, Toast.LENGTH_SHORT).show()
-
-                val intent: Intent = Intent(this, MainMenuActivity::class.java)
-                startActivity(intent)
-            }
-            else {
-                Toast.makeText(this, R.string.login_activity_toast_fail_login_user_account, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    // Click the register textview
-    private fun clickRegisterTextView() {
-        val intent: Intent = Intent(this, WhoActivity::class.java)
-        startActivity(intent)
-    }
-
-    // Click the register textview
-    private fun clickResetPasswordTextView() {
-        val intent: Intent = Intent(this, ResetPasswordActivity::class.java)
-        startActivity(intent)
-    }
-
-    // Click the register textview
-    private fun clickAnonymousUserTextView() {
-        loginAnonymousAccount()
-    }
-
-    // Login anonymous account
-    private fun loginAnonymousAccount() {
-        firebaseAuth.signInAnonymously().addOnCompleteListener {
-            if (it.isSuccessful) {
-                //Toast.makeText(this, R.string.login_activity_toast_succeed_login_anonymous_account, Toast.LENGTH_SHORT).show()
-
-                val intent: Intent = Intent(this, MainMenuActivity::class.java)
-                startActivity(intent)
-            }
-            else {
-                Toast.makeText(this, R.string.login_activity_toast_fail_login_anonymous_account, Toast.LENGTH_SHORT).show()
+            val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.loginFrameLayout)
+            when (fragment) {
+                is LoginFragment -> switchToOneFoodWebpage(this)
+                else ->  switchToLoginFragment(supportFragmentManager)
             }
         }
     }
@@ -214,6 +141,58 @@ class LoginActivity : AppCompatActivity() {
             }
 
             return true
+        }
+
+        // Switch to login fragment
+        fun switchToLoginFragment(supportFragmentManager: FragmentManager) {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.loginFrameLayout, LoginFragment())
+                commit()
+            }
+        }
+
+        // Switch to who fragment
+        fun switchToWhoFragment(supportFragmentManager: FragmentManager) {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.loginFrameLayout, WhoFragment())
+                commit()
+            }
+        }
+
+        // Switch to customer register fragment
+        fun switchToCustomerRegisterFragment(supportFragmentManager: FragmentManager) {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.loginFrameLayout, CustomerRegisterFragment())
+                commit()
+            }
+        }
+
+        // Switch to restaurant manager register fragment
+        fun switchToRestaurantManagerRegisterFragment(supportFragmentManager: FragmentManager) {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.loginFrameLayout, RestaurantManagerRegisterFragment())
+                commit()
+            }
+        }
+
+        // Switch to rest password fragment
+        fun switchToResetPasswordFragment(supportFragmentManager: FragmentManager) {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.loginFrameLayout, ResetPasswordFragment())
+                commit()
+            }
+        }
+
+        // Switch to main menu activity
+        fun switchToMainMenuActivity(context: Context) {
+            val intent: Intent = Intent(context, MainMenuActivity::class.java)
+            context.startActivity(intent)
+        }
+
+        // Switch to one food webpage
+        fun switchToOneFoodWebpage(context: Context) {
+            val intent: Intent = Intent(Intent.ACTION_VIEW, context.resources.getString(R.string.one_food_web_address).toUri())
+            context.startActivity(intent)
         }
     }
 }
