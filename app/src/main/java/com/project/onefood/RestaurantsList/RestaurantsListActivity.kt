@@ -15,13 +15,11 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.project.onefood.R
-import com.project.onefood.TinyDB
+import com.project.onefood.Databases.TinyDB
 import com.project.onefood.findSimilarity
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
-import org.w3c.dom.Text
-import java.util.*
 import kotlin.collections.ArrayList
 
 
