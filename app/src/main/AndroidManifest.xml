@@ -29,16 +29,9 @@
             android:exported="false" />
 
         <activity
-            android:name=".PagerSystem.FoodOrderActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".PagerSystem.NewOrderActivity"
-            android:exported="false" />
-
-        <activity
             android:name=".PagerSystem.FoodOrdersActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.1Food.NoActionBar" />
 
         <activity
             android:name=".Login.LoginActivity"

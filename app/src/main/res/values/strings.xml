@@ -30,6 +30,7 @@
 
     <!-- Firebase ////////////////////////////////////////////////////////////////////////////////-->
     <string name="firebase_database_users" translatable="false">Users</string>
+    <string name="firebase_database_food_orders" translatable="false">Food Orders</string>
     <string name="firebase_database_instance_users" translatable="false">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
 
     <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->
@@ -86,9 +87,10 @@
     <!-- Food Orders Activity ///////////////////////////////////////////////////////////////////-->
     <string name="food_orders_activity_action_bar_new_oder">New Order</string>
     <string name="food_orders_activity_text_empty_food_order_list">The food order list is empty</string>
+    <string name="food_orders_activity_text_restaurant_pager_system">Restaurant Pager System</string>
 
     <!-- New Order Activity /////////////////////////////////////////////////////////////////////-->
-    <string name="new_order_activity_text_remark">Remark</string>
+    <string name="new_order_activity_text_remark">Remarks</string>
     <string name="new_order_activity_button_submit">Submit</string>
     <string name="new_order_activity_toast_success">The request is sent</string>
     <string name="new_order_activity_toast_failure">Unable to send the request</string>
@@ -149,5 +151,7 @@
         <item>Jamaican</item>
         <item>New User</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
