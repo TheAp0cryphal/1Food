@@ -9,6 +9,7 @@ package com.project.onefood
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,7 +35,6 @@ class MainActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
 
         initActivity()
-
         switchToAnotherActivity()
     }
 
@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity()  {
     private fun initActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
