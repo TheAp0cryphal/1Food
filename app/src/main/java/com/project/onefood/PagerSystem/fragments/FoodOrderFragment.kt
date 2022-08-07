@@ -1,5 +1,13 @@
+/*
+ * File Name: FoodOrderFragment.kt
+ * File Description: show the content of a food order
+ * Author: Ching Hang Lam
+ * Last Modified: 2022/08/07
+ */
 package com.project.onefood.PagerSystem.fragments
 
+import android.app.AlertDialog
+import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
@@ -8,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -39,6 +48,8 @@ class FoodOrderFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         val root: View = initFragment(inflater, container)
 
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         if (savedInstanceState == null) {
             loadDataFromPrevious()
             generateQrCode()
@@ -49,6 +60,13 @@ class FoodOrderFragment : Fragment() {
         setQrCode()
 
         return root
+    }
+
+    // Actions on destroy view
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
     }
 
     // Initialize the fragment
@@ -95,6 +113,14 @@ class FoodOrderFragment : Fragment() {
         binding.doneButton.setOnClickListener {
             clickDoneButton()
         }
+
+        binding.remarksActionButton.setOnClickListener {
+            clickRemarksActionButton()
+        }
+
+        binding.deleteActionButton.setOnClickListener {
+            clickDeleteActionButton()
+        }
     }
 
     // Set the texts
@@ -110,13 +136,22 @@ class FoodOrderFragment : Fragment() {
 
     // Click the done button
     private fun clickDoneButton() {
-        loadDataFromDatabase()
+        sendNotification()
     }
 
-    // Load the data from database
-    private fun loadDataFromDatabase() {
-        val uid: String = firebaseAuth.currentUser!!.uid
+    // Click the remarks action button
+    private fun clickRemarksActionButton() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(binding.root.context)
 
+        builder.setTitle(R.string.new_order_activity_text_remark)
+        builder.setMessage(viewModel.remarks)
+
+        builder.show()
+    }
+
+    // Delete a food order
+    private fun deleteFoodOrder(uid: String, @StringRes message: Int) {
+        // Delete a food order
         firebaseDatabase.getReference(getString(R.string.firebase_database_food_orders)).child(uid).addListenerForSingleValueEvent(
             object: ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
@@ -128,13 +163,13 @@ class FoodOrderFragment : Fragment() {
                                 foodOrders.foodOrderList.remove(foodOrder)
 
                                 firebaseDatabase.getReference(getString(R.string.firebase_database_food_orders)).child(uid).setValue(foodOrders).addOnCompleteListener {
-                                    // Successfully store customer info
+                                    // Successfully delete the food order
                                     if (it.isSuccessful) {
-                                        Toast.makeText(binding.root.context, R.string.new_order_activity_toast_success, Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(binding.root.context, message, Toast.LENGTH_SHORT).show()
 
                                         FoodOrdersActivity.switchToFoodOrderListFragment(requireActivity().supportFragmentManager)
                                     }
-                                    // Unsuccessfully store customer info
+                                    // Unsuccessfully delete the food order
                                     else {
                                         Toast.makeText(binding.root.context, R.string.new_order_activity_toast_failure, Toast.LENGTH_SHORT).show()
                                     }
@@ -147,5 +182,27 @@ class FoodOrderFragment : Fragment() {
                 override fun onCancelled(p0: DatabaseError) {}
             }
         )
+    }
+
+    // Click the delete action button
+    private fun clickDeleteActionButton() {
+        val uid: String = firebaseAuth.currentUser!!.uid
+
+        // Delete a food order
+        deleteFoodOrder(uid, R.string.food_order_activity_toast_delete)
+
+        // Delete a food order notification
+        firebaseDatabase.getReference(getString(R.string.firebase_database_food_order_notifications)).child(viewModel.code).removeValue()
+    }
+
+    // Send a notification
+    private fun sendNotification() {
+        val uid: String = firebaseAuth.currentUser!!.uid
+
+        // Delete a food order
+        deleteFoodOrder(uid, R.string.food_order_activity_toast_notification)
+
+        // Delete a food order notification
+        firebaseDatabase.getReference(getString(R.string.firebase_database_food_order_notifications)).child(viewModel.code).removeValue()
     }
 }

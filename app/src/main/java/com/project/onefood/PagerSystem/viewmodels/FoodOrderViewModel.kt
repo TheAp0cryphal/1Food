@@ -1,3 +1,9 @@
+/*
+ * File Name: FoodOrderViewModel.kt
+ * File Description: store a food order info
+ * Author: Ching Hang Lam
+ * Last Modified: 2022/08/07
+ */
 package com.project.onefood.PagerSystem.viewmodels
 
 import android.graphics.Bitmap

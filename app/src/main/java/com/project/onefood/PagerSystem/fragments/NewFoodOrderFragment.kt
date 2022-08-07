@@ -1,3 +1,9 @@
+/*
+ * File Name: NewFoodOrderFragment.kt
+ * File Description: create a new food order
+ * Author: Ching Hang Lam
+ * Last Modified: 2022/08/07
+ */
 package com.project.onefood.PagerSystem.fragments
 
 import android.icu.util.Calendar
@@ -12,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.project.onefood.PagerSystem.FoodOrdersActivity
 import com.project.onefood.PagerSystem.data.FoodOrder
+import com.project.onefood.PagerSystem.data.FoodOrderNotification
 import com.project.onefood.PagerSystem.viewmodels.FoodOrdersViewModel
 import com.project.onefood.R
 import com.project.onefood.databinding.FragmentNewFoodOrderBinding
@@ -22,7 +29,7 @@ class NewFoodOrderFragment : Fragment() {
     private lateinit var binding: FragmentNewFoodOrderBinding
 
     // View models
-    private lateinit var viewModel: FoodOrdersViewModel
+    private lateinit var foodOrdersViewModel: FoodOrdersViewModel
 
     // Firebase
     private lateinit var firebaseAuth: FirebaseAuth
@@ -41,7 +48,7 @@ class NewFoodOrderFragment : Fragment() {
     private fun initFragment(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentNewFoodOrderBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(requireActivity()).get(FoodOrdersViewModel::class.java)
+        foodOrdersViewModel = ViewModelProvider(requireActivity()).get(FoodOrdersViewModel::class.java)
 
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
@@ -61,20 +68,40 @@ class NewFoodOrderFragment : Fragment() {
         val calendar: Calendar = Calendar.getInstance()
         val uid: String = firebaseAuth.currentUser!!.uid
         val codeString: String = "$uid,${calendar.timeInMillis}"
+        val orderTime: Long = calendar.timeInMillis
 
-        viewModel.foodOrders.value!!.maxOrderNumber += 1
+        // Max order number
+        foodOrdersViewModel.foodOrders.maxOrderNumber += 1
 
-        val foodOrder: FoodOrder = FoodOrder(viewModel.foodOrders.value!!.maxOrderNumber, calendar.timeInMillis, codeString, binding.remarkEditText.text.toString())
-        viewModel.foodOrders.value!!.foodOrderList.add(foodOrder)
+        // Food order
+        val foodOrder: FoodOrder = FoodOrder(foodOrdersViewModel.foodOrders.maxOrderNumber, orderTime, codeString, binding.remarkEditText.text.toString())
+        foodOrdersViewModel.foodOrders.foodOrderList.add(foodOrder)
 
-        firebaseDatabase.getReference(getString(R.string.firebase_database_food_orders)).child(uid).setValue(viewModel.foodOrders.value).addOnCompleteListener {
-            // Successfully store customer info
+        // Create a food order
+        firebaseDatabase.getReference(getString(R.string.firebase_database_food_orders)).child(uid).setValue(foodOrdersViewModel.foodOrders).addOnCompleteListener {
+            // Successfully create a food order
+            if (it.isSuccessful) {
+                saveFoodOrderNotification(foodOrder)
+            }
+            // Unsuccessfully create a food order
+            else {
+                Toast.makeText(binding.root.context, R.string.new_order_activity_toast_failure, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    // Save a food order notification
+    private fun saveFoodOrderNotification(foodOrder: FoodOrder) {
+        val foodOrderNotification: FoodOrderNotification = FoodOrderNotification()
+
+        firebaseDatabase.getReference(getString(R.string.firebase_database_food_order_notifications)).child(foodOrder.code).setValue(foodOrderNotification).addOnCompleteListener {
+            // Successfully create a food order
             if (it.isSuccessful) {
                 Toast.makeText(binding.root.context, R.string.new_order_activity_toast_success, Toast.LENGTH_SHORT).show()
 
                 FoodOrdersActivity.switchToFoodOrderFragment(requireActivity().supportFragmentManager, foodOrder)
             }
-            // Unsuccessfully store customer info
+            // Unsuccessfully create a food order
             else {
                 Toast.makeText(binding.root.context, R.string.new_order_activity_toast_failure, Toast.LENGTH_SHORT).show()
             }

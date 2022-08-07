@@ -1,3 +1,9 @@
+/*
+ * File Name: FoodOrderListFragment.kt
+ * File Description: show all the food orders
+ * Author: Ching Hang Lam
+ * Last Modified: 2022/08/07
+ */
 package com.project.onefood.PagerSystem.fragments
 
 import android.os.Bundle
@@ -25,7 +31,7 @@ class FoodOrderListFragment : Fragment() {
     private lateinit var binding: FragmentFoodOrderListBinding
 
     // View models
-    private lateinit var viewModel: FoodOrdersViewModel
+    private lateinit var foodOrdersViewModel: FoodOrdersViewModel
 
     // food order list
     private lateinit var foodOrderListAdapter: FoodOrderListAdapter
@@ -48,7 +54,7 @@ class FoodOrderListFragment : Fragment() {
     private fun initFragment(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentFoodOrderListBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(requireActivity()).get(FoodOrdersViewModel::class.java)
+        foodOrdersViewModel = ViewModelProvider(requireActivity()).get(FoodOrdersViewModel::class.java)
 
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
@@ -58,7 +64,7 @@ class FoodOrderListFragment : Fragment() {
 
     // Set the food order list
     private fun setFoodOrderList() {
-        foodOrderListAdapter = FoodOrderListAdapter(binding.root.context, viewModel.foodOrders.value!!)
+        foodOrderListAdapter = FoodOrderListAdapter(binding.root.context, foodOrdersViewModel.foodOrders)
         binding.foodOrderListView.adapter = foodOrderListAdapter
 
         changeVisibility()
@@ -66,7 +72,7 @@ class FoodOrderListFragment : Fragment() {
 
     // Change the visibility
     private fun changeVisibility() {
-        if (viewModel.foodOrders.value!!.foodOrderList.isEmpty()) {
+        if (foodOrdersViewModel.foodOrders.foodOrderList.isEmpty()) {
             binding.foodOrderListView.visibility = View.GONE
             binding.foodOrderListTextView.visibility = View.VISIBLE
         } else {
@@ -84,9 +90,7 @@ class FoodOrderListFragment : Fragment() {
         }
 
         binding.foodOrderListView.setOnItemClickListener { parent, view, position, id ->
-            val foodOrder: FoodOrder = viewModel.foodOrders.value!!.foodOrderList[position]
-
-            FoodOrdersActivity.switchToFoodOrderFragment(requireActivity().supportFragmentManager, foodOrder)
+            clickFoodOrderItem(position)
         }
     }
 
@@ -100,9 +104,8 @@ class FoodOrderListFragment : Fragment() {
                     val foodOrders: FoodOrders? = p0.getValue(FoodOrders::class.java)
 
                     if (foodOrders != null) {
-                        viewModel.foodOrders.value = foodOrders
-                        foodOrderListAdapter.notifyDataSetChanged()
-                        changeVisibility()
+                        foodOrdersViewModel.foodOrders = foodOrders
+                        setFoodOrderList()
                     }
                 }
 
@@ -114,5 +117,12 @@ class FoodOrderListFragment : Fragment() {
     // Click the new food order action button
     private fun clickNewFoodOrderActionButton() {
         FoodOrdersActivity.switchToNewFoodOrderFragment(requireActivity().supportFragmentManager)
+    }
+
+    // Click the food order item
+    private fun clickFoodOrderItem(position: Int) {
+        val foodOrder: FoodOrder = foodOrdersViewModel.foodOrders.foodOrderList[position]
+
+        FoodOrdersActivity.switchToFoodOrderFragment(requireActivity().supportFragmentManager, foodOrder)
     }
 }

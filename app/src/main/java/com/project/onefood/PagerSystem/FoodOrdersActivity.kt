@@ -1,3 +1,9 @@
+/*
+ * File Name: FoodOrdersActivity.kt
+ * File Description: Control the restaurant pager system
+ * Author: Ching Hang Lam
+ * Last Modified: 2022/08/07
+ */
 package com.project.onefood.PagerSystem
 
 import android.content.Context
@@ -55,12 +61,17 @@ class FoodOrdersActivity : AppCompatActivity() {
     // Set the listeners
     private fun setListeners() {
         binding.restaurantPagerSystemTextView.setOnClickListener {
-            val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.foodOrdersFrameLayout)
-            when (fragment) {
-                is NewFoodOrderFragment -> switchToFoodOrderListFragment(supportFragmentManager)
-                is FoodOrderFragment -> switchToFoodOrderListFragment(supportFragmentManager)
-                else -> switchToMainMenuActivity(this)
-            }
+            clickRestaurantPagerSystemTextView()
+        }
+    }
+
+    // Click the restaurant pager system textview
+    private fun clickRestaurantPagerSystemTextView() {
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.foodOrdersFrameLayout)
+        when (fragment) {
+            is NewFoodOrderFragment -> switchToFoodOrderListFragment(supportFragmentManager)
+            is FoodOrderFragment -> switchToFoodOrderListFragment(supportFragmentManager)
+            else -> switchToMainMenuActivity(this)
         }
     }
 
@@ -113,10 +124,6 @@ class FoodOrdersActivity : AppCompatActivity() {
             val calendar: Calendar = Calendar.getInstance()
             calendar.timeInMillis = time
 
-//            val timeFormat: SimpleDateFormat = if (SettingsFragment.is24HourFormat(context))
-//                SimpleDateFormat("HH:mm:ss")
-//            else
-//                SimpleDateFormat("h:mm:ss a")
             val timeFormat: SimpleDateFormat = SimpleDateFormat("HH:mm:ss")
 
             return timeFormat.format(calendar.time)

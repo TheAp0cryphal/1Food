@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_delete_order"
-        android:title="@string/food_order_activity_action_bar_delete_oder"
-        android:icon="@drawable/ic_delete_order"
-        app:showAsAction="always" />
-</menu>
