@@ -10,6 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
@@ -33,6 +36,8 @@ class RestaurantActivity : AppCompatActivity() {
     private lateinit var latLng : LatLng
     private var restaurantRating : String = ""
     private lateinit var reviewsArr: ArrayList<ReviewItem>
+    private lateinit var photosArr: ArrayList<SlideModel>
+
 
     override fun onResume() {
         super.onResume()
@@ -73,6 +78,7 @@ class RestaurantActivity : AppCompatActivity() {
         setContentView(R.layout.activity_restaurant)
 
         reviewsArr = ArrayList<ReviewItem>()
+        photosArr = ArrayList<SlideModel>()
 
         thread.start()
 
@@ -90,8 +96,8 @@ class RestaurantActivity : AppCompatActivity() {
 
         val restaurant_img = intent.getStringExtra("restaurant_img").toString()
 
-        val restaurantImgImageView : ImageView = findViewById(R.id.imageView3)
-        Picasso.get().load(restaurant_img).into(restaurantImgImageView);
+        //val restaurantImgImageView : ImageView = findViewById(R.id.imageView3)
+        //Picasso.get().load(restaurant_img).into(restaurantImgImageView);
 
 
 
@@ -163,10 +169,24 @@ class RestaurantActivity : AppCompatActivity() {
         val openingHoursResults = JSONObject(restaurantOpeningHours)
         val openNow = openingHoursResults.optString("open_now")
         val weekdayText = openingHoursResults.optJSONArray("weekday_text")
-
         updateTimings(weekdayText)
-       // Log.d("asdasdasdasdacasc", openNow)
-        //Log.d("asdasdasdasdacasc123", weekdayText.toString())
+
+        val restaurantPhotos = jsonResults.optJSONArray("photos")
+        if (restaurantPhotos != null){
+            for (i in 0 until restaurantPhotos.length()){
+                val photoJson = JSONObject(restaurantPhotos[i].toString())
+                val photo_reference = photoJson.optString("photo_reference")
+                if (photo_reference!=""){
+                    photosArr.add(SlideModel("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photo_reference}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA", ""))
+                }
+            }
+        }
+        val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
+        runOnUiThread{
+            imageSlider.setImageList(photosArr, ScaleTypes.FIT)
+        }
+
+
 
         val isOpen = if (openNow.toBoolean()) "Open" else "Not open"
         val restaurantStatusTextView : TextView = findViewById(R.id.restaurant_status)
