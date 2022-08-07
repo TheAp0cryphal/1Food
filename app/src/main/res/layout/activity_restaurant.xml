@@ -30,7 +30,6 @@
         android:layout_marginBottom="9dp"
         app:layout_constraintBottom_toTopOf="@+id/restaurant_address"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:iss_delay="0"/>
@@ -47,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.032"
         app:srcCompat="@drawable/back"
         app:tint="@null"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -65,7 +64,7 @@
         app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toEndOf="@+id/backfab"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
+        app:layout_constraintVertical_bias="0.0"
         app:maxImageSize="30dp"
         app:srcCompat="@drawable/reservation"
         app:tint="@null"
@@ -77,12 +76,10 @@
         android:layout_height="159dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.394"
+        app:layout_constraintVertical_bias="0.379"
         app:srcCompat="@drawable/rounded_corner" />
-
 
     <TextView
         android:id="@+id/restaurant_address"
@@ -121,23 +118,24 @@
         android:id="@+id/imageView5"
         android:layout_width="21dp"
         android:layout_height="21dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="72dp"
         android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/restaurant_info_box"
         app:layout_constraintStart_toStartOf="@+id/restaurant_info_box"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_status"
-        app:layout_constraintVertical_bias="0.195"
+        app:layout_constraintVertical_bias="0.153"
         app:srcCompat="@drawable/gps_img" />
 
     <TextView
         android:id="@+id/restaurant_status"
         android:layout_width="87dp"
         android:layout_height="19dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_light"
         android:text="Status : Open"
         android:textColor="#000A3E"
         app:layout_constraintEnd_toEndOf="@+id/restaurant_info_box"
+        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="@+id/restaurant_info_box"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_address" />
 
@@ -145,8 +143,8 @@
         android:id="@+id/imageView7"
         android:layout_width="21dp"
         android:layout_height="19dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="124dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="112dp"
         app:layout_constraintBottom_toBottomOf="@+id/restaurant_info_box"
         app:layout_constraintEnd_toEndOf="@+id/restaurant_info_box"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_status"
@@ -192,5 +190,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_info_box" />
+
+    <TextView
+        android:id="@+id/openTimes"
+        android:layout_width="157dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="17dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="Timings :"
+        android:textColor="#000A3E"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/restaurant_info_box"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="@+id/restaurant_info_box"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_address" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

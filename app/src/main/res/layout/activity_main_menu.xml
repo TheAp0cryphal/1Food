@@ -16,6 +16,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +180,7 @@
         android:layout_below="@+id/userAddress"
         android:layout_alignParentStart="true"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="@string/main_menu_activity_text_hello"
         android:textColor="#00B4E9"
         android:textFontWeight="400"
@@ -210,8 +211,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/userAddress"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="76dp"
         android:text="@string/todaypromo"
         android:textColor="#00B4E9"
         android:textFontWeight="400"
@@ -220,24 +221,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-    <ImageView
+    <TextView
         android:id="@+id/salutation"
         android:layout_width="218dp"
         android:layout_height="36dp"
         android:layout_below="@+id/userGreeting"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/salutation"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userGreeting"
-        app:srcCompat="@drawable/salutation" />
+        app:layout_constraintTop_toBottomOf="@+id/userGreeting" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/promorecycler"
         android:layout_width="403dp"
         android:layout_height="331dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">1Food</string>
+    <string name="salutation">Que puis-je faire pour vous?</string>
     <string name="qr">Lecteur QR</string>
     <string name="locations">Restaurants</string>
     <string name="reservation">Réservations</string>

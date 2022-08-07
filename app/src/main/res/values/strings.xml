@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">1Food</string>
-    <string name="hellouser">Hello, Anon</string>
+    <string name="salutation">What may I do for you?</string>
     <string name="qr">QR Scan</string>
     <string name="locations">Locations</string>
     <string name="reservation">Reservations</string>
@@ -117,6 +117,30 @@
         <item>English</item>
         <item>Chinese</item>
         <item>French</item>
+    </string-array>
+
+    <string-array name="cuisines">
+        <item>Indian</item>
+        <item>Chinese</item>
+        <item>Nepali</item>
+        <item>American</item>
+        <item>Italian</item>
+        <item>Mexican</item>
+        <item>Persian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Thai</item>
+        <item>Indonesian</item>
+        <item>Vietnamese</item>
+        <item>Greek</item>
+        <item>Malaysian</item>
+        <item>Filipino</item>
+        <item>Turkish</item>
+        <item>Peruvian</item>
+        <item>Nigerian</item>
+        <item>Spanish</item>
+        <item>Jamaican</item>
+        <item>New User</item>
     </string-array>
 
 </resources>
