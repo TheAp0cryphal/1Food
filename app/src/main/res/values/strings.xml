@@ -26,13 +26,11 @@
     <string name="tab_text_2">Tab 2</string>
 
     <!-- General ////////////////////////////////////////////////////////////////////////////////-->
-    <string name="one_food_web_address">http://onefood.lamchinghang.com/</string>
+    <string name="one_food_web_address" translatable="false">http://onefood.lamchinghang.com/</string>
 
     <!-- Firebase ////////////////////////////////////////////////////////////////////////////////-->
-    <string name="firebase_database_customers">Customers</string>
-    <string name="firebase_database_restaurant_manager">Restaurant Manager</string>
     <string name="firebase_database_users" translatable="false">Users</string>
-    <string name="firebase_database_instance_users">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
+    <string name="firebase_database_instance_users" translatable="false">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
 
     <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->
     <string name="main_menu_activity_text_hello">Hello,</string>
@@ -106,6 +104,14 @@
 
     <!-- User Profile Activity ///////////////////////////////////////////////////////////////////-->
     <string name="user_profile_activity_button_logout">Logout</string>
+    <string name="user_profile_activity_button_save">Save</string>
+    <string name="user_profile_activity_text_first_name">First Name</string>
+    <string name="user_profile_activity_text_last_name">Last Name</string>
+    <string name="user_profile_activity_text_restaurant_name">Restaurant Name</string>
+    <string name="user_profile_activity_text_email_address">Email Address</string>
+    <string name="user_profile_activity_text_home_address">Home Address</string>
+    <string name="user_profile_activity_toast_succeed_save">Saved</string>
+    <string name="user_profile_activity_toast_fail_save">Unable to save</string>
 
     <!-- ////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="favourites">favourites</string>

@@ -13,8 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.project.onefood.Login.LoginActivity
+import com.project.onefood.Login.data.User
 import com.project.onefood.R
 import com.project.onefood.databinding.FragmentLoginBinding
 
@@ -100,7 +104,7 @@ class LoginFragment : Fragment() {
 
         firebaseAuth.signInWithEmailAndPassword(emailAddressString, passwordString).addOnCompleteListener {
             if (it.isSuccessful) {
-                LoginActivity.switchToMainMenuActivity(binding.root.context)
+                loadDataFromDatabase()
             }
             else {
                 Toast.makeText(binding.root.context, R.string.login_activity_toast_fail_login_user_account, Toast.LENGTH_SHORT).show()
@@ -108,14 +112,50 @@ class LoginFragment : Fragment() {
         }
     }
 
+    // Load the data from database
+    private fun loadDataFromDatabase() {
+        val uid: String = firebaseAuth.currentUser!!.uid
+
+        firebaseDatabase.getReference(getString(R.string.firebase_database_users)).child(uid).addListenerForSingleValueEvent(
+            object: ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    val user: User? = p0.getValue(User::class.java)
+
+                    if (user != null) {
+                        LoginActivity.switchToMainMenuActivity(binding.root.context, user, false)
+                    }
+                }
+
+                override fun onCancelled(p0: DatabaseError) {}
+            }
+        )
+    }
+
     // Login anonymous account
     private fun loginAnonymousAccount() {
         firebaseAuth.signInAnonymously().addOnCompleteListener {
             if (it.isSuccessful) {
-                LoginActivity.switchToMainMenuActivity(binding.root.context)
+                storeAnonymousInfo()
             }
             else {
                 Toast.makeText(binding.root.context, R.string.login_activity_toast_fail_login_anonymous_account, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    // Store the anonymous info
+    private fun storeAnonymousInfo() {
+        val uid: String = firebaseAuth.currentUser!!.uid
+        val user: User = User()
+
+        firebaseDatabase.getReference(getString(R.string.firebase_database_users)).child(uid).setValue(user).addOnCompleteListener {
+            // Successfully store customer info
+            if (it.isSuccessful) {
+                LoginActivity.switchToMainMenuActivity(binding.root.context, user, false)
+            }
+            // Unsuccessfully store customer info
+            else {
+                Toast.makeText(binding.root.context, R.string.customer_register_activity_toast_fail_create_customer_account, Toast.LENGTH_SHORT).show()
             }
         }
     }

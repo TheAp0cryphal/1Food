@@ -16,6 +16,7 @@ import android.widget.EditText
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.project.onefood.Login.data.User
 import com.project.onefood.Login.fragments.*
 import com.project.onefood.MainMenu.MainMenuActivity
 import com.project.onefood.R
@@ -62,15 +63,28 @@ class LoginActivity : AppCompatActivity() {
     // Set the listeners
     private fun setListeners() {
         binding.logoImageView.setOnClickListener {
-            val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.loginFrameLayout)
-            when (fragment) {
-                is LoginFragment -> switchToOneFoodWebpage(this)
-                else ->  switchToLoginFragment(supportFragmentManager)
-            }
+            clickLogoImageView()
+        }
+    }
+
+    // Click the logo image view
+    private fun clickLogoImageView() {
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.loginFrameLayout)
+        when (fragment) {
+            is LoginFragment -> switchToOneFoodWebpage(this)
+            else ->  switchToLoginFragment(supportFragmentManager)
         }
     }
 
     companion object {
+
+        const val ACCOUNT_TYPE_KEY: String = "ACCOUNT_TYPE_KEY"
+        const val FIRST_NAME_KEY: String = "FIRST_NAME_KEY"
+        const val LAST_NAME_KEY: String = "LAST_NAME_KEY"
+        const val RESTAURANT_NAME_KEY: String = "RESTAURANT_NAME_KEY"
+        const val EMAIL_ADDRESS_KEY: String = "EMAIL_ADDRESS_KEY"
+        const val HOME_ADDRESS_KEY: String = "HOME_ADDRESS_KEY"
+        const val DATA_IS_CHANGED_KEY: String = "DATA_IS_CHANGED_KEY"
 
         // Check the email address
         // Returns
@@ -183,15 +197,24 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Switch to main menu activity
-        fun switchToMainMenuActivity(context: Context) {
-            val intent: Intent = Intent(context, MainMenuActivity::class.java)
-            context.startActivity(intent)
-        }
-
         // Switch to one food webpage
         fun switchToOneFoodWebpage(context: Context) {
             val intent: Intent = Intent(Intent.ACTION_VIEW, context.resources.getString(R.string.one_food_web_address).toUri())
+            context.startActivity(intent)
+        }
+
+        // Switch to main menu activity
+        fun switchToMainMenuActivity(context: Context, user: User, isDataChanged: Boolean) {
+            val intent: Intent = Intent(context, MainMenuActivity::class.java)
+
+            intent.putExtra(ACCOUNT_TYPE_KEY, user.accountType.ordinal)
+            intent.putExtra(FIRST_NAME_KEY, user.firstName)
+            intent.putExtra(LAST_NAME_KEY, user.lastName)
+            intent.putExtra(RESTAURANT_NAME_KEY, user.restaurantName)
+            intent.putExtra(EMAIL_ADDRESS_KEY, user.emailAddress)
+            intent.putExtra(HOME_ADDRESS_KEY, user.homeAddress)
+            intent.putExtra(DATA_IS_CHANGED_KEY, isDataChanged)
+
             context.startActivity(intent)
         }
     }

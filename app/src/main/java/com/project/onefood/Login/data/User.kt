@@ -21,4 +21,6 @@ data class User(
     var emailAddress:String = "",
 
     var homeAddress: String = ""
-)
+) {
+    constructor(): this(AccountType.ANONYMOUS, "", "", "", "", "")
+}

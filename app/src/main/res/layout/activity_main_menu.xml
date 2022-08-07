@@ -152,6 +152,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/foodOrdersCardView"
         android:layout_width="35dp"
         android:layout_height="37dp"
         android:layout_alignParentTop="true"
