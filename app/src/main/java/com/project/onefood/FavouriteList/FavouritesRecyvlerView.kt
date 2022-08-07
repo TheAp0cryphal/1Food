@@ -15,6 +15,7 @@ import com.project.onefood.Databases.FavouriteDB.FavouriteDatabase
 import com.project.onefood.Databases.FavouriteDB.FavouriteItem
 import com.project.onefood.R
 import com.project.onefood.RestaurantPage.RestaurantActivity
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,6 +28,7 @@ class FavouritesRecyvlerView(private val context: Context, private var list: Arr
         internal var tvRestaurantName: TextView
         internal var tvRestaurantAddress: TextView
         internal var tvRestaurantDistance: TextView
+        internal var ivRestaurantImg: ImageView
         var favouriteDatabaseDao = FavouriteDatabase.getInstance(context).FavouriteDatabaseDao
 
         init {
@@ -35,6 +37,7 @@ class FavouritesRecyvlerView(private val context: Context, private var list: Arr
             tvRestaurantName = itemView.findViewById(R.id.tvRestaurantName)
             tvRestaurantAddress = itemView.findViewById(R.id.tvRestaurantAddress)
             tvRestaurantDistance = itemView.findViewById(R.id.tvRestaurantDistance)
+            ivRestaurantImg = itemView.findViewById(R.id.restaurantImg)
         }
 
         internal fun bind(position: Int) {
@@ -42,6 +45,7 @@ class FavouritesRecyvlerView(private val context: Context, private var list: Arr
             tvRestaurantName.text = list[position].name
             tvRestaurantAddress.text = list[position].address
             tvRestaurantDistance.text = list[position].distance.toString()
+            Picasso.get().load(list[position].img).into(ivRestaurantImg);
 
             itemView.findViewById<ImageView>(R.id.favoriteBtn).setImageResource(R.drawable.heart)
 

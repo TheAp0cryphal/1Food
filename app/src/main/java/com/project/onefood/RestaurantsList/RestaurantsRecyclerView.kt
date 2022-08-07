@@ -84,8 +84,8 @@ class RestaurantsRecyclerView(private val context: Context, private val list: Ar
                                 FavouriteItem(
                                     list[position].name,
                                     list[position].address,
-                                    .0,
-                                    "",
+                                    list[position].distance,
+                                    list[position].img,
                                     list[position].place_id
                                 )
                             )
