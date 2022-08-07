@@ -7,8 +7,23 @@
     tools:context="com.project.onefood.RestaurantPage.RestaurantActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView3"
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView3"-->
+<!--        android:layout_width="489dp"-->
+<!--        android:layout_height="347dp"-->
+<!--        android:layout_marginTop="-128dp"-->
+<!--        android:layout_marginBottom="9dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/restaurant_address"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.504"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/rest_img" />-->
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/image_slider"
+        app:iss_period="1000"
+        app:iss_title_background="@android:color/transparent"
         android:layout_width="489dp"
         android:layout_height="347dp"
         android:layout_marginTop="-128dp"
@@ -18,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rest_img" />
+        app:iss_delay="0"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/backfab"
