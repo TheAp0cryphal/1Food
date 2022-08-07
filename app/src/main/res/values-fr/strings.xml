@@ -26,14 +26,6 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
 
-    <!-- General ////////////////////////////////////////////////////////////////////////////////-->
-    <string name="one_food_web_address">http://onefood.lamchinghang.com/</string>
-
-    <!-- Firebase ////////////////////////////////////////////////////////////////////////////////-->
-    <string name="firebase_database_customers">Customers</string>
-    <string name="firebase_database_restaurant_manager">Restaurant Manager</string>
-    <string name="firebase_database_instance_users">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
-
     <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->
     <string name="main_menu_activity_text_hello">Bonjour, </string>
 

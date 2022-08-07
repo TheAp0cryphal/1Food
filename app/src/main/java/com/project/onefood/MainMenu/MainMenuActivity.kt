@@ -4,26 +4,27 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.location.Geocoder
-import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.project.onefood.FavouriteList.FavouriteActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.LocationSource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.project.onefood.Login.data.Customer
-import com.project.onefood.Login.data.RestaurantManager
+import com.project.onefood.Login.LoginActivity
+import com.project.onefood.Login.data.AccountType
+import com.project.onefood.Login.data.User
 import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
+import com.project.onefood.MainMenu.viewmodels.MainMenuViewModel
 import com.project.onefood.PagerSystem.FoodOrdersActivity
 import com.project.onefood.R
 import com.project.onefood.RestaurantsList.RestaurantsListActivity
@@ -35,15 +36,42 @@ class MainMenuActivity : AppCompatActivity(){
 
     // UI
     private lateinit var binding: ActivityMainMenuBinding
-    private var name : String = ""
 
+    // View models
+    private lateinit var viewModel: MainMenuViewModel
+
+    // Firebase
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseDatabase: FirebaseDatabase
+
+    // Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    // Actions on create
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        initActivity()
+
+        if (viewModel.accountType.value == null || intent.getBooleanExtra(LoginActivity.DATA_IS_CHANGED_KEY, false)) {
+            loadDataFromPrevious()
+        }
+
+        setUserAccount()
+        setListeners()
+
+        binding.promorecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.promorecycler.adapter = PromoRecyclerView()
+
+        rqPerms()
+    }
+
+    // Actions on back pressed
     override fun onBackPressed() {
-        super.onBackPressed()
         finishAffinity()
     }
 
+    // Actions on resume
     override fun onResume() {
         super.onResume()
 
@@ -52,13 +80,6 @@ class MainMenuActivity : AppCompatActivity(){
         val qrScan: ImageView = findViewById(R.id.qr_scan)
         qrScan.setOnClickListener {
             val intent = Intent(this, QRScanActivity::class.java)
-            startActivity(intent)
-        }
-
-        val userProfile: ImageView = findViewById(R.id.userProfile)
-        userProfile.setOnClickListener {
-            val intent = Intent(this, UserProfileActivity::class.java)
-            intent.putExtra("customer_name", name)
             startActivity(intent)
         }
 
@@ -87,7 +108,7 @@ class MainMenuActivity : AppCompatActivity(){
         }
     }
 
-
+    // Get the user location
     @SuppressLint("MissingPermission")
     private fun getUserLocation() {
         Log.d("here?", "yes")
@@ -104,6 +125,7 @@ class MainMenuActivity : AppCompatActivity(){
                 }
     }
 
+    // Set the location text
     private fun setLocationText(userLatitude : Double, userLongitude : Double) {
         val mGeocoder = Geocoder(applicationContext, Locale.getDefault())
 
@@ -124,74 +146,8 @@ class MainMenuActivity : AppCompatActivity(){
         findViewById<TextView>(R.id.userAddress).text = address
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        initActivity()
-
-        setUserName()
-
-        val recyclerView : RecyclerView = findViewById(R.id.promorecycler)
-        val adapter = PromoRecyclerView()
-
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = adapter
-
-        rqPerms()
-        //rqPermsLocation()
-    }
-
-    // Initialize the activity
-    private fun initActivity() {
-        binding = ActivityMainMenuBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-    }
-
-    // Set the user name
-    private fun setUserName() {
-        val uid: String = FirebaseAuth.getInstance().currentUser!!.uid
-
-        FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users)).getReference(getString(R.string.firebase_database_customers)).child(uid).addListenerForSingleValueEvent(
-            object: ValueEventListener {
-                override fun onDataChange(p0: DataSnapshot) {
-                    val customer: Customer? = p0.getValue(Customer::class.java)
-                    if (customer != null) {
-                        binding.userNameTextView.text = customer.firstName
-
-                        var firstname = (customer.firstName).substring(0, 1).toUpperCase() + (customer.firstName).substring(1, customer.firstName.length)
-                        var lastname =  (customer.lastName).substring(0, 1).toUpperCase() + (customer.lastName).substring(1, customer.lastName.length)
-
-                        name = "$firstname $lastname"
-                    }
-                }
-
-                override fun onCancelled(p0: DatabaseError) {
-                    //binding.userNameTextView.text = ""
-                }
-            }
-        )
-
-        FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users)).getReference(getString(R.string.firebase_database_restaurant_manager)).child(uid).addListenerForSingleValueEvent(
-            object: ValueEventListener {
-                override fun onDataChange(p0: DataSnapshot) {
-                    val restaurantManager: RestaurantManager? = p0.getValue(RestaurantManager::class.java)
-                    if (restaurantManager != null) {
-                        binding.userNameTextView.text = restaurantManager.restaurantName
-                    }
-                }
-
-                override fun onCancelled(p0: DatabaseError) {
-                    //binding.userNameTextView.text = ""
-                }
-            }
-        )
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray)
-    {
+    // Actions on request permissions result
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(
             requestCode,
@@ -216,23 +172,90 @@ class MainMenuActivity : AppCompatActivity(){
         }
     }
 
-    /*
+    // Initialize the activity
+    private fun initActivity() {
+        binding = ActivityMainMenuBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    private fun rqPermsLocation() {
-        val perms = { Manifest.permission.ACCESS_FINE_LOCATION}
-        val perms2 = { Manifest.permission.ACCESS_COARSE_LOCATION}
+        viewModel = ViewModelProvider(this).get(MainMenuViewModel::class.java)
 
-        if (EasyPermissions.hasPermissions(this, perms.toString()) && EasyPermissions.hasPermissions(this, perms2.toString())){
-            //
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
+    }
+
+    // Load the data from the previous
+    private fun loadDataFromPrevious() {
+        viewModel.accountType.value = AccountType.values()[intent.getIntExtra(LoginActivity.ACCOUNT_TYPE_KEY, 0)]
+        viewModel.firstName.value = intent.getStringExtra(LoginActivity.FIRST_NAME_KEY)
+        viewModel.lastName.value = intent.getStringExtra(LoginActivity.LAST_NAME_KEY)
+        viewModel.restaurantName.value = intent.getStringExtra(LoginActivity.RESTAURANT_NAME_KEY)
+        viewModel.emailAddress.value = intent.getStringExtra(LoginActivity.EMAIL_ADDRESS_KEY)
+        viewModel.homeAddress.value = intent.getStringExtra(LoginActivity.HOME_ADDRESS_KEY)
+    }
+
+    // Set the user account
+    private fun setUserAccount() {
+        // User name
+        if (viewModel.accountType.value == AccountType.RESTAURANT_MANAGER) {
+            binding.userNameTextView.text = viewModel.restaurantName.value
+        } else {
+            binding.userNameTextView.text = viewModel.firstName.value
         }
-        else{
-            EasyPermissions.requestPermissions(this,
-                "Location required for displaying the restaurants...",
-                103,
-                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+
+        // Food orders image view
+        if (viewModel.accountType.value == AccountType.RESTAURANT_MANAGER || viewModel.accountType.value == AccountType.DEVELOPER) {
+            binding.foodOrdersCardView.visibility = View.VISIBLE
+        } else {
+            binding.foodOrdersCardView.visibility = View.GONE
         }
     }
 
-     */
+    // Set the listeners
+    private fun setListeners() {
+        loadDataFromDatabase()
 
+        binding.userProfile.setOnClickListener {
+            clickUserProfileButton()
+        }
+    }
+
+    // Load the data from database
+    private fun loadDataFromDatabase() {
+        val uid: String = firebaseAuth.currentUser!!.uid
+
+        firebaseDatabase.getReference(getString(R.string.firebase_database_users)).child(uid).addListenerForSingleValueEvent(
+            object: ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    val user: User? = p0.getValue(User::class.java)
+
+                    if (user != null) {
+                        viewModel.accountType.value = user.accountType
+                        viewModel.firstName.value = user.firstName
+                        viewModel.lastName.value = user.lastName
+                        viewModel.restaurantName.value = user.restaurantName
+                        viewModel.emailAddress.value = user.emailAddress
+                        viewModel.homeAddress.value = user.homeAddress
+
+                        setUserAccount()
+                    }
+                }
+
+                override fun onCancelled(p0: DatabaseError) {}
+            }
+        )
+    }
+
+    // Click the user profile button
+    private fun clickUserProfileButton() {
+        val intent = Intent(this, UserProfileActivity::class.java)
+
+        intent.putExtra(LoginActivity.ACCOUNT_TYPE_KEY, viewModel.accountType.value!!.ordinal)
+        intent.putExtra(LoginActivity.FIRST_NAME_KEY, viewModel.firstName.value)
+        intent.putExtra(LoginActivity.LAST_NAME_KEY, viewModel.lastName.value)
+        intent.putExtra(LoginActivity.RESTAURANT_NAME_KEY, viewModel.restaurantName.value)
+        intent.putExtra(LoginActivity.EMAIL_ADDRESS_KEY, viewModel.emailAddress.value)
+        intent.putExtra(LoginActivity.HOME_ADDRESS_KEY, viewModel.homeAddress.value)
+
+        startActivity(intent)
+    }
 }

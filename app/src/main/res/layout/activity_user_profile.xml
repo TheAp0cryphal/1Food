@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,88 +8,144 @@
     android:background="@color/white"
     tools:context=".MainMenu.UserProfileActivity">
 
-    <ImageView
-        android:id="@+id/user_profile"
-        android:layout_width="143dp"
-        android:layout_height="143dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/user_big"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="153dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="48dp"
-        android:text="Walter White"
-        android:textColor="#00B4E9"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="185dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="16dp"
-        android:text="727, Murdock St. , Albaquerque, New Mexico"
-        android:textColor="#00B4E9"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="171dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="232dp"
-        android:text="@string/usersettings"
-        android:textColor="#3E4462"
-        android:textSize="24dp"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/logoutButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/user_profile_activity_button_logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="20dp"/>
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <LinearLayout
-        android:id="@+id/settings"
-        android:layout_width="196dp"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.039">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/user_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:maxHeight="143dp"
+                android:maxWidth="143dp"
+                android:src="@drawable/user_big"
+                android:layout_gravity="center"
+                android:layout_weight="5"/>
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_profile_activity_button_save"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/myLanguage"
-            android:layout_width="145dp"
-            android:layout_height="29dp"
-            android:textAlignment="center" />
+            android:id="@+id/firstNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_profile_activity_text_first_name"
+            android:layout_marginTop="20dp"/>
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_baseline_settings_24" />
+        <EditText
+            android:id="@+id/firstNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"/>
+
+        <TextView
+            android:id="@+id/lastNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_profile_activity_text_last_name"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/lastNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"/>
+
+        <TextView
+            android:id="@+id/restaurantNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_profile_activity_text_restaurant_name"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/restaurantNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"/>
+
+        <TextView
+            android:id="@+id/emailAddressTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_profile_activity_text_email_address"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/emailAddressEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/homeAddressTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_profile_activity_text_home_address"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/homeAddressEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/usersettings"
+            android:textColor="#3E4462"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:id="@+id/settings"
+            android:layout_width="196dp"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/myLanguage"
+                android:layout_width="145dp"
+                android:layout_height="29dp"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_baseline_settings_24" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_profile_activity_button_logout"
+            android:layout_margin="10dp"/>
+
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

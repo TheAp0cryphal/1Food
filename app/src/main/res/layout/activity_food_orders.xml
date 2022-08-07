@@ -6,20 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".PagerSystem.FoodOrdersActivity"
     android:orientation="vertical"
-    android:gravity="center">
-
-    <ListView
-        android:id="@+id/foodOrdersListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    android:padding="10dp">
 
     <TextView
-        android:id="@+id/emptyFoodOrderListTextView"
+        android:id="@+id/restaurantPagerSystemTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/food_orders_activity_text_empty_food_order_list"
+        android:text="@string/food_orders_activity_text_restaurant_pager_system"
         android:textColor="@color/black"
-        android:textSize="30dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textSize="25dp"
+        android:layout_margin="10dp"/>
+
+    <FrameLayout
+        android:id="@+id/foodOrdersFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </LinearLayout>

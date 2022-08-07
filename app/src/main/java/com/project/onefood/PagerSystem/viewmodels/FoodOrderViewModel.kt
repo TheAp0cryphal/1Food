@@ -1,8 +1,8 @@
 /*
  * File Name: FoodOrderViewModel.kt
- * File Description: Store data for food order activity
+ * File Description: store a food order info
  * Author: Ching Hang Lam
- * Last Modified: 2022/08/02
+ * Last Modified: 2022/08/07
  */
 package com.project.onefood.PagerSystem.viewmodels
 
@@ -12,32 +12,32 @@ import androidx.lifecycle.ViewModel
 
 class FoodOrderViewModel: ViewModel() {
 
-    // Id
-    val _id: MutableLiveData<Long> = MutableLiveData<Long>(0)
-    var id: Long
-        get() = _id.value!!
-        set(value) { _id.value = value }
+    // Order number
+    private val _orderNumber: MutableLiveData<Int> = MutableLiveData<Int>(0)
+    var orderNumber: Int
+        get() = _orderNumber.value!!
+        set(value) { _orderNumber.value = value }
 
-    // Time
-    val _time: MutableLiveData<Long> = MutableLiveData<Long>(0)
-    var time: Long
-        get() = _time.value!!
-        set(value) { _time.value = value }
+    // Order time
+    private val _orderTime: MutableLiveData<Long> = MutableLiveData<Long>(0)
+    var orderTime: Long
+        get() = _orderTime.value!!
+        set(value) { _orderTime.value = value }
 
     // Code
-    val _code: MutableLiveData<String> = MutableLiveData<String>("")
+    private val _code: MutableLiveData<String> = MutableLiveData<String>("")
     var code: String
         get() = _code.value!!
         set(value) { _code.value = value }
 
-    // Remark
-    val _remark: MutableLiveData<String> = MutableLiveData<String>("")
-    var remark: String
-        get() = _remark.value!!
-        set(value) { _remark.value = value }
+    // Remarks
+    private val _remarks: MutableLiveData<String> = MutableLiveData<String>("")
+    var remarks: String
+        get() = _remarks.value!!
+        set(value) { _remarks.value = value }
 
     // QR code
-    val _qrCode: MutableLiveData<Bitmap> = MutableLiveData<Bitmap>()
+    private val _qrCode: MutableLiveData<Bitmap> = MutableLiveData<Bitmap>()
     var qrCode: Bitmap
         get() = _qrCode.value!!
         set(value) { _qrCode.value = value }

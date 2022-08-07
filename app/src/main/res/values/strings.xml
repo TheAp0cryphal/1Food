@@ -26,12 +26,13 @@
     <string name="tab_text_2">Tab 2</string>
 
     <!-- General ////////////////////////////////////////////////////////////////////////////////-->
-    <string name="one_food_web_address">http://onefood.lamchinghang.com/</string>
+    <string name="one_food_web_address" translatable="false">http://onefood.lamchinghang.com/</string>
 
     <!-- Firebase ////////////////////////////////////////////////////////////////////////////////-->
-    <string name="firebase_database_customers">Customers</string>
-    <string name="firebase_database_restaurant_manager">Restaurant Manager</string>
-    <string name="firebase_database_instance_users">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
+    <string name="firebase_database_users" translatable="false">Users</string>
+    <string name="firebase_database_food_orders" translatable="false">Food Orders</string>
+    <string name="firebase_database_food_order_notifications" translatable="false">Food Order Notifications</string>
+    <string name="firebase_database_instance_users" translatable="false">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
 
     <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->
     <string name="main_menu_activity_text_hello">Hello,</string>
@@ -87,9 +88,10 @@
     <!-- Food Orders Activity ///////////////////////////////////////////////////////////////////-->
     <string name="food_orders_activity_action_bar_new_oder">New Order</string>
     <string name="food_orders_activity_text_empty_food_order_list">The food order list is empty</string>
+    <string name="food_orders_activity_text_restaurant_pager_system">Restaurant Pager System</string>
 
     <!-- New Order Activity /////////////////////////////////////////////////////////////////////-->
-    <string name="new_order_activity_text_remark">Remark</string>
+    <string name="new_order_activity_text_remark">Remarks</string>
     <string name="new_order_activity_button_submit">Submit</string>
     <string name="new_order_activity_toast_success">The request is sent</string>
     <string name="new_order_activity_toast_failure">Unable to send the request</string>
@@ -102,9 +104,21 @@
     <string name="food_order_activity_toast_failure">Unable to send the notification</string>
     <string name="food_order_activity_toast_delete">The food order is deleted</string>
     <string name="food_order_activity_action_bar_delete_oder">Delete Order</string>
+    <string name="food_order_activity_toast_notification">The notification is sent</string>
 
     <!-- User Profile Activity ///////////////////////////////////////////////////////////////////-->
     <string name="user_profile_activity_button_logout">Logout</string>
+    <string name="user_profile_activity_button_save">Save</string>
+    <string name="user_profile_activity_text_first_name">First Name</string>
+    <string name="user_profile_activity_text_last_name">Last Name</string>
+    <string name="user_profile_activity_text_restaurant_name">Restaurant Name</string>
+    <string name="user_profile_activity_text_email_address">Email Address</string>
+    <string name="user_profile_activity_text_home_address">Home Address</string>
+    <string name="user_profile_activity_toast_succeed_save">Saved</string>
+    <string name="user_profile_activity_toast_fail_save">Unable to save</string>
+
+    <!-- QR Scan Activity ///////////////////////////////////////////////////////////////////-->
+    <string name="qr_scan_activity_toast_repeat">You has registered for this order</string>
 
     <!-- ////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="favourites">favourites</string>
@@ -142,5 +156,7 @@
         <item>Jamaican</item>
         <item>New User</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
