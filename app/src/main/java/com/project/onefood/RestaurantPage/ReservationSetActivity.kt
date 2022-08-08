@@ -102,7 +102,7 @@ class ReservationSetActivity : AppCompatActivity() {
             var latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
             numOfPeople = numOfPeopleEditText.text.toString()
 
-            var reservationItem = ReservationItem(
+            var reservationItem = ReservationItem("",
                 restaurantName,
                 myDate,
                 myTime,

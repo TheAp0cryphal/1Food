@@ -1,6 +1,7 @@
 package com.project.onefood.MainMenu.viewmodels
 
 data class ReservationItem (
+    var firebaseKey : String = "",
     val restaurantName : String = "",
     val date : String = "",
     val time : String = "",

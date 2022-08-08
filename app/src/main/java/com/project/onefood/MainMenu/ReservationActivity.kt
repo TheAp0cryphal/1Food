@@ -80,7 +80,9 @@ class ReservationActivity : AppCompatActivity() {
                     reservationList.clear()
                     //reservationList = p0.getValue(ReservationItem::class.java)
                     for (postSnapshot : DataSnapshot in p0.children){
+
                         val reservationItem = postSnapshot.getValue(ReservationItem::class.java)
+                        reservationItem?.firebaseKey = postSnapshot.key.toString()
 
                         Log.d("checkReturn", reservationItem.toString() + " " + p0.childrenCount)
 

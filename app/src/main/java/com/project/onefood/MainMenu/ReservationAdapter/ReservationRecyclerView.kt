@@ -10,7 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.project.onefood.Databases.FavouriteDB.FavouriteDatabase
+import com.project.onefood.MainMenu.ReservationActivity
 import com.project.onefood.MainMenu.viewmodels.ReservationItem
 import com.project.onefood.R
 import com.project.onefood.RestaurantPage.ReservationMapsActivity
@@ -19,10 +22,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ReservationRecyclerView(private val context : Context, private var list: List<ReservationItem>) : RecyclerView.Adapter<ReservationRecyclerView.MyViewHolder>() {
+class ReservationRecyclerView(private val context : Context, private var list: ArrayList<ReservationItem>) : RecyclerView.Adapter<ReservationRecyclerView.MyViewHolder>() {
 
-     var lat : Double = 0.0
-     var lon : Double = 0.0
+    var lat : Double = 0.0
+    var lon : Double = 0.0
+    val firebaseAuth = FirebaseAuth.getInstance()
+    val firebaseDatabase = FirebaseDatabase.getInstance(context.getString(R.string.firebase_database_instance_users))
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.reservation_list_item, parent, false)
@@ -58,7 +64,12 @@ class ReservationRecyclerView(private val context : Context, private var list: L
            guests = itemView.findViewById(R.id.guests)
 
            itemView.findViewById<ImageView>(R.id.reservation_delete).setOnClickListener {
-
+               val uid: String = firebaseAuth.currentUser!!.uid
+               firebaseDatabase
+                   .getReference(context.getString(R.string.firebase_database_reservations))
+                   .child(uid).child(list[position].firebaseKey).removeValue()
+               list.removeAt(position)
+               notifyItemRemoved(position)
            }
        }
 
@@ -68,7 +79,7 @@ class ReservationRecyclerView(private val context : Context, private var list: L
             context.startActivity(intent)
         }
     }
-    fun replace(newReservationList: List<ReservationItem>) {
+    fun replace(newReservationList: ArrayList<ReservationItem>) {
         list = newReservationList
     }
 }
