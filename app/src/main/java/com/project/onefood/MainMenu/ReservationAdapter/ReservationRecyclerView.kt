@@ -11,8 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import com.project.onefood.Databases.FavouriteDB.FavouriteDatabase
-import com.project.onefood.Databases.ReservationDB.ReservationDatabase
-import com.project.onefood.Databases.ReservationDB.ReservationItem
+import com.project.onefood.MainMenu.viewmodels.ReservationItem
 import com.project.onefood.R
 import com.project.onefood.RestaurantPage.ReservationMapsActivity
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +23,6 @@ class ReservationRecyclerView(private val context : Context, private var list: L
 
      var lat : Double = 0.0
      var lon : Double = 0.0
-    var reservationDatabaseDao = ReservationDatabase.getInstance(context).reservationDatabaseDao
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.reservation_list_item, parent, false)
@@ -60,9 +58,7 @@ class ReservationRecyclerView(private val context : Context, private var list: L
            guests = itemView.findViewById(R.id.guests)
 
            itemView.findViewById<ImageView>(R.id.reservation_delete).setOnClickListener {
-               CoroutineScope(Dispatchers.IO).launch{
-                   reservationDatabaseDao.deleteById(list[position].id)
-               }
+
            }
        }
 

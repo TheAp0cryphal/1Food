@@ -13,9 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.project.onefood.Databases.ReservationDB.ReservationDatabase
-import com.project.onefood.Databases.ReservationDB.ReservationDatabaseDao
-import com.project.onefood.Databases.ReservationDB.ReservationItem
+import com.project.onefood.MainMenu.viewmodels.ReservationItem
 import com.project.onefood.R
 import com.project.onefood.showtoast
 import kotlinx.coroutines.CoroutineScope
@@ -29,7 +27,6 @@ class ReservationSetActivity : AppCompatActivity() {
     private var myDate : String = ""
     private var myTime : String = ""
     private var numOfPeople : String = ""
-    private lateinit var reservationDatabaseDao: ReservationDatabaseDao
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseDatabase: FirebaseDatabase
 
@@ -114,23 +111,14 @@ class ReservationSetActivity : AppCompatActivity() {
                 latLng.longitude
             )
 
-            /*
-            CoroutineScope(IO).launch {
-                reservationDatabaseDao.insert(
-                    reservationItem
-                )
-            }
-
-             */
-
             val uid: String = firebaseAuth.currentUser!!.uid
             firebaseDatabase.getReference(getString(R.string.firebase_database_reservations))
                 .child(uid).push().setValue(reservationItem).addOnCompleteListener {
-                // Successfully store customer info
+                // Successfully store reservation info
                 if (it.isSuccessful) {
                     showtoast(this@ReservationSetActivity, "Saved")
                 }
-                // Unsuccessfully store customer info
+                // Unsuccessfully store reservation info
                 else {
                     showtoast(this@ReservationSetActivity, "Error")
                 }
@@ -157,7 +145,6 @@ class ReservationSetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation_set_activity)
 
-        reservationDatabaseDao = ReservationDatabase.getInstance(this).reservationDatabaseDao
 
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))

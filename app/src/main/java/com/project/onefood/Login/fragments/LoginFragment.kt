@@ -19,7 +19,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.project.onefood.Databases.ReservationDB.ReservationItem
 import com.project.onefood.Login.LoginActivity
 import com.project.onefood.Login.data.User
 import com.project.onefood.R

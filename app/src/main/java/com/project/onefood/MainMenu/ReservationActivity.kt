@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener
 import com.project.onefood.Databases.ReservationDB.*
 import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
 import com.project.onefood.MainMenu.ReservationAdapter.ReservationRecyclerView
+import com.project.onefood.MainMenu.viewmodels.ReservationItem
 import com.project.onefood.R
 import com.project.onefood.RestaurantsList.RestaurantItem
 import kotlinx.coroutines.flow.collect
@@ -27,10 +28,6 @@ class ReservationActivity : AppCompatActivity() {
 
     //var list: List<ReservationItem> = listOf()
     private lateinit var recyclerView: RecyclerView
-    private lateinit var reservationItemRepository : ReservationItemRepository
-    private lateinit var reservationDatabaseDao : ReservationDatabaseDao
-    private lateinit var reservationItemViewModelFactory: ReservationItemViewModelFactory
-    private lateinit var reservationItemViewModel: ReservationItemViewModel
     private lateinit var reservationItemAdapter : ReservationRecyclerView
 
 
@@ -50,12 +47,6 @@ class ReservationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservation)
-
-        reservationDatabaseDao = ReservationDatabase.getInstance(this).reservationDatabaseDao
-        reservationItemRepository = ReservationItemRepository(reservationDatabaseDao)
-        reservationItemViewModelFactory = ReservationItemViewModelFactory(repository = reservationItemRepository)
-        reservationItemViewModel = ViewModelProvider(this, reservationItemViewModelFactory)
-            .get(ReservationItemViewModel::class.java)
 
         recyclerView = findViewById(R.id.reservationrecycler)
 
