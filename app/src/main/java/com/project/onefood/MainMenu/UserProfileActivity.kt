@@ -113,8 +113,13 @@ class UserProfileActivity : AppCompatActivity(){
 
     // Click the save button
     private fun clickSaveButton() {
-        if (!LoginActivity.checkFirstName(resources, binding.firstNameEditText))
-            return
+        if (viewModel.accountType.value == AccountType.CUSTOMER) {
+            if (!LoginActivity.checkFirstName(resources, binding.firstNameEditText))
+                return
+        } else if (viewModel.accountType.value == AccountType.RESTAURANT_MANAGER) {
+            if (!LoginActivity.checkRestaurantName(resources, binding.restaurantNameEditText))
+                return
+        }
 
         viewModel.firstName.value = binding.firstNameEditText.text.toString()
         viewModel.lastName.value = binding.lastNameEditText.text.toString()
