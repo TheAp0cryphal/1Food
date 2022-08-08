@@ -32,6 +32,8 @@ class ReservationActivity : AppCompatActivity() {
     private lateinit var reservationItemViewModel: ReservationItemViewModel
     private lateinit var reservationItemAdapter : ReservationRecyclerView
 
+    var reservationList = arrayListOf<ReservationItem>()
+
 
     override fun onResume() {
         super.onResume()
@@ -69,40 +71,41 @@ class ReservationActivity : AppCompatActivity() {
 
          */
 
-        reservationItemAdapter = ReservationRecyclerView(this@ReservationActivity, getFromFirebase())
-        recyclerView.layoutManager = LinearLayoutManager(this@ReservationActivity, LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter = reservationItemAdapter
+        reservationItemAdapter = ReservationRecyclerView(this@ReservationActivity, reservationList)
 
+        getFromFirebase()
 
     }
 
     private fun getFromFirebase() : ArrayList<ReservationItem> {
 
-        Log.d("checkReturn", "here")
+        Log.d("checkReturn2345", "here")
 
-        var firebaseAuth = FirebaseAuth.getInstance()
-        var firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
 
         val uid: String = firebaseAuth.currentUser!!.uid
-
-        var reservationList = arrayListOf<ReservationItem>()
 
         firebaseDatabase.getReference(getString(R.string.firebase_database_reservations)).child(uid).addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
                     for (postSnapshot : DataSnapshot in p0.children){
                         Log.d("checkReturn", postSnapshot.toString())
-                        var reservationItem = p0.getValue(ReservationItem::class.java)
+                        val reservationItem = p0.getValue(ReservationItem::class.java)
                         if (reservationItem != null) {
                             reservationList.add(reservationItem)
+                            Log.d("asdasdasdas234243", reservationList.toString())
                         }
                     }
+
+                    reservationItemAdapter = ReservationRecyclerView(this@ReservationActivity, reservationList)
+                    recyclerView.layoutManager = LinearLayoutManager(this@ReservationActivity, LinearLayoutManager.VERTICAL, false)
+                    recyclerView.adapter = reservationItemAdapter
                 }
 
                 override fun onCancelled(p0: DatabaseError) {
                     //TODO("Not yet implemented")
                 }
-
             }
         )
         return reservationList
