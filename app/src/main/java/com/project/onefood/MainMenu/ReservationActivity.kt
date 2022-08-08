@@ -32,8 +32,6 @@ class ReservationActivity : AppCompatActivity() {
     private lateinit var reservationItemViewModel: ReservationItemViewModel
     private lateinit var reservationItemAdapter : ReservationRecyclerView
 
-    var reservationList = arrayListOf<ReservationItem>()
-
 
     override fun onResume() {
         super.onResume()
@@ -71,10 +69,7 @@ class ReservationActivity : AppCompatActivity() {
 
          */
 
-        reservationItemAdapter = ReservationRecyclerView(this@ReservationActivity, reservationList)
-
-        getFromFirebase()
-
+        reservationItemAdapter = ReservationRecyclerView(this@ReservationActivity, getFromFirebase())
     }
 
     private fun getFromFirebase() : ArrayList<ReservationItem> {
@@ -85,16 +80,17 @@ class ReservationActivity : AppCompatActivity() {
         val firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
 
         val uid: String = firebaseAuth.currentUser!!.uid
+        var reservationList = arrayListOf<ReservationItem>()
 
         firebaseDatabase.getReference(getString(R.string.firebase_database_reservations)).child(uid).addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
+                    reservationList.clear()
                     for (postSnapshot : DataSnapshot in p0.children){
                         Log.d("checkReturn", postSnapshot.toString())
                         val reservationItem = p0.getValue(ReservationItem::class.java)
                         if (reservationItem != null) {
                             reservationList.add(reservationItem)
-                            Log.d("asdasdasdas234243", reservationList.toString())
                         }
                     }
 
