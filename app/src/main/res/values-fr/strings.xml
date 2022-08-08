@@ -21,8 +21,6 @@
 
     <string name="title_activity_reservation_maps">Activité de réservation de cartes</string>
     <string name="title_activity_tabbed_menu_reviews">TabbedMenuReviews</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
 
     <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->
     <string name="main_menu_activity_text_hello">Bonjour, </string>

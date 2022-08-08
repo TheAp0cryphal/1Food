@@ -22,8 +22,8 @@
 
     <string name="title_activity_reservation_maps">ReservationMapsActivity</string>
     <string name="title_activity_tabbed_menu_reviews">TabbedMenuReviews</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1" translatable="false">Tab 1</string>
+    <string name="tab_text_2" translatable="false">Tab 2</string>
 
     <!-- General ////////////////////////////////////////////////////////////////////////////////-->
     <string name="one_food_web_address" translatable="false">http://onefood.lamchinghang.com/</string>
