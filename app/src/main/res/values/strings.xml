@@ -119,6 +119,9 @@
 
     <!-- QR Scan Activity ///////////////////////////////////////////////////////////////////-->
     <string name="qr_scan_activity_toast_repeat">You have registered for this order</string>
+    <string name="qr_scan_activity_notification_marking_food">Your food is making</string>
+    <string name="qr_scan_activity_notification_food_ready">Your food is ready</string>
+    <string name="qr_scan_activity_notification_title">Restaurant Pager System</string>
 
     <!-- ////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="favourites">favourites</string>

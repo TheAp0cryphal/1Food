@@ -93,4 +93,7 @@
     <string name="nearest">最近的</string>
     <string name="Nearest">最近的</string>
     <string name="Clear">清除</string>
+    <string name="qr_scan_activity_notification_marking_food">你的食物正在制作</string>
+    <string name="qr_scan_activity_notification_title">餐厅寻呼系统</string>
+    <string name="qr_scan_activity_notification_food_ready">你的食物准备好了</string>
 </resources>

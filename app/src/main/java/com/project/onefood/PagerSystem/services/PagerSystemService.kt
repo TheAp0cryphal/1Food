@@ -49,7 +49,7 @@ class PagerSystemService: Service() {
                 override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
 
                 override fun onChildRemoved(p0: DataSnapshot) {
-                    Toast.makeText(context, "Your food is ready", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.qr_scan_activity_notification_food_ready), Toast.LENGTH_SHORT).show()
                     val intent = Intent(context, PagerSystemService::class.java)
                     stopService(intent)
                 }
@@ -67,7 +67,7 @@ class PagerSystemService: Service() {
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val serviceChannel = NotificationChannel(
-                channel_id, "One Food Restaurant Pager System",
+                channel_id, getString(R.string.qr_scan_activity_notification_title),
                 NotificationManager.IMPORTANCE_DEFAULT
             )
 
@@ -88,7 +88,7 @@ class PagerSystemService: Service() {
 
         val notification = Notification
             .Builder(this, channel_id)
-            .setContentText("Order Time: 09:44:00")
+            .setContentText(getString(R.string.qr_scan_activity_notification_marking_food))
             .setSmallIcon(R.drawable.logo)
             .setContentIntent(pendingIntent)
             .build()

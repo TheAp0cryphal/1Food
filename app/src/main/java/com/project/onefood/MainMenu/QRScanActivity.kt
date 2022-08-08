@@ -1,12 +1,9 @@
 package com.project.onefood.MainMenu
 
-import android.app.Notification
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.app.NotificationCompat
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
@@ -20,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.project.onefood.PagerSystem.FoodOrdersActivity
 import com.project.onefood.PagerSystem.data.FoodOrderNotification
-import com.project.onefood.PagerSystem.data.FoodOrders
 import com.project.onefood.PagerSystem.services.PagerSystemService
 import com.project.onefood.R
 import com.project.onefood.databinding.ActivityQrscanBinding
