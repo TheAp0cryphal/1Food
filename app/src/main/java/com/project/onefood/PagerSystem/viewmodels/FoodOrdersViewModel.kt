@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel
 import com.project.onefood.PagerSystem.data.FoodOrders
 
 class FoodOrdersViewModel: ViewModel() {
-    val _foodOrders: MutableLiveData<FoodOrders> = MutableLiveData<FoodOrders>(FoodOrders())
+    private val _foodOrders: MutableLiveData<FoodOrders> = MutableLiveData<FoodOrders>(FoodOrders())
     var foodOrders: FoodOrders
         get() = _foodOrders.value!!
         set(value) { _foodOrders.value = value }

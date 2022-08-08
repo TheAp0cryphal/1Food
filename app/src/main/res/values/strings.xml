@@ -46,7 +46,7 @@
     <string name="login_activity_textview_reset_password">Forgot Password?</string>
     <string name="login_activity_textview_anonymous_user">Anonymous User</string>
     <string name="login_activity_error_empty_email_address">The email address cannot be empty</string>
-    <string name="login_activity_error_invalid_email_address">This email address is valid</string>
+    <string name="login_activity_error_invalid_email_address">This email address is invalid</string>
     <string name="login_activity_error_invalid_password">The password should be at least 6 characters</string>
     <string name="login_activity_error_empty_first_name">The first name cannot be empty</string>
     <string name="login_activity_error_empty_restaurant_name">The restaurant name cannot be empty</string>
@@ -118,7 +118,10 @@
     <string name="user_profile_activity_toast_fail_save">Unable to save</string>
 
     <!-- QR Scan Activity ///////////////////////////////////////////////////////////////////-->
-    <string name="qr_scan_activity_toast_repeat">You has registered for this order</string>
+    <string name="qr_scan_activity_toast_repeat">You have registered for this order</string>
+    <string name="qr_scan_activity_notification_marking_food">Your food is making</string>
+    <string name="qr_scan_activity_notification_food_ready">Your food is ready</string>
+    <string name="qr_scan_activity_notification_title">Restaurant Pager System</string>
 
     <!-- ////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="favourites">favourites</string>
@@ -156,7 +159,5 @@
         <item>Jamaican</item>
         <item>New User</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

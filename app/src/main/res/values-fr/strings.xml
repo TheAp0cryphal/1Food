@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">1Food</string>
     <string name="salutation">Que puis-je faire pour vous?</string>
     <string name="qr">Lecteur QR</string>
     <string name="locations">Restaurants</string>
@@ -38,7 +37,7 @@
     <string name="login_activity_textview_reset_password">Mot de passe oublié?</string>
     <string name="login_activity_textview_anonymous_user">Utilisateur anonyme</string>
     <string name="login_activity_error_empty_email_address">L\'adresse e-mail ne peut pas être vide</string>
-    <string name="login_activity_error_invalid_email_address">Cette adresse e-mail est valide</string>
+    <string name="login_activity_error_invalid_email_address">Cette adresse e-mail est invalide</string>
     <string name="login_activity_error_invalid_password">Le mot de passe doit comporter au moins 6 caractères</string>
     <string name="login_activity_error_empty_first_name">Le prénom ne peut pas être vide</string>
     <string name="login_activity_error_empty_restaurant_name">Le nom du restaurant ne peut pas être vide</string>
