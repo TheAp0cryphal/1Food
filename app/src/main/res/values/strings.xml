@@ -17,7 +17,7 @@
     <string name="todo">TODO</string>
     <string name="setdate">Set Date</string>
     <string name="settime">Set Time</string>
-    <string name="save">Save</string>
+    <string name="save">Save and Send</string>
     <string name="cancel">Cancel</string>
 
     <string name="title_activity_reservation_maps">ReservationMapsActivity</string>
