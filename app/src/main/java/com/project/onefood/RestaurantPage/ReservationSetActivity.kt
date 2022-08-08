@@ -125,7 +125,7 @@ class ReservationSetActivity : AppCompatActivity() {
 
             val uid: String = firebaseAuth.currentUser!!.uid
             firebaseDatabase.getReference(getString(R.string.firebase_database_reservations))
-                .child(uid).setValue(reservationItem).addOnCompleteListener {
+                .child(uid).push().setValue(reservationItem).addOnCompleteListener {
                 // Successfully store customer info
                 if (it.isSuccessful) {
                     showtoast(this@ReservationSetActivity, "Saved")

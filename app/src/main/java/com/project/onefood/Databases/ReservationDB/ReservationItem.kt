@@ -13,5 +13,5 @@ data class ReservationItem (
     val latitude : Double = 0.0,
     val longitude : Double = 0.0
 ) {
-    @PrimaryKey (autoGenerate = true) var id : Long = 0
+    @PrimaryKey (autoGenerate = true) var id : Long = 0L
 }
