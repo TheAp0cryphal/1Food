@@ -25,6 +25,7 @@ class ReservationSetActivity : AppCompatActivity() {
 
     private var myDate : String = ""
     private var myTime : String = ""
+    private var numOfPeople : String = ""
     private lateinit var reservationDatabaseDao: ReservationDatabaseDao
 
     private fun displayDatePicker() {
@@ -88,23 +89,21 @@ class ReservationSetActivity : AppCompatActivity() {
             displayTimePicker()
         }
 
+        var numOfPeopleEditText = findViewById<EditText>(R.id.numOfPeople)
+        numOfPeopleEditText.setText("0")
+
         var save : Button = findViewById(R.id.savebutton)
         save.setOnClickListener {
 
-            var numOfPeopleEditText = findViewById<EditText>(R.id.numOfPeople)
-            var numOfPeople = numOfPeopleEditText.text
-
-            var latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
-
-            Log.d("Coords2", "" + latLng.latitude + " " + latLng.longitude)
-
             var restaurantName = intent.getStringExtra("restaurant_name").toString()
+            var latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
+            numOfPeople = numOfPeopleEditText.text.toString()
 
             CoroutineScope(IO).launch{
                 reservationDatabaseDao.insert(ReservationItem(restaurantName,
                     myDate,
                     myTime,
-                    numOfPeople.toString().toInt(),
+                    numOfPeople.toInt(),
                     latLng.latitude,
                     latLng.longitude))
             }

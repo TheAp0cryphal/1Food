@@ -50,14 +50,10 @@ class ReservationActivity : AppCompatActivity() {
         reservationItemViewModel = ViewModelProvider(this, reservationItemViewModelFactory)
             .get(ReservationItemViewModel::class.java)
 
-
         recyclerView = findViewById(R.id.reservationrecycler)
         reservationItemAdapter = ReservationRecyclerView(this, list)
 
-
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = reservationItemAdapter
-
-
     }
 }

@@ -110,8 +110,6 @@
             android:layout_width="138dp"
             android:layout_height="53dp"
             android:ems="10"
-            android:clickable="false"
-            android:focusable="false"
             android:gravity="center_horizontal"
             android:inputType="number" />
     </LinearLayout>

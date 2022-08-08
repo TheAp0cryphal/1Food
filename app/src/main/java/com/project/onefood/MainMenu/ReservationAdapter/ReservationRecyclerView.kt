@@ -2,6 +2,7 @@ package com.project.onefood.MainMenu.ReservationAdapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,7 +68,7 @@ class ReservationRecyclerView(private val context : Context, private var list: L
 
         override fun onClick(v: View?) {
             val intent = Intent(context, ReservationMapsActivity::class.java)
-            intent.putExtra("restaurant_coordinates", LatLng(lat, lon))
+            intent.putExtra("restaurant_coordinates", LatLng(list[position].latitude, list[position].longitude))
             context.startActivity(intent)
         }
     }
