@@ -1,9 +1,12 @@
 package com.project.onefood.MainMenu
 
+import android.app.Notification
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
@@ -18,6 +21,7 @@ import com.google.firebase.database.ValueEventListener
 import com.project.onefood.PagerSystem.FoodOrdersActivity
 import com.project.onefood.PagerSystem.data.FoodOrderNotification
 import com.project.onefood.PagerSystem.data.FoodOrders
+import com.project.onefood.PagerSystem.services.PagerSystemService
 import com.project.onefood.R
 import com.project.onefood.databinding.ActivityQrscanBinding
 
@@ -60,6 +64,8 @@ class  QRScanActivity : AppCompatActivity() {
                                     if (it.isSuccessful) {
                                         Toast.makeText(binding.root.context, R.string.new_order_activity_toast_success, Toast.LENGTH_SHORT).show()
 
+                                        startNotification(code)
+
                                         switchOrderPlacedActivity()
                                     }
                                     // Unsuccessfully create a food order
@@ -74,13 +80,6 @@ class  QRScanActivity : AppCompatActivity() {
                     override fun onCancelled(p0: DatabaseError) {}
                 }
             )
-
-            /*
-            runOnUiThread{
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
-            }
-
-             */
         }
 
         qrScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
@@ -89,6 +88,13 @@ class  QRScanActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    //
+    private fun startNotification(code: String) {
+        val intent = Intent(this, PagerSystemService::class.java)
+        intent.putExtra(FoodOrdersActivity.CODE_KEY, code)
+        startService(intent)
     }
 
     // Switch to order placed activity
