@@ -2,6 +2,7 @@ package com.project.onefood.RestaurantPage
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -97,14 +98,24 @@ class ReservationSetActivity : AppCompatActivity() {
 
             Log.d("Coords2", "" + latLng.latitude + " " + latLng.longitude)
 
+            var restaurantName = intent.getStringExtra("restaurant_name").toString()
+
             CoroutineScope(IO).launch{
-                reservationDatabaseDao.insert(ReservationItem(intent.getStringExtra("restaurant_name").toString(),
+                reservationDatabaseDao.insert(ReservationItem(restaurantName,
                     myDate,
                     myTime,
                     numOfPeople.toString().toInt(),
                     latLng.latitude,
                     latLng.longitude))
             }
+
+            var sendText = "Hi, I would like to request a reservation at $restaurantName on $myDate, $myTime for $numOfPeople people"
+
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.putExtra(Intent.EXTRA_TEXT, sendText)
+            intent.type = "text/plain"
+            this.startActivity(Intent.createChooser(intent, "Share Via"))
+
             showtoast(this, "Reservation has been made!")
         }
 
