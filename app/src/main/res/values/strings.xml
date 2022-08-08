@@ -33,6 +33,7 @@
     <string name="firebase_database_food_orders" translatable="false">Food Orders</string>
     <string name="firebase_database_food_order_notifications" translatable="false">Food Order Notifications</string>
     <string name="firebase_database_instance_users" translatable="false">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
+    <string name="firebase_database_reservations" translatable="false">Reservation</string>
 
     <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->
     <string name="main_menu_activity_text_hello">Hello,</string>

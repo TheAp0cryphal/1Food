@@ -8,8 +8,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.project.onefood.Databases.ReservationDB.ReservationDatabase
 import com.project.onefood.Databases.ReservationDB.ReservationDatabaseDao
 import com.project.onefood.Databases.ReservationDB.ReservationItem
@@ -27,6 +30,9 @@ class ReservationSetActivity : AppCompatActivity() {
     private var myTime : String = ""
     private var numOfPeople : String = ""
     private lateinit var reservationDatabaseDao: ReservationDatabaseDao
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseDatabase: FirebaseDatabase
+
 
     private fun displayDatePicker() {
 
@@ -99,16 +105,39 @@ class ReservationSetActivity : AppCompatActivity() {
             var latLng = intent.getParcelableExtra<LatLng>("restaurant_coordinates")!!
             numOfPeople = numOfPeopleEditText.text.toString()
 
-            CoroutineScope(IO).launch{
-                reservationDatabaseDao.insert(ReservationItem(restaurantName,
-                    myDate,
-                    myTime,
-                    numOfPeople.toInt(),
-                    latLng.latitude,
-                    latLng.longitude))
+            var reservationItem = ReservationItem(
+                restaurantName,
+                myDate,
+                myTime,
+                numOfPeople.toInt(),
+                latLng.latitude,
+                latLng.longitude
+            )
+
+            /*
+            CoroutineScope(IO).launch {
+                reservationDatabaseDao.insert(
+                    reservationItem
+                )
             }
 
-            var sendText = "Hi, I would like to request a reservation at $restaurantName on $myDate, $myTime for $numOfPeople people"
+             */
+
+            val uid: String = firebaseAuth.currentUser!!.uid
+            firebaseDatabase.getReference(getString(R.string.firebase_database_reservations))
+                .child(uid).push().setValue(reservationItem).addOnCompleteListener {
+                // Successfully store customer info
+                if (it.isSuccessful) {
+                    showtoast(this@ReservationSetActivity, "Saved")
+                }
+                // Unsuccessfully store customer info
+                else {
+                    showtoast(this@ReservationSetActivity, "Error")
+                }
+            }
+
+            var sendText =
+                "Hi, I would like to request a reservation at $restaurantName on $myDate, $myTime for $numOfPeople people"
 
             val intent = Intent(Intent.ACTION_SEND)
             intent.putExtra(Intent.EXTRA_TEXT, sendText)
@@ -129,5 +158,8 @@ class ReservationSetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reservation_set_activity)
 
         reservationDatabaseDao = ReservationDatabase.getInstance(this).reservationDatabaseDao
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
     }
 }
