@@ -9,6 +9,9 @@ package com.project.onefood.PagerSystem.services
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.media.Ringtone
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.widget.Toast
@@ -50,6 +53,9 @@ class PagerSystemService: Service() {
 
                 override fun onChildRemoved(p0: DataSnapshot) {
                     Toast.makeText(context, getString(R.string.qr_scan_activity_notification_food_ready), Toast.LENGTH_SHORT).show()
+
+                    playNotificationSound(context)
+
                     val intent = Intent(context, PagerSystemService::class.java)
                     stopService(intent)
                 }
@@ -94,6 +100,13 @@ class PagerSystemService: Service() {
             .build()
 
         startForeground(notification_id, notification)
+    }
+
+    // Play a notification sound
+    private fun playNotificationSound(context: Context) {
+        val uri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val ringTone: Ringtone = RingtoneManager.getRingtone(context, uri)
+        ringTone.play()
     }
 
     companion object {
