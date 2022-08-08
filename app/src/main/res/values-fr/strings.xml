@@ -109,17 +109,13 @@
         <item>French</item>
     </string-array>
     <string name="todo">faire</string>
-    <string name="todo">fa</string>
-    <string name="food_orders_activity_text_restaurant_pager_system">système de téléavertisseur de restaurant</string>
     <string name="food_orders_activity_text_restaurant_pager_system">système de téléavertisseur de restaurant</string>
     <string name="food_order_activity_toast_notification">notification envoyée</string>
     <string name="user_profile_activity_button_save">"sauvegarder "</string>
     <string name="user_profile_activity_text_first_name">prénom</string>
-    <string name="user_profile_activity_text_first_name">prénom</string>
     <string name="user_profile_activity_text_last_name">nom de famille</string>
     <string name="user_profile_activity_text_restaurant_name">Nom du restaurant</string>
     <string name="user_profile_activity_text_email_address">adresse e-mail</string>
-    <string name="user_profile_activity_text_home_address">adresse du domicile</string>
     <string name="user_profile_activity_text_home_address">adresse du domicile</string>
     <string name="user_profile_activity_toast_fail_save">impossible de sauvegarder</string>
     <string name="user_profile_activity_toast_succeed_save">sauvegardé</string>
