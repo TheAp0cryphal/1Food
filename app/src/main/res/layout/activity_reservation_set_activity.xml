@@ -10,13 +10,16 @@
         android:id="@+id/linearLayout2"
         android:layout_width="396dp"
         android:layout_height="47dp"
-        android:layout_marginTop="148dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19999999">
 
         <EditText
+            android:clickable="false"
+            android:focusable="false"
             android:id="@+id/editTextDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,14 +40,15 @@
         android:id="@+id/linearLayout"
         android:layout_width="398dp"
         android:layout_height="48dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:clickable="false"
+            android:focusable="false"
             android:id="@+id/editTextTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,32 +69,32 @@
         android:id="@+id/savebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
         android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
     <Button
         android:id="@+id/cancelbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="28dp"
         android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
     <LinearLayout
-        android:layout_width="327dp"
-        android:layout_height="74dp"
-        android:layout_marginBottom="312dp"
+        android:id="@+id/linearLayout7"
+        android:layout_width="330dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.425"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
             android:id="@+id/textView9"
@@ -106,6 +110,8 @@
             android:layout_width="138dp"
             android:layout_height="53dp"
             android:ems="10"
+            android:clickable="false"
+            android:focusable="false"
             android:gravity="center_horizontal"
             android:inputType="number" />
     </LinearLayout>
