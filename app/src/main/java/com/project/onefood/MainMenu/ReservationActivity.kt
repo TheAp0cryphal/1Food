@@ -38,6 +38,8 @@ class ReservationActivity : AppCompatActivity() {
 
         val emptyText: TextView = findViewById(R.id.empty)
 
+        getFromFirebase()
+
         reservationItemViewModel.allReservationItemsLiveData.observe(this, Observer { it ->
 
             emptyText.isVisible = it.isEmpty()
@@ -66,12 +68,17 @@ class ReservationActivity : AppCompatActivity() {
         recyclerView.adapter = reservationItemAdapter
 
          */
+
         reservationItemAdapter = ReservationRecyclerView(this@ReservationActivity, getFromFirebase())
         recyclerView.layoutManager = LinearLayoutManager(this@ReservationActivity, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = reservationItemAdapter
+
+
     }
 
     private fun getFromFirebase() : ArrayList<ReservationItem> {
+
+        Log.d("checkReturn", "here")
 
         var firebaseAuth = FirebaseAuth.getInstance()
         var firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))

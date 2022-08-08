@@ -114,11 +114,14 @@ class ReservationSetActivity : AppCompatActivity() {
                 latLng.longitude
             )
 
+            /*
             CoroutineScope(IO).launch {
                 reservationDatabaseDao.insert(
                     reservationItem
                 )
             }
+
+             */
 
             val uid: String = firebaseAuth.currentUser!!.uid
             firebaseDatabase.getReference(getString(R.string.firebase_database_reservations))
