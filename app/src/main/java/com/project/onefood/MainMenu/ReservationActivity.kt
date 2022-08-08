@@ -9,6 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.project.onefood.Databases.ReservationDB.*
 import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
 import com.project.onefood.MainMenu.ReservationAdapter.ReservationRecyclerView
@@ -27,10 +32,12 @@ class ReservationActivity : AppCompatActivity() {
     private lateinit var reservationItemViewModel: ReservationItemViewModel
     private lateinit var reservationItemAdapter : ReservationRecyclerView
 
+
     override fun onResume() {
         super.onResume()
 
         val emptyText: TextView = findViewById(R.id.empty)
+
         reservationItemViewModel.allReservationItemsLiveData.observe(this, Observer { it ->
 
             emptyText.isVisible = it.isEmpty()
@@ -51,9 +58,46 @@ class ReservationActivity : AppCompatActivity() {
             .get(ReservationItemViewModel::class.java)
 
         recyclerView = findViewById(R.id.reservationrecycler)
+
+        /*
         reservationItemAdapter = ReservationRecyclerView(this, list)
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = reservationItemAdapter
+
+         */
+        reservationItemAdapter = ReservationRecyclerView(this@ReservationActivity, getFromFirebase())
+        recyclerView.layoutManager = LinearLayoutManager(this@ReservationActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView.adapter = reservationItemAdapter
+    }
+
+    private fun getFromFirebase() : ArrayList<ReservationItem> {
+
+        var firebaseAuth = FirebaseAuth.getInstance()
+        var firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
+
+        val uid: String = firebaseAuth.currentUser!!.uid
+
+        var reservationList = arrayListOf<ReservationItem>()
+
+        firebaseDatabase.getReference(getString(R.string.firebase_database_reservations)).child(uid).addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (postSnapshot : DataSnapshot in p0.children){
+                        Log.d("checkReturn", postSnapshot.toString())
+                        var reservationItem = p0.getValue(ReservationItem::class.java)
+                        if (reservationItem != null) {
+                            reservationList.add(reservationItem)
+                        }
+                    }
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    //TODO("Not yet implemented")
+                }
+
+            }
+        )
+        return reservationList
     }
 }
