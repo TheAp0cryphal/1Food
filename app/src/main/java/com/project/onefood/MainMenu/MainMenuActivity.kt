@@ -259,8 +259,11 @@ class MainMenuActivity : AppCompatActivity(){
         startActivity(intent)
     }
 
+    /*
     override fun onDestroy() {
         super.onDestroy()
         finishAffinity()
     }
+
+     */
 }
