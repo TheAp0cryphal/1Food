@@ -6,7 +6,7 @@
     <string name="reservation">Réservations</string>
     <string name="favorites">Favoris</string>
     <string name="todaypromo">Les promos du jour</string>
-    <string name="orderconfirmed">Your order is confirmed!</string>
+    <string name="orderconfirmed">votre commande est validée</string>
     <string name="checkorderstatus">Votre commande est confirmée!</string>
     <string name="usersettings">Paramètres utilisateur</string>
     <string name="recommended_for_you">Recommandé pour vous</string>
@@ -14,7 +14,6 @@
     <string name="american">Américain</string>
     <string name="mexican">Mexicain</string>
     <string name="empty">Cette rubrique est vide :(</string>
-    <string name="todo">TODO</string>
     <string name="setdate">Régler la date</string>
     <string name="settime">Régler le temps</string>
     <string name="save">Enregistrer</string>
@@ -22,8 +21,6 @@
 
     <string name="title_activity_reservation_maps">Activité de réservation de cartes</string>
     <string name="title_activity_tabbed_menu_reviews">TabbedMenuReviews</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
 
     <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->
     <string name="main_menu_activity_text_hello">Bonjour, </string>
@@ -93,7 +90,7 @@
     <string name="food_order_activity_toast_success">Notification is sent</string>
     <string name="food_order_activity_toast_failure">Unable to send the notification</string>
     <string name="food_order_activity_toast_delete">The food order is deleted</string>
-    <string name="food_order_activity_action_bar_delete_oder">Delete Order</string>
+    <string name="food_order_activity_action_bar_delete_oder">supprimer la commande</string>
 
     <!-- User Profile Activity ///////////////////////////////////////////////////////////////////-->
     <string name="user_profile_activity_button_logout">Se déconnecter</string>
@@ -111,5 +108,20 @@
         <item>Chinese</item>
         <item>French</item>
     </string-array>
+    <string name="todo">faire</string>
+    <string name="food_orders_activity_text_restaurant_pager_system">système de téléavertisseur de restaurant</string>
+    <string name="food_order_activity_toast_notification">notification envoyée</string>
+    <string name="user_profile_activity_button_save">"sauvegarder "</string>
+    <string name="user_profile_activity_text_first_name">prénom</string>
+    <string name="user_profile_activity_text_last_name">nom de famille</string>
+    <string name="user_profile_activity_text_restaurant_name">Nom du restaurant</string>
+    <string name="user_profile_activity_text_email_address">adresse e-mail</string>
+    <string name="user_profile_activity_text_home_address">adresse du domicile</string>
+    <string name="user_profile_activity_toast_fail_save">impossible de sauvegarder</string>
+    <string name="user_profile_activity_toast_succeed_save">sauvegardé</string>
+    <string name="qr_scan_activity_toast_repeat">Vous vous êtes inscrit pour cette commande</string>
+    <string name="qr_scan_activity_notification_marking_food">votre nourriture est en cours de préparation</string>
+    <string name="qr_scan_activity_notification_food_ready">Votre repas est prêt</string>
+    <string name="qr_scan_activity_notification_title">système de téléavertisseur de restaurant</string>
 
 </resources>

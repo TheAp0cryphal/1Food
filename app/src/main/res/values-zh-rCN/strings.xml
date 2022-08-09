@@ -21,8 +21,6 @@
     <string name="cancel">取消</string>
     <string name="title_activity_reservation_maps">预订地图</string>
     <string name="title_activity_tabbed_menu_reviews">菜单评论</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
     <string name="main_menu_activity_text_hello">你好，</string>
     <string name="login_activity_title">登录一食</string>
     <string name="login_activity_hint_email_address">电子邮件地址</string>
