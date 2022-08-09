@@ -67,6 +67,7 @@ class RestaurantsRecyclerView(private val context: Context, private val list: Ar
                 intent.putExtra("restaurant_img", list[position].img)
                 intent.putExtra("restaurant_distance", tvRestaurantDistance.text)
                 intent.putExtra("place_id", list[position].place_id)
+                Log.d("sasdjhasd, ", list[position].toString())
                 context.startActivity(intent)
             }
             itemView.findViewById<ImageView>(R.id.favoriteBtn).setOnClickListener {

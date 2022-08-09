@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.onefood.FavouriteList.FavouriteActivity
@@ -25,6 +26,7 @@ import com.project.onefood.Login.data.AccountType
 import com.project.onefood.Login.data.User
 import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
 import com.project.onefood.MainMenu.viewmodels.MainMenuViewModel
+import com.project.onefood.MainMenu.viewmodels.ReservationItem
 import com.project.onefood.PagerSystem.FoodOrdersActivity
 import com.project.onefood.R
 import com.project.onefood.RestaurantsList.RestaurantsListActivity
@@ -47,6 +49,10 @@ class MainMenuActivity : AppCompatActivity(){
     // Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    var promosList = arrayListOf<promoItem>()
+
+    lateinit var reservationItemAdapter: PromoRecyclerView
+
     // Actions on create
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,9 +67,56 @@ class MainMenuActivity : AppCompatActivity(){
         setListeners()
 
         binding.promorecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.promorecycler.adapter = PromoRecyclerView()
+        reservationItemAdapter = PromoRecyclerView(this, promosList)
+        binding.promorecycler.adapter = reservationItemAdapter
 
         rqPerms()
+
+        getFromFirebase()
+    }
+
+
+    private fun getFromFirebase() : ArrayList<promoItem> {
+
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseDatabase = FirebaseDatabase.getInstance(getString(R.string.firebase_database_instance_users))
+
+        val uid: String = firebaseAuth.currentUser!!.uid
+
+
+        Log.d("asdasdasdheh","asd")
+
+        firebaseDatabase.getReference("Promos").addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onDataChange(p0: DataSnapshot) {
+                    promosList.clear()
+                    Log.d("asdasdasdheh1",p0.children.toString())
+                    for (postSnapshot : DataSnapshot in p0.children){
+                        Log.d("asdasdasdheh1123",postSnapshot.toString())
+                        val promoItem = postSnapshot.getValue(promoItem::class.java)
+                        Log.d("asdasdasdheh1promoItem",postSnapshot.toString())
+
+                        promoItem?.firebaseKey = postSnapshot.key.toString()
+
+                        Log.d("checkReturn", promoItem.toString() + " " + p0.childrenCount)
+
+                        if (promoItem != null) {
+                            //val emptyText: TextView = findViewById(R.id.empty)
+                            //emptyText.isVisible = false
+
+                            promosList.add(promoItem)
+                            reservationItemAdapter.replace(promosList)
+                            reservationItemAdapter.notifyDataSetChanged()
+                        }
+                    }
+                }
+                override fun onCancelled(p0: DatabaseError) {
+                    //TODO("Not yet implemented")
+                }
+            }
+        )
+        return promosList
     }
 
     // Actions on back pressed
