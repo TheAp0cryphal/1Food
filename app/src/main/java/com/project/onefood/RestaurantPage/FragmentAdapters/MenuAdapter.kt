@@ -27,7 +27,7 @@ class MenuAdapter(var context : Context) : BaseAdapter() {
     }
 
     override fun getItemId(p0: Int): Long {
-        return foodnames[p0].toLong()
+        return 0
     }
 
     override fun getView(position: Int, view : View?, parent : ViewGroup?): View {
