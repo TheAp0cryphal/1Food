@@ -56,6 +56,13 @@ class RestaurantActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        var addressTextView = findViewById<TextView>(R.id.restaurant_address)
+        addressTextView.setOnClickListener {
+            val intent = Intent(this, ReservationMapsActivity::class.java)
+            intent.putExtra("restaurant_coordinates", latLng)
+            startActivity(intent)
+        }
+
     }
     val thread = Thread {
         try {

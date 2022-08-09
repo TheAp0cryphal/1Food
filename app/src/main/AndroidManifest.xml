@@ -42,7 +42,8 @@
         <activity
             android:name=".RestaurantPage.ReservationMapsActivity"
             android:exported="false"
-            android:label="@string/title_activity_reservation_maps" />
+            android:label="@string/title_activity_reservation_maps"
+            android:theme="@style/Theme.1Food.NoActionBar"/>
 
         <activity
             android:name=".RestaurantPage.ReservationSetActivity"
