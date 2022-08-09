@@ -28,7 +28,7 @@ class ReviewAdapter(var context : Context, var list: ArrayList<ReviewItem>) : Ba
     }
 
     override fun getItemId(p0: Int): Long {
-        return list[p0].text.toLong()
+        return 0
     }
 
     @SuppressLint("SetTextI18n")
