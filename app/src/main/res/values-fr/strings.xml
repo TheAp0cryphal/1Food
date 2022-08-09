@@ -123,5 +123,6 @@
     <string name="qr_scan_activity_notification_marking_food">votre nourriture est en cours de préparation</string>
     <string name="qr_scan_activity_notification_food_ready">Votre repas est prêt</string>
     <string name="qr_scan_activity_notification_title">système de téléavertisseur de restaurant</string>
+    <string name="qr_scan_activity_toast_invalid">Code QR invalide</string>
 
 </resources>
