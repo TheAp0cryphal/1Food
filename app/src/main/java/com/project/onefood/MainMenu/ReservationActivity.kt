@@ -15,14 +15,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.project.onefood.Databases.ReservationDB.*
-import com.project.onefood.MainMenu.PromoAdapter.PromoRecyclerView
 import com.project.onefood.MainMenu.ReservationAdapter.ReservationRecyclerView
 import com.project.onefood.MainMenu.viewmodels.ReservationItem
 import com.project.onefood.R
-import com.project.onefood.RestaurantsList.RestaurantItem
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 
 class ReservationActivity : AppCompatActivity() {
 

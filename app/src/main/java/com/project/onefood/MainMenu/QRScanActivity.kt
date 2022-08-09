@@ -70,6 +70,9 @@ class  QRScanActivity : AppCompatActivity() {
                                     }
                                 }
                             }
+                        } else {
+                            Toast.makeText(binding.root.context, R.string.qr_scan_activity_toast_invalid, Toast.LENGTH_SHORT).show()
+                            qrScanner.startPreview()
                         }
                     }
 
@@ -105,6 +108,12 @@ class  QRScanActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // Switch to QR scan activity
+    private fun switchQRScanActivity() {
+        val intent = Intent(this, QRScanActivity::class.java)
+        startActivity(intent)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -134,5 +143,11 @@ class  QRScanActivity : AppCompatActivity() {
     override fun onPause() {
         qrScanner.releaseResources()
         super.onPause()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+
     }
 }

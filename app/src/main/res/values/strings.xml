@@ -35,6 +35,9 @@
     <string name="firebase_database_instance_users" translatable="false">https://onefood-255ff-default-rtdb.firebaseio.com/</string>
     <string name="firebase_database_reservations" translatable="false">Reservation</string>
 
+    <!-- Main Activity /////////////////////////////////////////////////////////////////////-->
+    <string name="main_activity_no_internet_connection">No Internet Connection</string>
+
     <!-- Main Menu Activity /////////////////////////////////////////////////////////////////////-->
     <string name="main_menu_activity_text_hello">Hello,</string>
 
@@ -123,6 +126,7 @@
     <string name="qr_scan_activity_notification_marking_food">Your food is being prepared</string>
     <string name="qr_scan_activity_notification_food_ready">Your food is ready</string>
     <string name="qr_scan_activity_notification_title">Restaurant Pager System</string>
+    <string name="qr_scan_activity_toast_invalid">Invalid QR Code</string>
 
     <!-- ////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="favourites">favourites</string>
