@@ -38,47 +38,55 @@ class  QRScanActivity : AppCompatActivity() {
 
         qrScanner.decodeCallback = DecodeCallback {
             val code: String = it.text.toString()
-            val uid: String = firebaseAuth.currentUser!!.uid
 
-            firebaseDatabase.getReference(getString(R.string.firebase_database_food_order_notifications)).child(code).addListenerForSingleValueEvent(
-                object: ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
-                        val foodOrderNotification: FoodOrderNotification? = p0.getValue(FoodOrderNotification::class.java)
+            if (code.contains('.') || code.contains('#') || code.contains('$') || code.contains('[') || code.contains(']')) {
+                runOnUiThread {
+                    Toast.makeText(binding.root.context, R.string.qr_scan_activity_toast_invalid, Toast.LENGTH_SHORT).show()
+                }
+                qrScanner.startPreview()
+            }
+            else {
+                val uid: String = firebaseAuth.currentUser!!.uid
 
-                        if (foodOrderNotification != null) {
-                            if (uid in foodOrderNotification.receivers) {
-                                Toast.makeText(binding.root.context, R.string.qr_scan_activity_toast_repeat, Toast.LENGTH_SHORT).show()
+                firebaseDatabase.getReference(getString(R.string.firebase_database_food_order_notifications)).child(code).addListenerForSingleValueEvent(
+                    object: ValueEventListener {
+                        override fun onDataChange(p0: DataSnapshot) {
+                            val foodOrderNotification: FoodOrderNotification? = p0.getValue(FoodOrderNotification::class.java)
 
-                                switchMainMenuActivity()
-                                return
-                            } else {
-                                foodOrderNotification.receiverNumber += 1
-                                foodOrderNotification.receivers.add(uid)
+                            if (foodOrderNotification != null) {
+                                if (uid in foodOrderNotification.receivers) {
+                                    Toast.makeText(binding.root.context, R.string.qr_scan_activity_toast_repeat, Toast.LENGTH_SHORT).show()
 
-                                firebaseDatabase.getReference(getString(R.string.firebase_database_food_order_notifications)).child(code).setValue(foodOrderNotification).addOnCompleteListener {
-                                    // Successfully create a food order
-                                    if (it.isSuccessful) {
-                                        Toast.makeText(binding.root.context, R.string.new_order_activity_toast_success, Toast.LENGTH_SHORT).show()
+                                    switchMainMenuActivity()
+                                    return
+                                } else {
+                                    foodOrderNotification.receiverNumber += 1
+                                    foodOrderNotification.receivers.add(uid)
 
-                                        startNotification(code)
+                                    firebaseDatabase.getReference(getString(R.string.firebase_database_food_order_notifications)).child(code).setValue(foodOrderNotification).addOnCompleteListener {
+                                        // Successfully create a food order
+                                        if (it.isSuccessful) {
+                                            Toast.makeText(binding.root.context, R.string.new_order_activity_toast_success, Toast.LENGTH_SHORT).show()
 
-                                        switchOrderPlacedActivity()
-                                    }
-                                    // Unsuccessfully create a food order
-                                    else {
-                                        Toast.makeText(binding.root.context, R.string.new_order_activity_toast_failure, Toast.LENGTH_SHORT).show()
+                                            startNotification(code)
+
+                                            switchOrderPlacedActivity()
+                                        }
+                                        // Unsuccessfully create a food order
+                                        else {
+                                            Toast.makeText(binding.root.context, R.string.new_order_activity_toast_failure, Toast.LENGTH_SHORT).show()
+                                        }
                                     }
                                 }
+                            } else {
+                                Toast.makeText(binding.root.context, R.string.qr_scan_activity_toast_invalid, Toast.LENGTH_SHORT).show()
                             }
-                        } else {
-                            Toast.makeText(binding.root.context, R.string.qr_scan_activity_toast_invalid, Toast.LENGTH_SHORT).show()
-                            qrScanner.startPreview()
                         }
-                    }
 
-                    override fun onCancelled(p0: DatabaseError) {}
-                }
-            )
+                        override fun onCancelled(p0: DatabaseError) {}
+                    }
+                )
+            }
         }
 
         qrScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
