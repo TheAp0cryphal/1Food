@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity()  {
             switchToAnotherActivity()
         }
         else {
-            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.main_activity_no_internet_connection, Toast.LENGTH_SHORT).show()
         }
     }
 
