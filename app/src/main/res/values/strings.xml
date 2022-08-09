@@ -126,7 +126,7 @@
     <string name="qr_scan_activity_notification_marking_food">Your food is being prepared</string>
     <string name="qr_scan_activity_notification_food_ready">Your food is ready</string>
     <string name="qr_scan_activity_notification_title">Restaurant Pager System</string>
-    <string name="qr_scan_activity_toast_invalid">Invalid QR Code</string>
+    <string name="qr_scan_activity_toast_invalid">Invalid QR Code, Tap to Rescan</string>
 
     <!-- ////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="favourites">favourites</string>
