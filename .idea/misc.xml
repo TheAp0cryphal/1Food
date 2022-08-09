@@ -3,12 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Ching Hang/OneDrive/SFU/Terms/2022 Summer/CMPT 362/Labs/1Food/app/src/main/res/layout/fragment_food_order.xml" value="0.10764944275582573" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_main.xml" value="0.31974921630094044" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_reservation.xml" value="0.1644021739130435" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_reservation_set_activity.xml" value="0.33" />
-        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_restaurant.xml" value="0.2" />
+        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_restaurant.xml" value="0.22" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_restaurants_list.xml" value="0.33" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/activity_user_profile.xml" value="0.22" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/fragment_menu.xml" value="0.23645833333333333" />
@@ -17,6 +16,8 @@
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/restaurant_item_card.xml" value="0.33" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/review_row.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/layout/tabbed_layout_restaurant.xml" value="0.20742753623188406" />
+        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.257" />
+        <entry key="..\:/Users/Tanis/AndroidStudioProjects/1Food/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.257" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/drawable/heart.xml" value="0.1" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/drawable/heart_outline.xml" value="0.1" />
@@ -27,12 +28,9 @@
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_main_menu.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_order_placed.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_restaurant.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_restaurants_list.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/activity_user_profile.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/cardview.xml" value="0.1" />
-        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/fragment_menu.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/fragment_reviews.xml" value="0.1" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/reservation_list_item.xml" value="0.1" />
         <entry key="..\:/Users/samer/Desktop/1Food/app/src/main/res/layout/restaurant_item_card.xml" value="0.22" />
         <entry key="..\:/Users/spars/AndroidStudioProjects/1Food/app/src/main/res/layout/fragment_menu.xml" value="0.12360688956433637" />
