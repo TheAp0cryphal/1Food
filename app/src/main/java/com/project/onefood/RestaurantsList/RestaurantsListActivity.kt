@@ -48,7 +48,7 @@ class RestaurantsListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_restaurants_list)
 
         // Initialize the SDK
-        Places.initialize(applicationContext, "AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA")
+        Places.initialize(applicationContext, "")
 
         // Create a new PlacesClient instance
         val placesClient = Places.createClient(this)
@@ -191,11 +191,11 @@ class RestaurantsListActivity : AppCompatActivity() {
     private fun callApi(){
         var url = ""
         if (isNearestBtnPressed){
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?types=restaurant&rankby=distance&location=${userLatitude},${userLongitude}&sensor=true&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?types=restaurant&rankby=distance&location=${userLatitude},${userLongitude}&sensor=true&key="
         } else if (!isResultsForSearch){
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=restaurant&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=restaurant&key="
         }else {
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=${queryString}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLatitude},${userLongitude}&radius=500000&type=restaurant&keyword=${queryString}&key="
         }
 
         list.clear()
@@ -251,7 +251,7 @@ class RestaurantsListActivity : AppCompatActivity() {
                 list.add(RestaurantItem(restaurantName,
                     restaurantAccurateAddress,
                     calculateDistanceUserToRestaurant(restaurantLatResult, restaurantLngResult).toDouble(),
-                    "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${restaurantPhotoReference}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA",
+                    "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${restaurantPhotoReference}&key=",
                     LatLng(restaurantLatResult,
                         restaurantLngResult),
                     restaurantRating, restaurantOpeningResult, place_id))

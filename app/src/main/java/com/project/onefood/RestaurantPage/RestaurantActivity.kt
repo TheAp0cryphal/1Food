@@ -161,7 +161,7 @@ class RestaurantActivity : AppCompatActivity() {
     }
 
     private fun callRestaurantDetailsApi(placeid: String){
-        val request = Request.Builder().url("https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeid}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA").build()
+        val request = Request.Builder().url("https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeid}&key=").build()
 
 
         val response = OkHttpClient().newCall(request).execute().body?.string()
@@ -184,7 +184,7 @@ class RestaurantActivity : AppCompatActivity() {
                 val photoJson = JSONObject(restaurantPhotos[i].toString())
                 val photo_reference = photoJson.optString("photo_reference")
                 if (photo_reference!=""){
-                    photosArr.add(SlideModel("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photo_reference}&key=AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA", ""))
+                    photosArr.add(SlideModel("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photo_reference}&key=", ""))
                 }
             }
         }

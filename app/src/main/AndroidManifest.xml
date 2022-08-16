@@ -101,7 +101,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDArS6HnLH9ggPb3wnZ1P08HNb2RhwNSoA" />
+            android:value="" />
 
         <service android:name=".PagerSystem.services.PagerSystemService"/>
 
