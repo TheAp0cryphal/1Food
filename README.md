@@ -7,7 +7,7 @@ An application that implements a pager system using android to replace expensive
 ![Screenshot 2025-03-11 134940](https://github.com/user-attachments/assets/f9887ec9-1ad6-440c-b423-521d7243f9c3)
 
 ## System Design / DB Design
-<img src="https://github.com/user-attachments/assets/258cdc63-8653-41a1-afdf-27f2e0f99ff0" width="150">
+<img src="https://github.com/user-attachments/assets/258cdc63-8653-41a1-afdf-27f2e0f99ff0" width="600">
 ![image](https://github.com/user-attachments/assets/258cdc63-8653-41a1-afdf-27f2e0f99ff0)
 ![image](https://github.com/user-attachments/assets/07043b48-75b0-442e-8e2a-d7721ca1bd52)
 ![image](https://github.com/user-attachments/assets/31e41305-e4d1-4433-a23f-52c555782259)
