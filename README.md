@@ -8,7 +8,7 @@ An application that implements a pager system using android to replace expensive
 
 ## System Design / DB Design
 <img src="https://github.com/user-attachments/assets/258cdc63-8653-41a1-afdf-27f2e0f99ff0" width="1000">
-<img src="https://github.com/user-attachments/assets/31e41305-e4d1-4433-a23f-52c555782259" width="1000">
+<img src="https://github.com/user-attachments/assets/31e41305-e4d1-4433-a23f-52c555782259" height="500">
 <img src="https://github.com/user-attachments/assets/57409fc9-d652-402a-873e-5352582d5fab" height="400">
 
 ## In App UI
